@@ -1,4 +1,4 @@
-package com.example.trinkspiel;
+package com.example.trinkspiel.gamepackages;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class GamePackageStandard {
     }
 
     private ArrayList<String> fillList() {
-        ArrayList<String> filledList = new ArrayList<String>();
+        ArrayList<String> filledList = new ArrayList<>();
 
         filledList.add("$Sp1 Trinke 3");
         filledList.add("$Sp1 Trinke 8");
