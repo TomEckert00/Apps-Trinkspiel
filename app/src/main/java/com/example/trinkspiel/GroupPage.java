@@ -55,5 +55,9 @@ public class GroupPage extends AppCompatActivity {
     public static ArrayList<String> getPlayerList(){
         return playerList;
     }
-
+    
+    public void redirectBack(View v){
+        this.finish();
+        return;
+    }
 }
