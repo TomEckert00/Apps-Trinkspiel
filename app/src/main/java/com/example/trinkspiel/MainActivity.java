@@ -1,6 +1,7 @@
 package com.example.trinkspiel;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -19,13 +20,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openMarketPage(View v){
-        Intent intent = new Intent(this, MarketPage.class);
+    public void openInstagram(View v){
+        Uri uri = Uri.parse("https://www.instagram.com/tom_eckert_/");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
 
     public void openMoreInformationPage(View v){
         Intent intent = new Intent(this, MoreInformationPage.class);
+        startActivity(intent);
+    }
+
+    public void openMainSettings(View v){
+        Intent intent = new Intent(this, MainSettings.class);
         startActivity(intent);
     }
 }

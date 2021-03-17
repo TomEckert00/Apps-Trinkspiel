@@ -19,35 +19,50 @@
 
     <Button
         android:id="@+id/button_play"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_width="308dp"
+        android:layout_height="102dp"
         android:onClick="openGroupPage"
         android:text="Spielen"
-        app:layout_constraintBottom_toTopOf="@+id/button_market"
+        app:layout_constraintBottom_toTopOf="@+id/button_information"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_logo"
+        app:layout_constraintVertical_bias="0.276" />
+
+    <Button
+        android:id="@+id/button_information"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="openMoreInformationPage"
+        android:text="i"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_market"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:onClick="openMarketPage"
-        android:text="Markt"
+        android:id="@+id/button_settings"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="openMainSettings"
+        android:text="Set"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/button_information" />
 
     <Button
-        android:id="@+id/button_more"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:onClick="openMoreInformationPage"
-        android:text="Mehr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_market" />
+        android:id="@+id/button_instagram"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="openInstagram"
+        android:text="Inst"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_information"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
