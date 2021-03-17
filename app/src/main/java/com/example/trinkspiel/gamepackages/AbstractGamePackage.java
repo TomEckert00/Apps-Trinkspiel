@@ -1,5 +1,9 @@
 package com.example.trinkspiel.gamepackages;
 
-public abstract class AbstractGamePackage {
+import java.util.ArrayList;
 
+public abstract class AbstractGamePackage implements Cloneable {
+    public abstract ArrayList<String> getCards();
+
+    public abstract AbstractGamePackage clone();
 }

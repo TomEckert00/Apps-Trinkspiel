@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Trinkspiel" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#FFEB3B</item>
+        <item name="colorPrimary">#00BCD4</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->

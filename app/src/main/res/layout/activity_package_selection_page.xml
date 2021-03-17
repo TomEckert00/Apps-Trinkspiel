@@ -28,20 +28,20 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_Header2" />
 
     <Button
-        android:id="@+id/Paket1"
+        android:id="@+id/button_standardPacket"
         android:layout_width="367dp"
         android:layout_height="174dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:onClick="selectStandardPackage"
         android:text="Standard Paket"
-        app:layout_constraintBottom_toTopOf="@+id/paket2"
+        app:layout_constraintBottom_toTopOf="@+id/button_onlinePacket"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerListOutput" />
 
     <Button
-        android:id="@+id/paket2"
+        android:id="@+id/button_onlinePacket"
         android:layout_width="367dp"
         android:layout_height="174dp"
         android:layout_marginBottom="16dp"

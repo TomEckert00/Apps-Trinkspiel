@@ -11,6 +11,11 @@ public class GamePackageOnline extends AbstractGamePackage{
         return cards;
     }
 
+    @Override
+    public AbstractGamePackage clone() {
+        return new GamePackageOnline();
+    }
+
     private ArrayList<String> fillList() {
         ArrayList<String> filledList = new ArrayList<>();
 

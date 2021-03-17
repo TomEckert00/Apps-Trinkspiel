@@ -11,6 +11,11 @@ public class GamePackageStandard extends AbstractGamePackage{
         return cards;
     }
 
+    @Override
+    public AbstractGamePackage clone() {
+        return new GamePackageStandard();
+    }
+
     private ArrayList<String> fillList() {
         ArrayList<String> filledList = new ArrayList<>();
 
