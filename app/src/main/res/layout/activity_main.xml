@@ -36,9 +36,10 @@
         android:layout_height="75dp"
         android:layout_marginBottom="32dp"
         android:onClick="openMoreInformationPage"
-        android:text="i"
         android:textAllCaps="false"
         android:textSize="30sp"
+        app:icon="@android:drawable/ic_dialog_info"
+        app:iconSize="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -49,7 +50,8 @@
         android:layout_height="75dp"
         android:layout_marginBottom="32dp"
         android:onClick="openMainSettings"
-        android:text="Set"
+        app:icon="@drawable/settings"
+        app:iconSize="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_information" />
@@ -60,7 +62,9 @@
         android:layout_height="75dp"
         android:layout_marginBottom="32dp"
         android:onClick="openInstagram"
-        android:text="Inst"
+        app:icon="@drawable/instagram"
+        app:iconSize="@android:dimen/app_icon_size"
+        app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_information"
         app:layout_constraintStart_toStartOf="parent" />

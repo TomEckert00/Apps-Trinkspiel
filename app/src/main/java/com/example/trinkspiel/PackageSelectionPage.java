@@ -34,8 +34,14 @@ public class PackageSelectionPage extends AppCompatActivity {
         playerList = GroupPage.getPlayerList();
         TextView probeOutput = findViewById(R.id.playerListOutput);
         probeOutput.setText("");
+        int i = 0;
         for(String name:playerList){
-            probeOutput.setText(probeOutput.getText() + name + "; ");
+            i++;
+            if(i<playerList.size()){
+                probeOutput.setText(probeOutput.getText() + name + ", ");
+            }else{
+                probeOutput.setText(probeOutput.getText() + name);
+            }
         }
     }
 
