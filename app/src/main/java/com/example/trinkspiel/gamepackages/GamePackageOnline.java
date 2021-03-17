@@ -2,8 +2,8 @@ package com.example.trinkspiel.gamepackages;
 
 import java.util.ArrayList;
 
-public class GamePackageStandard extends AbstractGamePackage{
-    public static final String PACKAGE_NAME = "Standard Paket";
+public class GamePackageOnline extends AbstractGamePackage{
+    public static final String PACKAGE_NAME = "Online Paket";
 
     private ArrayList<String> cards = fillList();
 
@@ -14,10 +14,9 @@ public class GamePackageStandard extends AbstractGamePackage{
     private ArrayList<String> fillList() {
         ArrayList<String> filledList = new ArrayList<>();
 
-        filledList.add("$Sp1 Trinke 3");
-        filledList.add("$Sp1 Trinke 8");
-        filledList.add("$Sp1 Trinke 111");
-        filledList.add("$Sp1 Trinke bis zum Tod");
+        filledList.add("$Sp1 Trinke zoom");
+        filledList.add("$Sp1 Trinke skype");
+        filledList.add("$Sp1 Trinke teams");
 
         return filledList;
     }
