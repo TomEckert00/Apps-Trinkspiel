@@ -66,9 +66,7 @@ public class GameLoop extends AppCompatActivity {
     }
 
     private void shuffleCardsFillWithPlayersAnSetIndexToZero() {
-        selectedgamePackage = PackageSelectionPage.getSelectedPackage().clone();
-        gamePack = selectedgamePackage;
-        cards = gamePack.getCards();
+        cards = GamePackageManager.getCardsFromProperties(this,PackageSelectionPage.getSelectedPackage(),getResources().getConfiguration().locale.getLanguage());
         shuffleInRandomOrder(cards);
         players = GroupPage.getPlayerList();
         fillCardsWithPlayers();
