@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.trinkspiel.gamepackages.AbstractGamePackage;
-import com.example.trinkspiel.gamepackages.GamePackageOnline;
-import com.example.trinkspiel.gamepackages.GamePackageStandard;
-
 import java.util.ArrayList;
 
 public class PackageSelectionPage extends AppCompatActivity {
