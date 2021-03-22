@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">boivejoue</string>
+    <string name="language">Französisch</string>
+
+    <string name="mainActivity_logo">LOGé</string>
+    <string name="mainActivity_playbutton">Joue</string>
+
+    <string name="groupActivity_header">Selection de jou</string>
+    <string name="groupActivity_previousButton">previée</string>
+    <string name="groupActivity_nextButton">Néext</string>
+
+    <string name="packageActivity_header">Selection de Pak</string>
+    <string name="packageActivity_name_StandardPackage">Standardpaké</string>
+    <string name="packageActivity_name_OnlinePackage">Onlinepaké</string>
+    <string name="packageActivity_previousButton">previéee</string>
+    <string name="packageActivity_startButton">Joué</string>
+</resources>

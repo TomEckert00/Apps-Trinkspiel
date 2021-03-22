@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:text="Spielerauswahl"
+        android:text="@string/groupActivity_header"
         android:textSize="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="24dp"
         android:onClick="openPackageSelectionPage"
-        android:text="Weiter"
+        android:text="@string/groupActivity_nextButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -77,7 +77,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="24dp"
         android:onClick="redirectBack"
-        android:text="Zurück"
+        android:text="@string/groupActivity_previousButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

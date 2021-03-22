@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:text="LOGO"
-        android:textSize="56dp"
+        android:text="@string/mainActivity_logo"
+        android:textSize="56sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
         android:layout_width="308dp"
         android:layout_height="102dp"
         android:onClick="openGroupPage"
-        android:text="Spielen"
+        android:text="@string/mainActivity_playbutton"
         app:layout_constraintBottom_toTopOf="@+id/button_information"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -49,7 +49,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginBottom="32dp"
-        android:onClick="openMainSettings"
+        android:onClick="changeLanguageToNextInOrder"
         app:icon="@drawable/settings"
         app:iconSize="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -67,6 +67,17 @@
         app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_information"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/language"
+        app:layout_constraintBottom_toTopOf="@+id/button_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
