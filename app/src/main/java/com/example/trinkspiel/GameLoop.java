@@ -10,8 +10,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.trinkspiel.gamepackages.AbstractGamePackage;
-import com.example.trinkspiel.gamepackages.GamePackageStandard;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -20,12 +18,10 @@ import java.util.Collections;
 public class GameLoop extends AppCompatActivity {
     TextView aufgabe;
     ConstraintLayout mainLayout;
-    AbstractGamePackage gamePack;
     ArrayList<String> cards;
     ArrayList<String> players;
     int cardIndex;
     boolean touchedRightHalf;
-    private AbstractGamePackage selectedgamePackage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +62,7 @@ public class GameLoop extends AppCompatActivity {
     }
 
     private void shuffleCardsFillWithPlayersAnSetIndexToZero() {
-        selectedgamePackage = PackageSelectionPage.getSelectedPackage().clone();
-        gamePack = selectedgamePackage;
-        cards = gamePack.getCards();
+        cards = GamePackageManager.getCardsFromProperties(this,PackageSelectionPage.getSelectedPackage(),getResources().getConfiguration().locale.getLanguage());
         shuffleInRandomOrder(cards);
         players = GroupPage.getPlayerList();
         fillCardsWithPlayers();

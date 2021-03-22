@@ -10,16 +10,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.trinkspiel.gamepackages.AbstractGamePackage;
-import com.example.trinkspiel.gamepackages.GamePackageOnline;
-import com.example.trinkspiel.gamepackages.GamePackageStandard;
-
 import java.util.ArrayList;
 
 public class PackageSelectionPage extends AppCompatActivity {
 
     private ArrayList<String> playerList;
-    private static AbstractGamePackage selectedPackage;
+    private static String selectedPackageName;
     private Button button_standardPacket;
     private Button button_onlinePacket;
     private Button startGameButton;
@@ -59,7 +55,7 @@ public class PackageSelectionPage extends AppCompatActivity {
     }
 
     public void selectStandardPackage(View view){
-        selectedPackage = new GamePackageStandard();
+        selectedPackageName = "StandardPackage";
         startGameButton.setEnabled(true);
         button_standardPacket.setEnabled(false);
         button_onlinePacket.setEnabled(true);
@@ -67,7 +63,7 @@ public class PackageSelectionPage extends AppCompatActivity {
     }
 
     public void selectOnlinePackage(View view){
-        selectedPackage = new GamePackageOnline();
+        selectedPackageName = "OnlinePackage";
         startGameButton.setEnabled(true);
         button_onlinePacket.setEnabled(false);
         button_standardPacket.setEnabled(true);
@@ -79,7 +75,7 @@ public class PackageSelectionPage extends AppCompatActivity {
         return;
     }
 
-    public static AbstractGamePackage getSelectedPackage(){
-        return selectedPackage;
+    public static String getSelectedPackage(){
+        return selectedPackageName;
     }
 }
