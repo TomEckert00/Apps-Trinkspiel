@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class GroupPage extends AppCompatActivity {
+public class GroupSelectionPage extends AppCompatActivity {
 
     private static ArrayList<String> playerList = new ArrayList<>();
     private LinearLayout playerListLayout;
@@ -19,7 +19,7 @@ public class GroupPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_group_page);
+        setContentView(R.layout.activity_group_selection_page);
         playerListLayout = findViewById(R.id.playerListLinearLayout);
     }
 

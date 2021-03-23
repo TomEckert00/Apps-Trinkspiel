@@ -21,7 +21,7 @@
         android:id="@+id/button_play"
         android:layout_width="308dp"
         android:layout_height="102dp"
-        android:onClick="openGroupPage"
+        android:onClick="openGroupSelectionPage"
         android:text="@string/mainActivity_playbutton"
         app:layout_constraintBottom_toTopOf="@+id/button_information"
         app:layout_constraintEnd_toEndOf="parent"

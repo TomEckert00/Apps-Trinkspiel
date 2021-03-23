@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
@@ -20,30 +19,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    /*
-    public void reloadForLanguage(){
-        Locale locale = new Locale(language);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        Resources resources = getResources();
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
-        recreate();
-    }
-     */
-
-    public void openGroupPage(View v){
-        Intent intent = new Intent(this, GroupPage.class);
+    public void openGroupSelectionPage(View view){
+        Intent intent = new Intent(this, GroupSelectionPage.class);
         startActivity(intent);
     }
 
-    public void openInstagram(View v){
+    public void openInstagram(View view){
         Uri uri = Uri.parse("https://www.instagram.com/tom_eckert_/");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
 
-    public void openMoreInformationPage(View v){
+    public void openMoreInformationPage(View view){
         Intent intent = new Intent(this, MoreInformationPage.class);
         startActivity(intent);
     }
@@ -58,17 +45,17 @@ public class MainActivity extends AppCompatActivity {
         String language = getResources().getConfiguration().locale.getLanguage();
         if (language == "de"){
             language = "en";
-            System.out.println(language);
         }
         else if (language == "en"){
             language = "fr";
-            System.out.println(language);
         }
         else if (language == "fr"){
             language = "de";
-            System.out.println(language);
         }
-        System.out.println(language);
+        reloadPageForNewLanguage(language);
+    }
+
+    private void reloadPageForNewLanguage(String language) {
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
         Configuration config = new Configuration();

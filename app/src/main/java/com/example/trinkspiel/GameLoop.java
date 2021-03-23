@@ -11,7 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 
-import java.lang.reflect.Array;
+import com.example.trinkspiel.util.GamePackageManager;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -64,7 +65,7 @@ public class GameLoop extends AppCompatActivity {
     private void shuffleCardsFillWithPlayersAnSetIndexToZero() {
         cards = GamePackageManager.getCardsFromProperties(this,PackageSelectionPage.getSelectedPackage(),getResources().getConfiguration().locale.getLanguage());
         shuffleInRandomOrder(cards);
-        players = GroupPage.getPlayerList();
+        players = GroupSelectionPage.getPlayerList();
         fillCardsWithPlayers();
         cardIndex = 0;
     }
