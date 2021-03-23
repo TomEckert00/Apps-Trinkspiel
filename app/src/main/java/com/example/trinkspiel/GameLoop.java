@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 
+import com.example.trinkspiel.util.Card;
 import com.example.trinkspiel.util.GamePackageManager;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.Collections;
 public class GameLoop extends AppCompatActivity {
     TextView aufgabe;
     ConstraintLayout mainLayout;
-    ArrayList<String> cards;
+    ArrayList<Card> cards;
     ArrayList<String> players;
     int cardIndex;
     boolean touchedRightHalf;
@@ -90,8 +91,10 @@ public class GameLoop extends AppCompatActivity {
                 cardIndex = 0;
             }
         }
-        String aktuelleAufgabe = cards.get(cardIndex);
+        String aktuelleAufgabe = cards.get(cardIndex).getAufgabe();
         aufgabe.setText(aktuelleAufgabe);
+        int aktuelleSchlucke = cards.get(cardIndex).getSchlucke();
+        schluckCount.setText(""+aktuelleSchlucke);
     }
 
 
@@ -99,19 +102,19 @@ public class GameLoop extends AppCompatActivity {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
-    private void shuffleInRandomOrder(ArrayList<String> list){
+    private void shuffleInRandomOrder(ArrayList<Card> list){
         Collections.shuffle(list);
     }
 
     private void fillCardsWithPlayers(){
-        ArrayList<String> kartenDeck = cards;
+        ArrayList<Card> kartenDeck = cards;
         ArrayList<String> spieler = players;
         String removedPlayer = null;
         int repetitions = cards.size();
         for(int i=0;i<repetitions;i++){
             String randomPlayer = spieler.get(getRandomNumber(0,spieler.size()));
-            String TaskWithPlayerReplaced = kartenDeck.get(i).replace("$Sp1", randomPlayer);
-            kartenDeck.set(i, TaskWithPlayerReplaced);
+            String TaskWithPlayerReplaced = kartenDeck.get(i).getAufgabe().replace("$Sp1", randomPlayer);
+            kartenDeck.get(i).setAufgabe(TaskWithPlayerReplaced);
             spieler.remove(randomPlayer);
             if(removedPlayer != null){
                 spieler.add(removedPlayer);
