@@ -14,4 +14,6 @@
     <string name="packageActivity_name_OnlinePackage">Onlinepackage</string>
     <string name="packageActivity_previousButton">Back</string>
     <string name="packageActivity_startButton">Play</string>
+
+    <string name="gameLoop_Schlucke">Schlucke</string>
 </resources>

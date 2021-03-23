@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Trinkspiel</string>
     <string name="language">Deutsch</string>
+    <string name="disclaimer">Kenne deine Grenzen! Die Angaben sind nur als Vorschlag zu beachten. Vorsichtiger Umgang mit Alkohol</string>
 
     <string name="mainActivity_logo">LOGO</string>
     <string name="mainActivity_playbutton">Spielen</string>
@@ -14,4 +15,6 @@
     <string name="packageActivity_name_OnlinePackage">Onlinepaket</string>
     <string name="packageActivity_previousButton">Zurück</string>
     <string name="packageActivity_startButton">Spielen</string>
+
+    <string name="gameLoop_Schlucke">Schlucke</string>
 </resources>

@@ -1,8 +1,6 @@
 package com.example.trinkspiel;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +25,7 @@ public class PackageSelectionPage extends AppCompatActivity {
         button_standardPacket = findViewById(R.id.button_standardPacket);
         button_onlinePacket =findViewById(R.id.button_onlinePacket);
         startGameButton = findViewById(R.id.button_startGameLoop);
-        playerList = GroupPage.getPlayerList();
+        playerList = GroupSelectionPage.getPlayerList();
         TextView probeOutput = findViewById(R.id.playerListOutput);
         probeOutput.setText("");
         int i = 0;

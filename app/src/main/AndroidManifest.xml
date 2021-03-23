@@ -14,7 +14,7 @@
         <activity android:name=".PackageSelectionPage" />
         <activity android:name=".MoreInformationPage" />
         <activity android:name=".MarketPage" />
-        <activity android:name=".GroupPage" />
+        <activity android:name=".GroupSelectionPage" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

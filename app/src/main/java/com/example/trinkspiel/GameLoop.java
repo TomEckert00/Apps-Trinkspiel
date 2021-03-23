@@ -11,7 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 
-import java.lang.reflect.Array;
+import com.example.trinkspiel.util.GamePackageManager;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -22,6 +23,8 @@ public class GameLoop extends AppCompatActivity {
     ArrayList<String> players;
     int cardIndex;
     boolean touchedRightHalf;
+    TextView loopInfos;
+    TextView schluckCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,9 @@ public class GameLoop extends AppCompatActivity {
         setContentView(R.layout.activity_game_loop);
         aufgabe = findViewById(R.id.AufgabenTextView);
         mainLayout = findViewById(R.id.mainLayout);
+        loopInfos = findViewById(R.id.loopInfos);
+        schluckCount = findViewById(R.id.schluckCount);
+        System.out.println(schluckCount.getText());
         mainLayout.setOnTouchListener(new View.OnTouchListener(){
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -64,28 +70,30 @@ public class GameLoop extends AppCompatActivity {
     private void shuffleCardsFillWithPlayersAnSetIndexToZero() {
         cards = GamePackageManager.getCardsFromProperties(this,PackageSelectionPage.getSelectedPackage(),getResources().getConfiguration().locale.getLanguage());
         shuffleInRandomOrder(cards);
-        players = GroupPage.getPlayerList();
+        players = GroupSelectionPage.getPlayerList();
         fillCardsWithPlayers();
         cardIndex = 0;
     }
 
-    public void changeCard(){
-        if (touchedRightHalf){
+    public void changeCard() {
+        if (touchedRightHalf) {
+            loopInfos.setText("");
             cardIndex++;
-            if (cardIndex == cards.size()){
+            if (cardIndex == cards.size()) {
                 System.out.println("Letzte Karte erreicht, starte von vorne");
                 shuffleCardsFillWithPlayersAnSetIndexToZero();
+                loopInfos.setText("Deck shuffled");
             }
-        }else{
+        } else {
             cardIndex--;
-            if (cardIndex<0){
-                cardIndex=0;
+            if (cardIndex < 0) {
+                cardIndex = 0;
             }
         }
         String aktuelleAufgabe = cards.get(cardIndex);
         aufgabe.setText(aktuelleAufgabe);
-
     }
+
 
     private int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
@@ -114,6 +122,11 @@ public class GameLoop extends AppCompatActivity {
         cards = kartenDeck;
         System.out.println("Neues Deck:");
         System.out.println(cards.toString());
+    }
+
+    public void backToPackages(View view){
+        this.finish();
+        return;
     }
 
 }

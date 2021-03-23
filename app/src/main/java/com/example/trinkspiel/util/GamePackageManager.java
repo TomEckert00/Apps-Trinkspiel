@@ -1,16 +1,18 @@
-package com.example.trinkspiel;
+package com.example.trinkspiel.util;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.util.ArraySet;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Properties;
 
 public class GamePackageManager{
 
-    public static ArrayList<String> getCardsFromProperties(Context context, String packagename,String language){
+    public static ArrayList<String> getCardsFromProperties(Context context, String packagename, String language){
         System.out.println(language);
         System.out.println(packagename);
         ArrayList<String> cards = new ArrayList<>();
@@ -27,4 +29,5 @@ public class GamePackageManager{
         }
         return cards;
     }
+
 }
