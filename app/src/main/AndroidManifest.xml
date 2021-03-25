@@ -15,7 +15,10 @@
         <activity android:name=".PackageSelectionPage" />
         <activity android:name=".MoreInformationPage" />
         <activity android:name=".MarketPage" />
-        <activity android:name=".GroupSelectionPage" />
+        <activity
+            android:name=".GroupSelectionPage"
+            android:windowSoftInputMode="adjustPan"
+        />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,10 +2,15 @@ package com.example.trinkspiel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +26,7 @@ public class GroupSelectionPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_selection_page);
         playerListLayout = findViewById(R.id.playerListLinearLayout);
+        ((EditText) playerListLayout.getChildAt(playerListLayout.getChildCount()-2)).setOnEditorActionListener(editorActionListener);
     }
 
     public void openPackageSelectionPage(View v){
@@ -46,10 +52,15 @@ public class GroupSelectionPage extends AppCompatActivity {
     }
 
     public void addNewPlayerInput(View v){
-        int lastIndex = playerListLayout.getChildCount()-1;
+        int newFieldIndex = playerListLayout.getChildCount()-1;
+        int lastFieldIndex = playerListLayout.getChildCount()-2;
+        ((EditText) playerListLayout.getChildAt(lastFieldIndex)).setOnEditorActionListener(null);
         EditText newField = new EditText(this);
-        newField.setHint("Spieler " + (lastIndex+1));
-        playerListLayout.addView(newField,lastIndex);
+        newField.setSingleLine();
+        newField.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        newField.setOnEditorActionListener(editorActionListener);
+        newField.setHint("Spieler " + (newFieldIndex+1));
+        playerListLayout.addView(newField,newFieldIndex);
     }
 
     public static ArrayList<String> getPlayerList(){
@@ -60,4 +71,18 @@ public class GroupSelectionPage extends AppCompatActivity {
         this.finish();
         return;
     }
+
+    private TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener(){
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            switch (actionId){
+                case EditorInfo.IME_ACTION_NEXT:
+                    addNewPlayerInput(null);
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        }
+    };
 }

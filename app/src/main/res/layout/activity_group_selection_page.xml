@@ -17,18 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_groupReady"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="24dp"
-        android:onClick="openPackageSelectionPage"
-        android:text="@string/groupActivity_nextButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <ScrollView
         android:id="@+id/playerListScrollView"
         android:layout_width="350dp"
@@ -42,6 +30,7 @@
             android:id="@+id/playerListLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <EditText
@@ -50,7 +39,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Spieler 1"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:imeOptions="actionNext"/>
 
             <EditText
                 android:id="@+id/editTextTextPersonName5"
@@ -58,7 +48,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Spieler 2"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:imeOptions="actionNext"/>
 
             <Button
                 android:id="@+id/button_addPlayer"
@@ -80,5 +71,17 @@
         android:text="@string/groupActivity_previousButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_groupReady"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="24dp"
+        android:onClick="openPackageSelectionPage"
+        android:text="@string/groupActivity_nextButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
