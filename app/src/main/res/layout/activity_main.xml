@@ -6,78 +6,129 @@
     android:layout_height="match_parent"
     tools:context=".pages.MainActivity">
 
-    <TextView
-        android:id="@+id/textView_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="@string/mainActivity_logo"
-        android:textSize="56sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".pages.MainActivity">
 
-    <Button
-        android:id="@+id/button_play"
-        android:layout_width="308dp"
-        android:layout_height="102dp"
-        android:onClick="openGroupSelectionPage"
-        android:text="@string/mainActivity_playbutton"
-        app:layout_constraintBottom_toTopOf="@+id/button_information"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_logo"
-        app:layout_constraintVertical_bias="0.276" />
+        <TextView
+            android:id="@+id/textView_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:text="@string/mainActivity_logo"
+            android:textSize="56sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_information"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="32dp"
-        android:onClick="openMoreInformationPage"
-        android:textAllCaps="false"
-        android:textSize="30sp"
-        app:icon="@android:drawable/ic_dialog_info"
-        app:iconSize="@android:dimen/app_icon_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/button_play"
+            android:layout_width="308dp"
+            android:layout_height="102dp"
+            android:onClick="openGroupSelectionPage"
+            android:text="@string/mainActivity_playbutton"
+            app:layout_constraintBottom_toTopOf="@+id/button_information"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_logo"
+            app:layout_constraintVertical_bias="0.276" />
 
-    <Button
-        android:id="@+id/button_settings"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="32dp"
-        android:onClick="changeLanguageToNextInOrder"
-        app:icon="@drawable/settings"
-        app:iconSize="@android:dimen/app_icon_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_information" />
+        <Button
+            android:id="@+id/button_information"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="32dp"
+            android:onClick="openMoreInformationPage"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            app:icon="@android:drawable/ic_dialog_info"
+            app:iconSize="@android:dimen/app_icon_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/button_instagram"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="32dp"
-        android:onClick="openInstagram"
-        app:icon="@drawable/instagram"
-        app:iconSize="@android:dimen/app_icon_size"
-        app:iconTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_information"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/button_settings"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="32dp"
+            android:onClick="changeLanguageToNextInOrder"
+            app:icon="@drawable/settings"
+            app:iconSize="@android:dimen/app_icon_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_information" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:text="@string/language"
-        app:layout_constraintBottom_toTopOf="@+id/button_settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.87"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/button_instagram"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="32dp"
+            android:onClick="openInstagram"
+            app:icon="@drawable/instagram"
+            app:iconSize="@android:dimen/app_icon_size"
+            app:iconTint="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_information"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="@string/language"
+            app:layout_constraintBottom_toTopOf="@+id/button_settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.87"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/disclaimerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CDDC39">
+
+        <TextView
+            android:id="@+id/disclaimer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/disclaimer_title"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toTopOf="@+id/disclaimer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/disclaimer"
+            android:layout_width="396dp"
+            android:layout_height="193dp"
+            android:gravity="center"
+            android:text="@string/disclaimer"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:onClick="killDisclaimer"
+            android:text="@string/disclaimerAkzeptiert"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Trinkspiel</string>
     <string name="language">Deutsch</string>
-    <string name="disclaimer">Kenne deine Grenzen! Die Angaben sind nur als Vorschlag zu beachten. Vorsichtiger Umgang mit Alkohol</string>
+    <string name="disclaimer">Kenne deine Grenzen! Die Angaben sind nur als Vorschlag zu beachten. Vorsichtiger Umgang mit Alkohol!</string>
+    <string name="disclaimerAkzeptiert">Akzeptiert!</string>
+    <string name="disclaimer_title">Achtung</string>
 
     <string name="mainActivity_logo">LOGO</string>
     <string name="mainActivity_playbutton">Spielen</string>

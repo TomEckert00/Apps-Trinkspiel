@@ -8,15 +8,27 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    ConstraintLayout disclaimerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        boolean disClaimerShown = getIntent().getBooleanExtra("disclaimerShown", false);
+        if (disClaimerShown){
+            killDisclaimer(null);
+        }
+    }
+
+    public void killDisclaimer(View view){
+        disclaimerView = findViewById(R.id.disclaimerView);
+        disclaimerView.setVisibility(View.GONE);
     }
 
     public void openGroupSelectionPage(View view){
@@ -62,7 +74,10 @@ public class MainActivity extends AppCompatActivity {
         config.locale = locale;
         Resources resources = getResources();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
-        recreate();
+        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("disclaimerShown", true);
+        startActivity(intent);
     }
 
 }

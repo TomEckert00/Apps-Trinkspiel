@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">boivejoue</string>
     <string name="language">Französisch</string>
+    <string name="disclaimer">Kenne deine Grenzen! Die Angaben sind nur als Vorschlag zu beachten. Vorsichtiger Umgang mit Alkohol!</string>
+    <string name="disclaimerAkzeptiert">Akzeptiert!</string>
+    <string name="disclaimer_title">Achtung</string>
 
     <string name="mainActivity_logo">LOGé</string>
     <string name="mainActivity_playbutton">Joue</string>
