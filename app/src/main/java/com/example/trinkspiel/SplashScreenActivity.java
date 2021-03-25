@@ -21,7 +21,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         };
 
         Handler handler = new Handler();
-        handler.postDelayed(runnable,3000);
+        handler.postDelayed(runnable,1000);
 
 
     }
