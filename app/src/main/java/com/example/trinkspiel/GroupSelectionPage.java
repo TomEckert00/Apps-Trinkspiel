@@ -59,7 +59,7 @@ public class GroupSelectionPage extends AppCompatActivity {
         newField.setSingleLine();
         newField.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         newField.setOnEditorActionListener(editorActionListener);
-        newField.setHint("Spieler " + (newFieldIndex+1));
+        newField.setHint(getString(R.string.player_hint) + " " + (newFieldIndex+1));
         playerListLayout.addView(newField,newFieldIndex);
     }
 

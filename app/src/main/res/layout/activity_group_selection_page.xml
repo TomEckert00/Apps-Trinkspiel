@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:text="@string/groupActivity_header"
-        android:textSize="56dp"
+        android:textSize="56sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,25 +38,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Spieler 1"
-                android:inputType="textPersonName"
-                android:imeOptions="actionNext"/>
+                android:hint="@string/player1_hint"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Spieler 2"
-                android:inputType="textPersonName"
-                android:imeOptions="actionNext"/>
+                android:hint="@string/player2_hint"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName" />
 
             <Button
                 android:id="@+id/button_addPlayer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="addNewPlayerInput"
-                android:text="+" />
+                android:text="@string/playerAddSign" />
         </LinearLayout>
     </ScrollView>
 

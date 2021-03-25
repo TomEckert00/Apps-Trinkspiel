@@ -9,6 +9,10 @@
     <string name="mainActivity_playbutton">Spielen</string>
 
     <string name="groupActivity_header">Spielerauswahl</string>
+    <string name="player_hint">Spieler</string>
+    <string name="player1_hint">Spieler 1</string>
+    <string name="player2_hint">Spieler 2</string>
+    <string name="playerAddSign">+</string>
     <string name="groupActivity_previousButton">Zurück</string>
     <string name="groupActivity_nextButton">Weiter</string>
 
