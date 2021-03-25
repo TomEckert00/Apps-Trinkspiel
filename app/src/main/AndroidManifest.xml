@@ -9,13 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trinkspiel">
-        <activity android:name=".MainSettings"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".MainSettings" />
         <activity android:name=".GameLoop" />
         <activity android:name=".PackageSelectionPage" />
         <activity android:name=".MoreInformationPage" />
         <activity android:name=".MarketPage" />
         <activity android:name=".GroupSelectionPage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
