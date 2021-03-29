@@ -26,6 +26,7 @@ public class GameLoop extends AppCompatActivity {
     boolean touchedRightHalf;
     TextView loopInfos;
     TextView schluckCount;
+    TextView schluckName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class GameLoop extends AppCompatActivity {
         mainLayout = findViewById(R.id.mainLayout);
         loopInfos = findViewById(R.id.loopInfos);
         schluckCount = findViewById(R.id.schluckCount);
+        schluckName = findViewById(R.id.schluckName);
         System.out.println(schluckCount.getText());
         mainLayout.setOnTouchListener(new View.OnTouchListener(){
             @Override
@@ -95,6 +97,11 @@ public class GameLoop extends AppCompatActivity {
         aufgabe.setText(aktuelleAufgabe);
         int aktuelleSchlucke = cards.get(cardIndex).getSchlucke();
         schluckCount.setText(""+aktuelleSchlucke);
+        schluckName.setVisibility(View.VISIBLE);
+        if (aktuelleSchlucke == 0){
+            schluckCount.setVisibility(View.INVISIBLE);
+            schluckName.setVisibility(View.INVISIBLE);
+        }
     }
 
 

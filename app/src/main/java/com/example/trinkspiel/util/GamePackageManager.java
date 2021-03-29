@@ -19,15 +19,19 @@ public class GamePackageManager{
         Properties properties = new Properties();
         AssetManager assetManager = context.getAssets();
         try {
-            InputStream inputStream = assetManager.open(packagename + "Cards.properties");
+            InputStream inputStream = assetManager.open(language + "_" + packagename + "Cards.properties");
             properties.load(inputStream);
         }catch (Exception e){}
 
         int size = Integer.parseInt(properties.getProperty("cardSetSize"));
-        for(int i=1; i <= size; i++){
-            String aufgabe = properties.getProperty(language + ".card." + i + ".aufgabe");
-            int schlucke = Integer.parseInt(properties.getProperty("card." + i + ".schlucke"));
-            cards.add(new Card(i,aufgabe,schlucke));
+        if (size > 0) {
+            for (int i = 1; i <= size; i++) {
+                String aufgabe = properties.getProperty(language + ".card." + i + ".aufgabe");
+                int schlucke = Integer.parseInt(properties.getProperty("card." + i + ".schlucke"));
+                cards.add(new Card(i, aufgabe, schlucke));
+            }
+        }else{
+            cards.add(new Card(1,"No Cards found",404));
         }
         return cards;
     }
