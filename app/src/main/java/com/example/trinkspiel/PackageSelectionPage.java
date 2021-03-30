@@ -1,12 +1,16 @@
 package com.example.trinkspiel;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
 
@@ -14,20 +18,19 @@ public class PackageSelectionPage extends AppCompatActivity {
 
     private ArrayList<String> playerList;
     private static String selectedPackageName;
-    private Button button_standardPacket;
-    private Button button_onlinePacket;
     private Button startGameButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package_selection_page);
-        button_standardPacket = findViewById(R.id.button_standardPacket);
-        button_onlinePacket =findViewById(R.id.button_onlinePacket);
         startGameButton = findViewById(R.id.button_startGameLoop);
-        playerList = GroupSelectionPage.getPlayerList();
         TextView probeOutput = findViewById(R.id.playerListOutput);
-        probeOutput.setText("");
+        showPlayerList(probeOutput);
+    }
+
+    private void showPlayerList(TextView probeOutput) {
+        playerList = GroupSelectionPage.getPlayerList();
         int i = 0;
         for(String name:playerList){
             i++;
@@ -43,8 +46,6 @@ public class PackageSelectionPage extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
             startGameButton.setEnabled(false);
-            button_onlinePacket.setEnabled(true);
-            button_standardPacket.setEnabled(true);
     }
 
     public void startGameWithSelectedPackage(View view){
@@ -55,16 +56,29 @@ public class PackageSelectionPage extends AppCompatActivity {
     public void selectStandardPackage(View view){
         selectedPackageName = "StandardPackage";
         startGameButton.setEnabled(true);
-        button_standardPacket.setEnabled(false);
-        button_onlinePacket.setEnabled(true);
-
+        resetAllColorsFromPackages();
+        highLightSelectedPackage(0);
     }
 
     public void selectOnlinePackage(View view){
         selectedPackageName = "OnlinePackage";
         startGameButton.setEnabled(true);
-        button_onlinePacket.setEnabled(false);
-        button_standardPacket.setEnabled(true);
+        resetAllColorsFromPackages();
+        highLightSelectedPackage(1);
+    }
+
+
+    private void highLightSelectedPackage(int index) {
+        LinearLayout cardViews = findViewById(R.id.package_cards);
+        CardView selectedCardView = (CardView) cardViews.getChildAt(index);
+        selectedCardView.setCardBackgroundColor(Color.rgb(200,200,200));
+    }
+
+    private void resetAllColorsFromPackages() {
+        LinearLayout cardViews = findViewById(R.id.package_cards);
+        for(int i=0;i<cardViews.getChildCount();i++){
+            ((CardView) cardViews.getChildAt(i)).setCardBackgroundColor(Color.WHITE);
+        }
     }
 
 

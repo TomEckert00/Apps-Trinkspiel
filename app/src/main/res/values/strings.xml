@@ -17,6 +17,8 @@
     <string name="groupActivity_nextButton">Weiter</string>
 
     <string name="packageActivity_header">Paketauswahl</string>
+    <string name="packageActivity_players">Spieler: </string>
+    <string name="packageActivity_ComingSoon">Coming soon...</string>
     <string name="packageActivity_name_StandardPackage">Standardpaket</string>
     <string name="packageActivity_name_OnlinePackage">Onlinepaket</string>
     <string name="packageActivity_previousButton">Zurück</string>
