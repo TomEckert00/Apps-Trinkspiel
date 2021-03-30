@@ -107,8 +107,8 @@
 
         <TextView
             android:id="@+id/disclaimer"
-            android:layout_width="396dp"
-            android:layout_height="193dp"
+            android:layout_width="350dp"
+            android:layout_height="190dp"
             android:gravity="center"
             android:text="@string/disclaimer"
             android:textColor="#FFFFFF"

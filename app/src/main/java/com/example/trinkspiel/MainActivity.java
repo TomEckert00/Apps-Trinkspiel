@@ -68,16 +68,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void reloadPageForNewLanguage(String language) {
+        UpdateConfiguration(language);
+        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("disclaimerShown", true);
+        startActivity(intent);
+    }
+
+    private void UpdateConfiguration(String language) {
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
         Resources resources = getResources();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
-        finish();
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("disclaimerShown", true);
-        startActivity(intent);
     }
 
 }
