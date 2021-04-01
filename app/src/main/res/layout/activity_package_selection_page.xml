@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple_200"
     tools:context="PackageSelectionPage">
 
     <TextView
@@ -106,7 +107,6 @@
                 android:layout_height="80dp"
                 android:layout_gravity="fill"
                 android:layout_margin="8dp"
-                android:onClick="selectStandardPackage"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp">
 

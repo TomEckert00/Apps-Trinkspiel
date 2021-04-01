@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pages.GroupPage">
+    android:background="@color/purple_200"
+    tools:context="GroupSelectionPage">
 
     <TextView
         android:id="@+id/textView_Header"
@@ -40,7 +41,8 @@
                 android:ems="10"
                 android:hint="@string/player1_hint"
                 android:imeOptions="actionNext"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="#FFFFFF" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName5"

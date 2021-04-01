@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pages.MainActivity">
+    android:background="@drawable/background"
+    tools:context="MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainView"
@@ -18,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
             android:text="@string/mainActivity_logo"
+            android:textColor="@color/design_default_color_on_primary"
             android:textSize="56sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,62 +31,47 @@
             android:layout_height="102dp"
             android:onClick="openGroupSelectionPage"
             android:text="@string/mainActivity_playbutton"
-            app:layout_constraintBottom_toTopOf="@+id/button_information"
+            app:layout_constraintBottom_toTopOf="@+id/infoImageButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_logo"
-            app:layout_constraintVertical_bias="0.276" />
+            app:layout_constraintVertical_bias="0.15" />
 
-        <Button
-            android:id="@+id/button_information"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginBottom="32dp"
-            android:onClick="openMoreInformationPage"
-            android:textAllCaps="false"
-            android:textSize="30sp"
-            app:icon="@android:drawable/ic_dialog_info"
-            app:iconSize="@android:dimen/app_icon_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/button_settings"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginBottom="32dp"
-            android:onClick="changeLanguageToNextInOrder"
-            app:icon="@drawable/settings"
-            app:iconSize="@android:dimen/app_icon_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_information" />
-
-        <Button
-            android:id="@+id/button_instagram"
+        <ImageView
+            android:id="@+id/InstaImageButton"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginBottom="32dp"
             android:onClick="openInstagram"
-            app:icon="@drawable/instagram"
-            app:iconSize="@android:dimen/app_icon_size"
-            app:iconTint="#FFFFFF"
+            android:src="@drawable/instagram_color"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_information"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/infoImageButton"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:srcCompat="@drawable/instagram_color" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:text="@string/language"
-            app:layout_constraintBottom_toTopOf="@+id/button_settings"
+        <ImageView
+            android:id="@+id/infoImageButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="32dp"
+            android:background="#FFFFFF"
+            android:onClick="openMoreInformationPage"
+            android:src="@drawable/info"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/languageImageView"
+            app:layout_constraintStart_toEndOf="@+id/InstaImageButton" />
+
+        <ImageView
+            android:id="@+id/languageImageView"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="32dp"
+            android:onClick="changeLanguageToNextInOrder"
+            android:src="@drawable/deutschland"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.87"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/infoImageButton"
+            tools:srcCompat="@drawable/greatbritain" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -92,14 +79,17 @@
         android:id="@+id/disclaimerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CDDC39">
+        android:background="@color/backgroundColor"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/disclaimer_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/disclaimer_title"
-            android:textSize="50sp"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="70sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/disclaimer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -122,9 +112,11 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="50dp"
             android:onClick="killDisclaimer"
             android:text="@string/disclaimerAkzeptiert"
+            android:textAllCaps="false"
+            android:textSize="35sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
