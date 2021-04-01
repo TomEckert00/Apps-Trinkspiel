@@ -41,8 +41,7 @@
                 android:ems="10"
                 android:hint="@string/player1_hint"
                 android:imeOptions="actionNext"
-                android:inputType="textPersonName"
-                android:textColor="#FFFFFF" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName5"
