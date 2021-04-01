@@ -121,7 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/packageActivity_name_StandardPackage"
+                        android:text="@string/packageActivity_ComingSoon"
                         android:textAlignment="center"
                         android:textSize="25sp" />
                 </LinearLayout>
