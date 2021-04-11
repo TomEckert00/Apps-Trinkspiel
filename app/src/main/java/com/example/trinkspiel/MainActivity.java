@@ -18,6 +18,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    ConstraintLayout mainView;
     ConstraintLayout disclaimerView;
     ImageView languageButton;
 
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     public void killDisclaimer(View view){
         disclaimerView = findViewById(R.id.disclaimerView);
         disclaimerView.setVisibility(View.GONE);
+        mainView = findViewById(R.id.mainView);
+        mainView.setVisibility(View.VISIBLE);
     }
 
     public void openGroupSelectionPage(View view){

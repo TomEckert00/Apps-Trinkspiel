@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:icon="@drawable/appicon_flo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/appicon_flo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trinkspiel">
         <activity android:name=".MainActivity" />
