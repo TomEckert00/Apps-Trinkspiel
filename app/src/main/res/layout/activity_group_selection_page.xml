@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
+    android:background="@color/flo5"
     tools:context="GroupSelectionPage">
 
     <TextView
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:text="@string/groupActivity_header"
+        android:textColor="@color/white"
         android:textSize="56sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,26 +39,33 @@
                 android:id="@+id/editTextTextPersonName4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
                 android:ems="10"
                 android:hint="@string/player1_hint"
                 android:imeOptions="actionNext"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
                 android:ems="10"
                 android:hint="@string/player2_hint"
                 android:imeOptions="actionNext"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
             <Button
                 android:id="@+id/button_addPlayer"
-                android:layout_width="wrap_content"
+                android:layout_width="120sp"
                 android:layout_height="wrap_content"
                 android:onClick="addNewPlayerInput"
-                android:text="@string/playerAddSign" />
+                android:text="@string/playerAddSign"
+                android:textSize="30sp" />
         </LinearLayout>
     </ScrollView>
 

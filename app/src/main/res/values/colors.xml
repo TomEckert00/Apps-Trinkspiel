@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="backgroundColor">#000026</color>
+    <color name="flo1">#DA22F2</color>
+    <color name="flo2">#AD24BF</color>
+    <color name="flo3">#7216F2</color>
+    <color name="flo4">#331673</color>
+    <color name="flo5">#1D0D40</color>
 </resources>

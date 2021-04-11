@@ -1,6 +1,7 @@
 package com.example.trinkspiel;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -59,6 +60,9 @@ public class GroupSelectionPage extends AppCompatActivity {
         newField.setSingleLine();
         newField.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         newField.setOnEditorActionListener(editorActionListener);
+        newField.setHintTextColor(getResources().getColor(R.color.white));
+        newField.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        newField.setTextColor(getResources().getColor(R.color.white));
         newField.setHint(getString(R.string.player_hint) + " " + (newFieldIndex+1));
         playerListLayout.addView(newField,newFieldIndex);
     }

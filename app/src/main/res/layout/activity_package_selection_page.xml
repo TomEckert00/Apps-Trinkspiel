@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
+    android:background="@color/flo5"
     tools:context="PackageSelectionPage">
 
     <TextView
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/packageActivity_header"
+        android:textColor="@color/white"
         android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/playerListOutput"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +54,7 @@
                 android:layout_gravity="fill"
                 android:layout_margin="8dp"
                 android:onClick="selectStandardPackage"
+                app:cardBackgroundColor="@color/flo1"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp">
 
@@ -80,6 +82,7 @@
                 android:layout_gravity="fill"
                 android:layout_margin="8dp"
                 android:onClick="selectOnlinePackage"
+                app:cardBackgroundColor="@color/flo1"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp">
 
@@ -107,6 +110,7 @@
                 android:layout_height="80dp"
                 android:layout_gravity="fill"
                 android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/flo3"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp">
 
