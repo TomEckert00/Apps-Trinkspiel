@@ -110,7 +110,7 @@
                 android:layout_height="80dp"
                 android:layout_gravity="fill"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/flo3"
+                app:cardBackgroundColor="@color/flo1"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp">
 

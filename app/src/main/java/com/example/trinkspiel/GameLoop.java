@@ -97,6 +97,7 @@ public class GameLoop extends AppCompatActivity {
         aufgabe.setText(aktuelleAufgabe);
         int aktuelleSchlucke = cards.get(cardIndex).getSchlucke();
         schluckCount.setText(""+aktuelleSchlucke);
+        schluckCount.setVisibility(View.VISIBLE);
         schluckName.setVisibility(View.VISIBLE);
         if (aktuelleSchlucke == 0){
             schluckCount.setVisibility(View.INVISIBLE);
@@ -120,19 +121,26 @@ public class GameLoop extends AppCompatActivity {
         int repetitions = cards.size();
         for(int i=0;i<repetitions;i++){
             String randomPlayer = spieler.get(getRandomNumber(0,spieler.size()));
-            String TaskWithPlayerReplaced = kartenDeck.get(i).getAufgabe().replace("$Sp1", randomPlayer);
-            kartenDeck.get(i).setAufgabe(TaskWithPlayerReplaced);
             spieler.remove(randomPlayer);
             if(removedPlayer != null){
                 spieler.add(removedPlayer);
             }
             removedPlayer = randomPlayer;
+            String anotherPlayer = spieler.get(getRandomNumber(0,spieler.size()));
+
+            String TaskWithPlayerReplaced = kartenDeck.get(i).getAufgabe().replace("$Sp1", randomPlayer);
+            TaskWithPlayerReplaced = TaskWithPlayerReplaced.replace("$Sp2", anotherPlayer);
+            kartenDeck.get(i).setAufgabe(TaskWithPlayerReplaced);
+
+
+
         }
         spieler.add(removedPlayer);
         cards = kartenDeck;
         System.out.println("Neues Deck:");
         System.out.println(cards.toString());
     }
+
 
     public void backToPackages(View view){
         this.finish();

@@ -71,13 +71,13 @@ public class PackageSelectionPage extends AppCompatActivity {
     private void highLightSelectedPackage(int index) {
         LinearLayout cardViews = findViewById(R.id.package_cards);
         CardView selectedCardView = (CardView) cardViews.getChildAt(index);
-        selectedCardView.setCardBackgroundColor(Color.rgb(200,200,200));
+        selectedCardView.setCardBackgroundColor(getResources().getColor(R.color.flo3));
     }
 
     private void resetAllColorsFromPackages() {
         LinearLayout cardViews = findViewById(R.id.package_cards);
         for(int i=0;i<cardViews.getChildCount();i++){
-            ((CardView) cardViews.getChildAt(i)).setCardBackgroundColor(Color.WHITE);
+            ((CardView) cardViews.getChildAt(i)).setCardBackgroundColor(getResources().getColor(R.color.flo1));
         }
     }
 
