@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -24,7 +25,6 @@ public class GameLoop extends AppCompatActivity {
     ArrayList<String> players;
     int cardIndex;
     boolean touchedRightHalf;
-    TextView loopInfos;
     TextView schluckCount;
     TextView schluckName;
 
@@ -35,7 +35,6 @@ public class GameLoop extends AppCompatActivity {
         setContentView(R.layout.activity_game_loop);
         aufgabe = findViewById(R.id.AufgabenTextView);
         mainLayout = findViewById(R.id.mainLayout);
-        loopInfos = findViewById(R.id.loopInfos);
         schluckCount = findViewById(R.id.schluckCount);
         schluckName = findViewById(R.id.schluckName);
         System.out.println(schluckCount.getText());
@@ -80,12 +79,11 @@ public class GameLoop extends AppCompatActivity {
 
     public void changeCard() {
         if (touchedRightHalf) {
-            loopInfos.setText("");
             cardIndex++;
             if (cardIndex == cards.size()) {
                 System.out.println("Letzte Karte erreicht, starte von vorne");
                 shuffleCardsFillWithPlayersAnSetIndexToZero();
-                loopInfos.setText("Deck shuffled");
+                Toast.makeText(this, "Deck shuffled", Toast.LENGTH_SHORT).show();
             }
         } else {
             cardIndex--;
