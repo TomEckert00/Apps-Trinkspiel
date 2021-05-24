@@ -45,7 +45,10 @@ public class PackageSelectionPage extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-            startGameButton.setEnabled(false);
+        startGameButton.setEnabled(false);
+        if (selectedPackageName != null){
+            startGameButton.setEnabled(true);
+        }
     }
 
     public void startGameWithSelectedPackage(View view){
