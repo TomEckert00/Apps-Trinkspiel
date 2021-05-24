@@ -1,5 +1,6 @@
 package com.example.trinkspiel;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -14,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.trinkspiel.util.Card;
 import com.example.trinkspiel.util.GamePackageManager;
+import com.example.trinkspiel.util.Kategorie;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +29,7 @@ public class GameLoop extends AppCompatActivity {
     boolean touchedRightHalf;
     TextView schluckCount;
     TextView schluckName;
+    TextView kategorieLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class GameLoop extends AppCompatActivity {
         mainLayout = findViewById(R.id.mainLayout);
         schluckCount = findViewById(R.id.schluckCount);
         schluckName = findViewById(R.id.schluckName);
+        kategorieLabel = findViewById(R.id.KategorieLabel);
         System.out.println(schluckCount.getText());
         mainLayout.setOnTouchListener(new View.OnTouchListener(){
             @Override
@@ -100,6 +104,19 @@ public class GameLoop extends AppCompatActivity {
         if (aktuelleSchlucke == 0){
             schluckCount.setVisibility(View.INVISIBLE);
             schluckName.setVisibility(View.INVISIBLE);
+        }
+        Kategorie aktuelleKategorie = cards.get(cardIndex).getKategorie();
+        kategorieLabel.setText(aktuelleKategorie.getKategorieName());
+        String color = aktuelleKategorie.getKategorieColorName();
+
+        System.out.println("Aktuelle Kategorie "+ aktuelleKategorie.getKategorieName());
+        System.out.println("Aktuelle Farbe "+ color);
+
+        if(color.equals("RED")){
+            mainLayout.setBackgroundColor(Color.RED);
+        }
+        else {
+            mainLayout.setBackgroundColor(Color.WHITE);
         }
     }
 
