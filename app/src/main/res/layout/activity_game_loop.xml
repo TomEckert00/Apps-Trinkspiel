@@ -29,27 +29,18 @@
 
     <Button
         android:id="@+id/button_backToPackages"
-        android:layout_width="106dp"
-        android:layout_height="47dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:onClick="backToPackages"
-        android:text="Zurück"
+        android:text="X"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        app:backgroundTint="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/schluckCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
-        android:text="0"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/schluckName"
@@ -57,20 +48,38 @@
         android:layout_height="wrap_content"
         android:text="@string/gameLoop_Schlucke"
         android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/schluckCount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AufgabenTextView"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
+        android:id="@+id/schluckCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:text="0"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
         android:id="@+id/KategorieLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Kategorie"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/AufgabenTextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.634" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
