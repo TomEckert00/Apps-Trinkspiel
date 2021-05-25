@@ -10,11 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Trinkspiel">
         <activity android:name=".MainActivity" />
-        <activity android:name=".MainSettings" />
         <activity android:name=".GameLoop" />
         <activity android:name=".PackageSelectionPage" />
         <activity android:name=".MoreInformationPage" />
-        <activity android:name=".MarketPage" />
         <activity
             android:name=".GroupSelectionPage"
             android:windowSoftInputMode="adjustPan"
