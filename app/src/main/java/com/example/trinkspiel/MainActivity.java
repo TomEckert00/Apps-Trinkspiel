@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
@@ -18,17 +17,27 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    ConstraintLayout mainView;
-    ConstraintLayout disclaimerView;
-    ImageView languageButton;
+    private ConstraintLayout mainView;
+    private ConstraintLayout disclaimerView;
+    private ImageView languageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initializeViews();
+        checkDisclaimer();
+    }
+
+    private void initializeViews() {
         languageButton = findViewById(R.id.languageImageView);
-        String currentlanguage = getResources().getConfiguration().locale.getLanguage();
-        setImageButtonViewToLanguage(currentlanguage);
+        disclaimerView = findViewById(R.id.disclaimerView);
+        mainView = findViewById(R.id.mainView);
+        setImageButtonViewToLanguage(getResources().getConfiguration().locale.getLanguage());
+    }
+
+    private void checkDisclaimer(){
         boolean disClaimerShown = getIntent().getBooleanExtra("disclaimerShown", false);
         if (disClaimerShown){
             killDisclaimer(null);
@@ -36,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void killDisclaimer(View view){
-        disclaimerView = findViewById(R.id.disclaimerView);
         disclaimerView.setVisibility(View.GONE);
-        mainView = findViewById(R.id.mainView);
         mainView.setVisibility(View.VISIBLE);
     }
 
@@ -57,12 +64,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MoreInformationPage.class);
         startActivity(intent);
     }
-
-    /*public void openMainSettings(View v){
-        Intent intent = new Intent(this, MainSettings.class);
-        startActivity(intent);
-    }
-     */
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void changeLanguageToNextInOrder(View view){
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         UpdateConfiguration(language);
         finish();
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("disclaimerShown", true);
+        intent.putExtra("disclaimerShown", false);
         startActivity(intent);
     }
 

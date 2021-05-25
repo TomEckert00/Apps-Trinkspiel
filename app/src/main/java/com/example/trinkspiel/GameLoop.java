@@ -21,42 +21,50 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class GameLoop extends AppCompatActivity {
-    TextView aufgabe;
-    ConstraintLayout mainLayout;
-    ArrayList<Card> cards;
-    ArrayList<String> players;
-    int cardIndex;
-    boolean touchedRightHalf;
-    TextView schluckCount;
-    TextView schluckName;
-    TextView kategorieLabel;
+
+    private TextView aufgabe;
+    private ConstraintLayout mainLayout;
+    private  ArrayList<Card> cards;
+    private ArrayList<String> players;
+    private int cardIndex;
+    private boolean touchedRightHalf;
+    private TextView schluckCount;
+    private TextView schluckName;
+    private TextView kategorieLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_game_loop);
+
+        initializeViews();
+
+        mainLayout.setOnTouchListener(new CardChangeListener());
+    }
+
+    private void initializeViews() {
         aufgabe = findViewById(R.id.AufgabenTextView);
         mainLayout = findViewById(R.id.mainLayout);
         schluckCount = findViewById(R.id.schluckCount);
         schluckName = findViewById(R.id.schluckName);
         kategorieLabel = findViewById(R.id.KategorieLabel);
-        System.out.println(schluckCount.getText());
-        mainLayout.setOnTouchListener(new View.OnTouchListener(){
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int x = (int) event.getX();
-                int screenWidth = FetchDynamicScreenWidth();
-                if(x >= screenWidth/2){
-                    touchedRightHalf = true;
-                }
-                else {
-                    touchedRightHalf = false;
-                }
-                changeCard();
-                return false;
+    }
+
+    private class CardChangeListener implements View.OnTouchListener{
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            int x = (int) event.getX();
+            int screenWidth = FetchDynamicScreenWidth();
+            if(x >= screenWidth/2){
+                touchedRightHalf = true;
             }
-        });
+            else {
+                touchedRightHalf = false;
+            }
+            changeCard();
+            return false;
+        }
     }
 
     private int FetchDynamicScreenWidth() {
@@ -74,18 +82,57 @@ public class GameLoop extends AppCompatActivity {
     }
 
     private void shuffleCardsFillWithPlayersAnSetIndexToZero() {
-        cards = GamePackageManager.getCardsFromProperties(this,PackageSelectionPage.getSelectedPackage(),getResources().getConfiguration().locale.getLanguage());
+        cards = fetchCardsFromProperties();
         shuffleInRandomOrder(cards);
         players = GroupSelectionPage.getPlayerList();
         fillCardsWithPlayers();
         cardIndex = 0;
     }
 
+    private ArrayList<Card> fetchCardsFromProperties() {
+        return GamePackageManager.getCardsFromProperties(this, PackageSelectionPage.getSelectedPackage(),getResources().getConfiguration().locale.getLanguage());
+    }
+
+    private void shuffleInRandomOrder(ArrayList<Card> list){
+        Collections.shuffle(list);
+    }
+
+    private void fillCardsWithPlayers(){
+        ArrayList<Card> temporaryCardDeck = cards;
+        ArrayList<String> temporaryPlayers = players;
+        String removedPlayer = null;
+
+        for(int i = 0; i < cards.size(); i++){
+            String randomPlayer = temporaryPlayers.get(getRandomNumber(0,temporaryPlayers.size()));
+            temporaryPlayers.remove(randomPlayer);
+            if(removedPlayer != null){
+                temporaryPlayers.add(removedPlayer);
+            }
+            removedPlayer = randomPlayer;
+            String randomPlayer2 = temporaryPlayers.get(getRandomNumber(0,temporaryPlayers.size()));
+
+            String TaskWithPlayerReplaced = temporaryCardDeck.get(i).getAufgabe().replace("$Sp1", randomPlayer);
+            TaskWithPlayerReplaced = TaskWithPlayerReplaced.replace("$Sp2", randomPlayer2);
+            temporaryCardDeck.get(i).setAufgabe(TaskWithPlayerReplaced);
+
+        }
+        temporaryPlayers.add(removedPlayer);
+        cards = temporaryCardDeck;
+    }
+
+    private int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+
     public void changeCard() {
+        NavigateThroughCards();
+        changeViewDependingOfCard();
+    }
+
+    private void NavigateThroughCards() {
         if (touchedRightHalf) {
             cardIndex++;
             if (cardIndex == cards.size()) {
-                System.out.println("Letzte Karte erreicht, starte von vorne");
                 shuffleCardsFillWithPlayersAnSetIndexToZero();
                 Toast.makeText(this, "Deck shuffled", Toast.LENGTH_SHORT).show();
             }
@@ -95,67 +142,58 @@ public class GameLoop extends AppCompatActivity {
                 cardIndex = 0;
             }
         }
-        String aktuelleAufgabe = cards.get(cardIndex).getAufgabe();
-        aufgabe.setText(aktuelleAufgabe);
-        int aktuelleSchlucke = cards.get(cardIndex).getSchlucke();
-        schluckCount.setText(""+aktuelleSchlucke);
+    }
+
+    private void changeViewDependingOfCard() {
+        prepareAktuelleAufgabe();
+        prepareAktuelleSchlucke();
+        changeViewDependingOnKategorie();
+    }
+
+    private void prepareAktuelleAufgabe() {
+        aufgabe.setText(getAufgabeFromCardWithIndex());
+    }
+
+    private String getAufgabeFromCardWithIndex() {
+        return cards.get(cardIndex).getAufgabe();
+    }
+
+    private void prepareAktuelleSchlucke() {
+        int aktuelleSchlucke = getSchluckeFromCardWithIndex();
+        schluckCount.setText("" + aktuelleSchlucke);
         schluckCount.setVisibility(View.VISIBLE);
         schluckName.setVisibility(View.VISIBLE);
         if (aktuelleSchlucke == 0){
             schluckCount.setVisibility(View.INVISIBLE);
             schluckName.setVisibility(View.INVISIBLE);
         }
-        Kategorie aktuelleKategorie = cards.get(cardIndex).getKategorie();
+    }
+
+    private int getSchluckeFromCardWithIndex(){
+        return cards.get(cardIndex).getSchlucke();
+    }
+
+    private void changeViewDependingOnKategorie() {
+        Kategorie aktuelleKategorie = getKategorieFromCardWithIndex();
         kategorieLabel.setText(aktuelleKategorie.getKategorieName());
         String color = aktuelleKategorie.getKategorieColorName();
+        changeBackground(color);
+    }
 
-        System.out.println("Aktuelle Kategorie "+ aktuelleKategorie.getKategorieName());
-        System.out.println("Aktuelle Farbe "+ color);
+    private Kategorie getKategorieFromCardWithIndex() {
+        return cards.get(cardIndex).getKategorie();
+    }
 
-        if(color.equals("RED")){
-            mainLayout.setBackgroundColor(Color.RED);
+    private void changeBackground(String color) {
+        switch (color){
+            case "RED":
+                mainLayout.setBackgroundColor(Color.RED);
+                break;
+            default:
+                mainLayout.setBackgroundColor(Color.WHITE);
+                break;
         }
-        else {
-            mainLayout.setBackgroundColor(Color.WHITE);
-        }
     }
-
-
-    private int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
-    }
-
-    private void shuffleInRandomOrder(ArrayList<Card> list){
-        Collections.shuffle(list);
-    }
-
-    private void fillCardsWithPlayers(){
-        ArrayList<Card> kartenDeck = cards;
-        ArrayList<String> spieler = players;
-        String removedPlayer = null;
-        int repetitions = cards.size();
-        for(int i=0;i<repetitions;i++){
-            String randomPlayer = spieler.get(getRandomNumber(0,spieler.size()));
-            spieler.remove(randomPlayer);
-            if(removedPlayer != null){
-                spieler.add(removedPlayer);
-            }
-            removedPlayer = randomPlayer;
-            String anotherPlayer = spieler.get(getRandomNumber(0,spieler.size()));
-
-            String TaskWithPlayerReplaced = kartenDeck.get(i).getAufgabe().replace("$Sp1", randomPlayer);
-            TaskWithPlayerReplaced = TaskWithPlayerReplaced.replace("$Sp2", anotherPlayer);
-            kartenDeck.get(i).setAufgabe(TaskWithPlayerReplaced);
-
-
-
-        }
-        spieler.add(removedPlayer);
-        cards = kartenDeck;
-        System.out.println("Neues Deck:");
-        System.out.println(cards.toString());
-    }
-
 
     public void backToPackages(View view){
         this.finish();

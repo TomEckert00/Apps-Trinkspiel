@@ -7,24 +7,18 @@ import java.util.Map;
 
 public class Card {
 
-    private int kartenNummer;
     private int schlucke;
     private String aufgabe;
     private Kategorie kategorie;
 
-    public Card(int kartenNummer,String aufgabe,int schlucke, Kategorie kategorie){
-        this.kartenNummer=kartenNummer;
-        this.aufgabe=aufgabe;
-        this.schlucke=schlucke;
-        this.kategorie=kategorie;
-    }
-
-    public void setAufgabe(String aufgabe) {
+    public Card(String aufgabe, int schlucke, Kategorie kategorie){
         this.aufgabe = aufgabe;
+        this.schlucke = schlucke;
+        this.kategorie = kategorie;
     }
 
-    public int getKartenNummer(){
-        return kartenNummer;
+    public void setAufgabe(String aufgabe){
+        this.aufgabe = aufgabe;
     }
 
     public int getSchlucke(){
@@ -35,5 +29,7 @@ public class Card {
         return aufgabe;
     }
 
-    public Kategorie getKategorie(){ return kategorie; }
+    public Kategorie getKategorie(){
+        return kategorie;
+    }
 }

@@ -16,37 +16,34 @@ import java.util.ArrayList;
 
 public class PackageSelectionPage extends AppCompatActivity {
 
-    private ArrayList<String> playerList;
     private static String selectedPackageName;
     private Button startGameButton;
+    private LinearLayout cardViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package_selection_page);
-        startGameButton = findViewById(R.id.button_startGameLoop);
-        TextView probeOutput = findViewById(R.id.playerListOutput);
-        showPlayerList(probeOutput);
+
+        initializeViews();
     }
 
-    private void showPlayerList(TextView probeOutput) {
-        playerList = GroupSelectionPage.getPlayerList();
-        int i = 0;
-        for(String name:playerList){
-            i++;
-            if(i<playerList.size()){
-                probeOutput.setText(probeOutput.getText() + name + ", ");
-            }else{
-                probeOutput.setText(probeOutput.getText() + name);
-            }
-        }
+    private void initializeViews() {
+        startGameButton = findViewById(R.id.button_startGameLoop);
+        cardViews = findViewById(R.id.package_cards);
+        selectedPackageName = "";
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        checkButtonActivation();
+    }
+
+    private void checkButtonActivation() {
         startGameButton.setEnabled(false);
-        if (selectedPackageName != null){
+        if (selectedPackageName != null && !selectedPackageName.equals("")){
             startGameButton.setEnabled(true);
         }
     }
@@ -70,20 +67,16 @@ public class PackageSelectionPage extends AppCompatActivity {
         highLightSelectedPackage(1);
     }
 
-
-    private void highLightSelectedPackage(int index) {
-        LinearLayout cardViews = findViewById(R.id.package_cards);
-        CardView selectedCardView = (CardView) cardViews.getChildAt(index);
-        selectedCardView.setCardBackgroundColor(getResources().getColor(R.color.flo3));
-    }
-
     private void resetAllColorsFromPackages() {
-        LinearLayout cardViews = findViewById(R.id.package_cards);
-        for(int i=0;i<cardViews.getChildCount();i++){
+        for(int i = 0; i < cardViews.getChildCount(); i++){
             ((CardView) cardViews.getChildAt(i)).setCardBackgroundColor(getResources().getColor(R.color.flo1));
         }
     }
 
+    private void highLightSelectedPackage(int index) {
+        CardView selectedCardView = (CardView) cardViews.getChildAt(index);
+        selectedCardView.setCardBackgroundColor(getResources().getColor(R.color.flo3));
+    }
 
     public void redirectBack(View v){
         this.finish();

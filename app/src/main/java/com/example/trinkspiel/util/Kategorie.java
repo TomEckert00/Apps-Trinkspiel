@@ -8,8 +8,8 @@ public class Kategorie {
     private String kategorieColorName;
 
     public Kategorie(String kategorieName, String kategorieColorName){
-        this.kategorieName=kategorieName;
-        this.kategorieColorName=kategorieColorName;
+        this.kategorieName = kategorieName;
+        this.kategorieColorName = kategorieColorName;
     }
 
     public String getKategorieName(){
