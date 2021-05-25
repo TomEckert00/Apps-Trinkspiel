@@ -8,6 +8,8 @@ import android.os.Handler;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
+    private final long SPLASHSCREEN_TIME_MILLIS = 3000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +23,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         };
 
         Handler handler = new Handler();
-        handler.postDelayed(runnable,3000);
-
+        handler.postDelayed(runnable,SPLASHSCREEN_TIME_MILLIS);
 
     }
 
