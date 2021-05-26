@@ -186,13 +186,34 @@ public class GameLoop extends AppCompatActivity {
 
     private void changeBackground(String color) {
         switch (color){
-            case "RED":
+            case "Normal":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.flo4));
+                setViewColors(Color.WHITE);
+                break;
+            case "Rot":
                 mainLayout.setBackgroundColor(Color.RED);
+                setViewColors(Color.BLACK);
+                break;
+            case "Grün":
+                mainLayout.setBackgroundColor(Color.GREEN);
+                setViewColors(Color.BLACK);
+                break;
+            case "Schwarz":
+                mainLayout.setBackgroundColor(Color.BLACK);
+                setViewColors(Color.WHITE);
                 break;
             default:
                 mainLayout.setBackgroundColor(Color.WHITE);
+                setViewColors(Color.BLACK);
                 break;
         }
+    }
+
+    private void setViewColors(int color){
+        aufgabe.setTextColor(color);
+        schluckCount.setTextColor(color);
+        schluckName.setTextColor(color);
+        kategorieLabel.setTextColor(color);
     }
 
     public void backToPackages(View view){
