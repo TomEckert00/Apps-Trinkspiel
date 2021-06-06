@@ -67,6 +67,13 @@ public class PackageSelectionPage extends AppCompatActivity {
         highLightSelectedPackage(1);
     }
 
+    public void selectActivityPackage(View view){
+        selectedPackageName = "ActivityPackage";
+        startGameButton.setEnabled(true);
+        resetAllColorsFromPackages();
+        highLightSelectedPackage(2);
+    }
+
     private void resetAllColorsFromPackages() {
         for(int i = 0; i < cardViews.getChildCount(); i++){
             ((CardView) cardViews.getChildAt(i)).setCardBackgroundColor(getResources().getColor(R.color.flo1));
