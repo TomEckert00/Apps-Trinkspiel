@@ -11,7 +11,7 @@
         android:id="@+id/mainView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
+        android:visibility="visible"
         tools:context=".pages.MainActivity">
 
         <TextView
@@ -43,6 +43,7 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginBottom="32dp"
+            android:contentDescription="@string/alt_instagram"
             android:onClick="openInstagram"
             android:src="@drawable/instagram_color"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,6 +57,7 @@
             android:layout_height="75dp"
             android:layout_marginBottom="32dp"
             android:background="#FFFFFF"
+            android:contentDescription="@string/alt_infoicon"
             android:onClick="openMoreInformationPage"
             android:src="@drawable/info"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,6 +69,7 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginBottom="32dp"
+            android:contentDescription="@string/alt_language"
             android:onClick="changeLanguageToNextInOrder"
             android:src="@drawable/deutschland"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -81,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundColor"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/disclaimer_title"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trinkspiel</string>
+    <string name="app_name">Saufapparat</string>
     <string name="language">Deutsch</string>
     <string name="disclaimer">Kenne deine Grenzen! Die Angaben sind nur als Vorschlag zu beachten. Vorsichtiger Umgang mit Alkohol!</string>
     <string name="disclaimerAkzeptiert">Akzeptiert!</string>
@@ -39,8 +39,11 @@
 
     <string name="gameLoop_Schlucke">Schlucke</string>
 
+    <string name="alt_instagram">Instagram Link</string>
+    <string name="alt_language">Sprache tauschen</string>
     <string name="alt_Bierkrug">Bierkrug</string>
     <string name="alt_Bildschirm">Bildschirm</string>
     <string name="alt_Turnschuh">Turnschuh</string>
     <string name="alt_infoicon">Infobutton</string>
+    <string name="alt_zuruckPfeil">Zurück</string>
 </resources>

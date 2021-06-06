@@ -5,7 +5,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pages.GameLoop">
+    tools:context="GameLoop">
 
     <TextView
         android:id="@+id/AufgabenTextView"
@@ -27,18 +27,16 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="205dp" />
 
-    <Button
+    <ImageView
         android:id="@+id/button_backToPackages"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/alt_zuruckPfeil"
         android:onClick="backToPackages"
-        android:text="X"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp"
-        app:backgroundTint="#000000"
+        android:src="@drawable/zuruck"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
