@@ -22,8 +22,9 @@
 
     <ScrollView
         android:id="@+id/paketScrollView"
-        android:layout_width="391dp"
+        android:layout_width="390dp"
         android:layout_height="550dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +37,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Standardpaket Karte -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/standardPackage_card"
                 android:layout_width="match_parent"
@@ -48,22 +50,95 @@
                 app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:id="@+id/linearLayout1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="20dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Standardpaket"
+                                android:textColor="@color/white"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Angelehnt an den Klassiker Kingscup"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginRight="0dp"
+                                android:src="@drawable/info" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/packageActivity_name_StandardPackage"
-                        android:textAlignment="center"
-                        android:textSize="25sp" />
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="20dp">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/bierkrug"
+                            android:layout_marginLeft="0dp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginLeft="6dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginRight="0dp"
+                                android:text="3,99€"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+                        </RelativeLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Onlinepaket Karte -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/onlinePackage_card"
                 android:layout_width="match_parent"
@@ -73,26 +148,148 @@
                 android:onClick="selectOnlinePackage"
                 app:cardBackgroundColor="@color/flo1"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
+                app:cardElevation="8dp"
+                >
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:elevation="4dp"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/cardview_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="18dp"
+                        android:src="@drawable/videoconference" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/packageActivity_name_OnlinePackage"
-                        android:textAlignment="center"
-                        android:textSize="25sp" />
+                        android:id="@+id/cardview_list_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/cardview_image"
+                        android:paddingBottom="5dp"
+                        android:text="Onlinepaket"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
 
-                </LinearLayout>
+                    <TextView
+                        android:id="@+id/short_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cardview_list_title"
+                        android:layout_toRightOf="@+id/cardview_image"
+                        android:text="Perfekt fürs online Saufen"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"/>
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="64dp"
+                        android:layout_marginLeft="64dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginRight="0dp"
+                        android:layout_toEndOf="@+id/cardview_list_title"
+                        android:layout_toRightOf="@+id/cardview_list_title"
+                        android:src="@drawable/info" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="1dp"
+                        android:text="3,99€"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/activityPackage_card"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_gravity="fill"
+                android:layout_margin="8dp"
+                android:onClick="selectActivityPackage"
+                app:cardBackgroundColor="@color/flo1"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <ImageView android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:id="@+id/img"
+                        android:src="@drawable/lauf"/>
+
+                    <TextView
+                        android:id="@+id/txt"
+                        android:textSize="30sp"
+                        android:text="Aktivpaket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/img"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/sub_txt"
+                        android:textSize="16sp"
+                        android:text="Damit Niemand einschläft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="italic"
+                        android:layout_toRightOf="@+id/img"
+                        android:layout_below="@+id/txt"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/white"/>
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="0dp"
+                        android:src="@drawable/info" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:text="3,99€"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Bald Karte -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/comingSoon_card"
                 android:layout_width="match_parent"
@@ -128,6 +325,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="16dp"
         android:enabled="false"
@@ -141,6 +339,7 @@
         android:id="@+id/button_back2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginBottom="16dp"
