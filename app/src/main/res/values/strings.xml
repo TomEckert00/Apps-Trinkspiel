@@ -8,6 +8,8 @@
     <string name="mainActivity_logo">Saufapparat</string>
     <string name="mainActivity_playbutton">Spielen</string>
 
+    <string name="moreInformationActivity_previousButton">Zurück</string>
+
     <string name="groupActivity_header">Spielerauswahl</string>
     <string name="player_hint">Spieler</string>
     <string name="player1_hint">Spieler 1</string>
@@ -26,16 +28,19 @@
     <string name="standardPaket_label">Standard</string>
     <string name="standardPaket_sub">Angelehnt an den Klassiker Kingscup</string>
     <string name="standardPaket_price">Frei</string>
+    <string name="standardPaket_infoText">Das Paket beinhaltet den Standard</string>
 
     <string name="onlinePaket_label">Online</string>
     <string name="onlinePaket_sub">Für das perfekte online Sauferlebnis</string>
     <string name="onlinePaket_price">Frei</string>
+    <string name="onlinePaket_infoText">Das Paket beinhaltet den Online</string>
 
     <string name="activityPaket_label">Aktiv</string>
     <string name="activityPaket_sub">Damit Niemand einschläft</string>
     <string name="activityPaket_price">Frei</string>
+    <string name="activityPaket_infoText">Das Paket beinhaltet den Aktivität</string>
 
-    <string name="packageActivity_ComingSoon">Coming soon...</string>
+    <string name="packageActivity_ComingSoon">Bald mehr...</string>
 
     <string name="gameLoop_Schlucke">Schlucke</string>
 

@@ -1,6 +1,9 @@
 package com.example.trinkspiel;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,5 +18,23 @@ public class MoreInformationPage extends AppCompatActivity {
         setContentView(R.layout.activity_more_information_page);
         TextView version =(TextView) findViewById(R.id.software_version);
         version.setText("Version: " + Constants.SOFTWARE_VERSION);
+    }
+
+    public void openInstagramOfFlo(View view){
+        Uri uri = Uri.parse("https://www.instagram.com/_floeck__/");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
+    public void openFlaticon(View view){
+        Uri uri = Uri.parse("https://www.flaticon.com");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
+    public void openFreepik(View view){
+        Uri uri = Uri.parse("https://www.freepik.com");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 }
