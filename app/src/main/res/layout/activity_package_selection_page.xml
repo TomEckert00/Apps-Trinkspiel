@@ -102,6 +102,7 @@
 
                     <ImageView
                         android:id="@+id/standardPaket_info"
+                        android:tag="standard"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentTop="true"
@@ -111,6 +112,7 @@
                         android:layout_marginEnd="0dp"
                         android:layout_marginRight="0dp"
                         android:contentDescription="@string/alt_infoicon"
+                        android:onClick="openMoreInformationDialog"
                         android:src="@drawable/info" />
 
                     <TextView
@@ -192,6 +194,7 @@
 
                     <ImageView
                         android:id="@+id/onlinePaket_info"
+                        android:tag="online"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentTop="true"
@@ -201,6 +204,7 @@
                         android:layout_marginEnd="0dp"
                         android:layout_marginRight="0dp"
                         android:contentDescription="@string/alt_infoicon"
+                        android:onClick="openMoreInformationDialog"
                         android:src="@drawable/info" />
 
                     <TextView
@@ -283,6 +287,7 @@
 
                     <ImageView
                         android:id="@+id/activityPaket_info"
+                        android:tag="aktiv"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentTop="true"
@@ -292,6 +297,7 @@
                         android:layout_marginEnd="0dp"
                         android:layout_marginRight="0dp"
                         android:contentDescription="@string/alt_infoicon"
+                        android:onClick="openMoreInformationDialog"
                         android:src="@drawable/info" />
 
                     <TextView
