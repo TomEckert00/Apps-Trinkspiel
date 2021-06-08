@@ -113,7 +113,7 @@
                         android:layout_marginRight="0dp"
                         android:contentDescription="@string/alt_infoicon"
                         android:onClick="openMoreInformationDialog"
-                        android:src="@drawable/info" />
+                        android:src="@drawable/info2"/>
 
                     <TextView
                         android:id="@+id/standard_price"
@@ -205,7 +205,7 @@
                         android:layout_marginRight="0dp"
                         android:contentDescription="@string/alt_infoicon"
                         android:onClick="openMoreInformationDialog"
-                        android:src="@drawable/info" />
+                        android:src="@drawable/info2" />
 
                     <TextView
                         android:id="@+id/onlinePaket_price"
@@ -298,7 +298,7 @@
                         android:layout_marginRight="0dp"
                         android:contentDescription="@string/alt_infoicon"
                         android:onClick="openMoreInformationDialog"
-                        android:src="@drawable/info" />
+                        android:src="@drawable/info2" />
 
                     <TextView
                         android:id="@+id/activityPaket_price"
