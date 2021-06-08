@@ -38,9 +38,8 @@ public class MoreInformationPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openPixelPerfekt(View view){
-        Uri uri = Uri.parse("https://www.flaticon.com/authors/pixel-perfect");
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+    public void backToMain(View view){
+        this.finish();
+        return;
     }
 }

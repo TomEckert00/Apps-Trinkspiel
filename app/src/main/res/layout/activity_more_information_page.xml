@@ -175,7 +175,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:onClick="openFlaticon"
+                    android:onClick="openFreepik"
                     android:src="@drawable/freepik"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/infoImageButton"
@@ -250,6 +250,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/flo5"
+        android:onClick="backToMain"
         android:text="@string/moreInformationActivity_previousButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
