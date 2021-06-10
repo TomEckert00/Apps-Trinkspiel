@@ -72,11 +72,10 @@
                     android:layout_marginBottom="32dp"
                     android:contentDescription="@string/alt_instagram"
                     android:onClick="openInstagramOfFlo"
-                    android:src="@drawable/instagram_color"
+                    android:src="@drawable/instagram"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/infoImageButton"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:srcCompat="@drawable/instagram_color" />
+                    app:layout_constraintStart_toStartOf="parent"/>
 
             </LinearLayout>
 

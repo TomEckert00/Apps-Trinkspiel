@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openInstagram(View view){
-        Uri uri = Uri.parse("https://www.instagram.com/tom_eckert_/");
+        Uri uri = Uri.parse("https://www.instagram.com/saufapparat/");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
