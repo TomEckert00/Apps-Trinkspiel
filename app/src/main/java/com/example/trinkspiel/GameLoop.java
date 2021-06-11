@@ -134,7 +134,7 @@ public class GameLoop extends AppCompatActivity {
             cardIndex++;
             if (cardIndex == cards.size()) {
                 shuffleCardsFillWithPlayersAnSetIndexToZero();
-                Toast.makeText(this, "Deck shuffled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.karten_gemischt), Toast.LENGTH_SHORT).show();
             }
         } else {
             cardIndex--;
@@ -201,6 +201,10 @@ public class GameLoop extends AppCompatActivity {
             case "Schwarz":
                 mainLayout.setBackgroundColor(Color.BLACK);
                 setViewColors(Color.WHITE);
+                break;
+            case "Gelb":
+                mainLayout.setBackgroundColor(Color.YELLOW);
+                setViewColors(Color.BLACK);
                 break;
             default:
                 mainLayout.setBackgroundColor(Color.WHITE);

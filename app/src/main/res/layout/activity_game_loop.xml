@@ -7,26 +7,6 @@
     android:layout_height="match_parent"
     tools:context="GameLoop">
 
-    <TextView
-        android:id="@+id/AufgabenTextView"
-        android:layout_width="378dp"
-        android:layout_height="377dp"
-        android:gravity="center"
-        android:text="Das ist eine Aufgabe. Die solltest du jetzt machen du Schlingel oder trink!"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/screen_divider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="205dp" />
-
     <ImageView
         android:id="@+id/button_backToPackages"
         android:layout_width="50dp"
@@ -40,6 +20,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <TextView
+        android:id="@+id/KategorieLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Kategorie"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_backToPackages" />
+
+    <TextView
+        android:id="@+id/AufgabenTextView"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="36sp"
+        android:autoSizeMinTextSize="15sp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="Das ist eine Aufgabe. Die solltest du jetzt machen du Schlingel oder trink!Das ist eine Aufgabe. Die solltest du jetzt machen du Schlingel oder trink!Das ist eine Aufgabe. Die solltest du jetzt machen du Schlingel oder trink!Das ist eine Aufgabe. Die solltest du jetzt machen du Schlingel oder trink!"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/schluckName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/KategorieLabel" />
+
     <TextView
         android:id="@+id/schluckName"
         android:layout_width="wrap_content"
@@ -49,9 +63,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/schluckCount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AufgabenTextView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/schluckCount"
@@ -63,21 +75,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/KategorieLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kategorie"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/AufgabenTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
