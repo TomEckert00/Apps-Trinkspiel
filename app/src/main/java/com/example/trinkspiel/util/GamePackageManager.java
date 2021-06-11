@@ -14,7 +14,7 @@ public class GamePackageManager{
         Properties properties = new Properties();
         AssetManager assetManager = context.getAssets();
         try {
-            InputStream inputStream = assetManager.open(language + "_" + packagename + "Cards.properties");
+            InputStream inputStream = assetManager.open(packagename + "Cards.properties");
             properties.load(inputStream);
         }catch (Exception e){}
 
@@ -36,7 +36,7 @@ public class GamePackageManager{
     }
 
     private static void addAllExistingKategories(Properties properties, List<Kategorie> kategories) {
-        int kategorieCount = Integer.parseInt(properties.getProperty("kategorie.count"));
+        int kategorieCount = Integer.parseInt(properties.getProperty("kategorieSize"));
         for(int i = 1 ; i <= kategorieCount; i++){
             addKategorieOfCard(properties, kategories, i);
         }
