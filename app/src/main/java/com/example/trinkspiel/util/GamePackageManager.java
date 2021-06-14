@@ -10,9 +10,12 @@ import java.util.Properties;
 
 public class GamePackageManager{
 
+    private static String sprache;
+
     public static ArrayList<Card> getCardsFromProperties(Context context, String packagename, String language){
         Properties properties = new Properties();
         AssetManager assetManager = context.getAssets();
+        sprache = language;
         try {
             InputStream inputStream = assetManager.open(packagename + "Cards.properties");
             properties.load(inputStream);
@@ -20,7 +23,7 @@ public class GamePackageManager{
 
         List<Kategorie> kategories = fetchKategories(properties);
 
-        return cardsFromProperties(language, properties, kategories);
+        return cardsFromProperties(properties, kategories);
     }
 
     private static List<Kategorie> fetchKategories(Properties properties) {
@@ -43,19 +46,20 @@ public class GamePackageManager{
     }
 
     private static void addKategorieOfCard(Properties properties, List<Kategorie> kategories, int index) {
-        String kategorieName = properties.getProperty("kategorie."+ index + ".name");
+        String kategorieName = properties.getProperty(sprache + ".kategorie."+ index + ".name");
+        kategorieName = (kategorieName == null || kategorieName.isEmpty()) ? "Kategorie" : kategorieName;
         String kategorieColorName = properties.getProperty("kategorie." + index + ".color");
         Kategorie kategorie = new Kategorie(kategorieName, kategorieColorName);
         kategories.add(index, kategorie);
     }
 
-    private static ArrayList<Card> cardsFromProperties(String language, Properties properties, List<Kategorie> kategories) {
+    private static ArrayList<Card> cardsFromProperties(Properties properties, List<Kategorie> kategories) {
         ArrayList<Card> temporaryCards = new ArrayList<>();
 
         int cardSetSize = fetchCardSetSize(properties);
         if (cardSetSize > 0) {
             for (int i = 1; i <= cardSetSize; i++) {
-                temporaryCards.add(buildNewCard(language, properties, kategories, i));
+                temporaryCards.add(buildNewCard(properties, kategories, i));
             }
         }else{
             temporaryCards.add(new Card("No Cards found",404, kategories.get(0)));
@@ -67,19 +71,21 @@ public class GamePackageManager{
         return Integer.parseInt(properties.getProperty("cardSetSize"));
     }
 
-    private static Card buildNewCard(String language, Properties properties, List<Kategorie> kategories, int index){
-        String aufgabe = fetchAufgabe(language, properties, index);
+    private static Card buildNewCard(Properties properties, List<Kategorie> kategories, int index){
+        String aufgabe = fetchAufgabe(properties, index);
         int schlucke = fetchSchlucke(properties, index);
         Kategorie kategorieForCard = FindCorrespondingKategorie(properties, kategories, index);
-        return new Card(aufgabe, schlucke,kategorieForCard);
+        return new Card(aufgabe, schlucke, kategorieForCard);
     }
 
-    private static String fetchAufgabe(String language, Properties properties, int index) {
-        return properties.getProperty(language + ".card." + index + ".aufgabe");
+    private static String fetchAufgabe(Properties properties, int index) {
+        String result = properties.getProperty(sprache + ".card." + index + ".aufgabe");
+        return (result == null || result.isEmpty()) ? "Nothing to do" : result;
     }
 
     private static int fetchSchlucke(Properties properties, int index) {
-        return Integer.parseInt(properties.getProperty("card." + index + ".schlucke"));
+        String result = properties.getProperty("card." + index + ".schlucke");
+        return result == null ? 0 : Integer.parseInt(result);
     }
 
     private static Kategorie FindCorrespondingKategorie(Properties properties, List<Kategorie> kategories, int index) {
