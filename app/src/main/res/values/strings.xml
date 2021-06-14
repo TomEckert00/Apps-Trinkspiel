@@ -19,26 +19,23 @@
     <string name="groupActivity_nextButton">Weiter</string>
 
     <string name="packageActivity_header">Paketwahl</string>
-    <string name="packageActivity_players">Spieler: </string>
-    <string name="packageActivity_name_StandardPackage">Standardpaket</string>
-    <string name="packageActivity_name_OnlinePackage">Onlinepaket</string>
     <string name="packageActivity_previousButton">Zurück</string>
     <string name="packageActivity_startButton">Spielen</string>
 
     <string name="standardPaket_label">Standard</string>
-    <string name="standardPaket_sub">Angelehnt an den Klassiker Kingscup</string>
+    <string name="standardPaket_sub">Für die perfekte Party</string>
     <string name="standardPaket_price">Frei</string>
-    <string name="standardPaket_infoText">Das Paket beinhaltet den Standard</string>
+    <string name="standardPaket_infoText">Aufgaben, Regeln und Abstimmungen brechen das Eis oder bringen Schwung in die Runde. Bei manchen Aufgaben wird man aktiv, bei anderen wird lediglich der Durst gestillt.</string>
 
     <string name="onlinePaket_label">Online</string>
-    <string name="onlinePaket_sub">Für das perfekte online Sauferlebnis</string>
+    <string name="onlinePaket_sub">Für das online Meeting mit den Freunden</string>
     <string name="onlinePaket_price">Frei</string>
-    <string name="onlinePaket_infoText">Das Paket beinhaltet den Online</string>
+    <string name="onlinePaket_infoText">Auch wenn man sich mal nicht persönlich treffen kann, sorgen die Aufgaben für viel Spaß, Zusammenhalt und neue Herausforderungen.</string>
 
     <string name="activityPaket_label">Aktiv</string>
-    <string name="activityPaket_sub">Damit Niemand einschläft</string>
+    <string name="activityPaket_sub">Mit viel Bewegung und perfekt für draußen</string>
     <string name="activityPaket_price">Frei</string>
-    <string name="activityPaket_infoText">Das Paket beinhaltet den Aktivität</string>
+    <string name="activityPaket_infoText">Perfekt für einen coolen Abend im Freien oder für den nötigen Schwung bei einer Party. Viele witzige Aufgaben um ein bisschen Bewegung in euer Spiel zu bringen oder dafür zu sorgen, dass niemand einschläft.</string>
 
     <string name="packageActivity_ComingSoon">Bald mehr...</string>
 
