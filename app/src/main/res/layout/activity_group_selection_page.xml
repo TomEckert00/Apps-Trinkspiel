@@ -44,31 +44,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/editTextTextPersonName4"
+            android:orientation="vertical"
+            >
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                >
+
+            <EditText
+                android:id="@+id/player1EditText"
+                android:layout_weight="9"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
                 android:backgroundTint="@color/white"
-                android:ems="10"
                 android:hint="@string/player1_hint"
                 android:imeOptions="actionNext"
                 android:inputType="textPersonName"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white" />
-
-            <EditText
-                android:id="@+id/editTextTextPersonName5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:ems="10"
-                android:hint="@string/player2_hint"
-                android:imeOptions="actionNext"
-                android:inputType="textPersonName"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+            <ImageView
+                android:id="@+id/closeKeyBoardImage"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:src="@drawable/haken"
+                android:onClick="closeKeyBoard"/>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/button_addPlayer"

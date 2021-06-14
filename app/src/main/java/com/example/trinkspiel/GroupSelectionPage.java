@@ -1,13 +1,18 @@
 package com.example.trinkspiel;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +25,8 @@ public class GroupSelectionPage extends AppCompatActivity {
     private static ArrayList<String> playerList;
     private LinearLayout playerListLayout;
     private TextView.OnEditorActionListener editorActionListener;
+    private EditText player1EditText;
+    private ImageView closeKeyBoardImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +38,10 @@ public class GroupSelectionPage extends AppCompatActivity {
 
     private void initializeViews() {
         playerListLayout = findViewById(R.id.playerListLinearLayout);
+        player1EditText = findViewById(R.id.player1EditText);
+        closeKeyBoardImage = findViewById(R.id.closeKeyBoardImage);
         editorActionListener = new CustomActionListener();
-        ((EditText) playerListLayout.getChildAt(playerListLayout.getChildCount()-2)).setOnEditorActionListener(editorActionListener);
+        player1EditText.setOnEditorActionListener(editorActionListener);
     }
 
     public void openPackageSelectionPage(View v){
@@ -48,7 +57,8 @@ public class GroupSelectionPage extends AppCompatActivity {
 
     private void fillListWithPlayerNames() {
         for (int index=0; index<playerListLayout.getChildCount()-1; index++){
-            String name = ((EditText)playerListLayout.getChildAt(index)).getText().toString();
+            LinearLayout lay = (LinearLayout) playerListLayout.getChildAt(index);
+            String name = ((EditText) lay.getChildAt(0)).getText().toString();
             if(!TextUtils.isEmpty(name)){
                 playerList.add(name);
             }
@@ -56,10 +66,16 @@ public class GroupSelectionPage extends AppCompatActivity {
     }
 
     private void validatePlayerList() {
-        int i=1;
-        while(playerList.size() < 2){
-            playerList.add("Neuer Spieler " + i);
-            i++;
+        if(playerList.size()==0){
+            playerList.add(getString(R.string.player1_hint));
+            playerList.add(getString(R.string.player2_hint));
+        }
+        else if(playerList.size()==1){
+            if (playerList.get(0).equals(getString(R.string.player2_hint))){
+                playerList.add(getString(R.string.player1_hint));
+            }else{
+                playerList.add(getString(R.string.player2_hint));
+            }
         }
     }
 
@@ -70,23 +86,48 @@ public class GroupSelectionPage extends AppCompatActivity {
 
     public void addNewPlayerInput(View v){
         int newFieldIndex = playerListLayout.getChildCount()-1;
-        int lastFieldIndex = playerListLayout.getChildCount()-2;
-
-        ((EditText) playerListLayout.getChildAt(lastFieldIndex)).setOnEditorActionListener(null);
+        int oldField = playerListLayout.getChildCount()-2;
+        LinearLayout lay = (LinearLayout) playerListLayout.getChildAt(oldField);
+        lay.removeViewAt(1);
 
         EditText newField = prepareNewField(newFieldIndex);
-        playerListLayout.addView(newField,newFieldIndex);
+        playerListLayout.addView(constructLinearLayout(newFieldIndex),newFieldIndex);
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(newField, InputMethodManager.SHOW_IMPLICIT);
     }
 
-    private EditText prepareNewField(int newFieldIndex) {
+    private View constructLinearLayout(int playerNumber) {
+        LinearLayout linear = new LinearLayout(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        linear.setOrientation(LinearLayout.HORIZONTAL);
+        linear.setWeightSum(10.0f);
+        linear.setLayoutParams(params);
+        linear.addView(prepareNewField(playerNumber),0);
+        linear.addView(closeKeyBoardImage,1);
+        return linear;
+    }
+
+    private EditText prepareNewField(int playerNumber) {
         EditText newField = new EditText(this);
         newField.setSingleLine();
+        newField.requestFocus();
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+            0,LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.weight=9;
+        params.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics());
+        newField.setLayoutParams(params);
+
         newField.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         newField.setOnEditorActionListener(editorActionListener);
         newField.setHintTextColor(getResources().getColor(R.color.white));
         newField.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         newField.setTextColor(getResources().getColor(R.color.white));
-        newField.setHint(getString(R.string.player_hint) + " " + (newFieldIndex+1));
+        newField.setHint(getString(R.string.player_hint) + " " + (playerNumber+1));
         return newField;
     }
 
@@ -112,4 +153,9 @@ public class GroupSelectionPage extends AppCompatActivity {
             return false;
         }
     };
+
+    public void closeKeyBoard(View view){
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 }
