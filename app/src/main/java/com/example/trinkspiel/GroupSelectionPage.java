@@ -87,8 +87,10 @@ public class GroupSelectionPage extends AppCompatActivity {
     public void addNewPlayerInput(View v){
         int newFieldIndex = playerListLayout.getChildCount()-1;
         int oldField = playerListLayout.getChildCount()-2;
+
         LinearLayout lay = (LinearLayout) playerListLayout.getChildAt(oldField);
         lay.removeViewAt(1);
+        ((EditText)lay.getChildAt(0)).setOnEditorActionListener(null);
 
         EditText newField = prepareNewField(newFieldIndex);
         playerListLayout.addView(constructLinearLayout(newFieldIndex),newFieldIndex);
