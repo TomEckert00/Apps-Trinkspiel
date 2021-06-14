@@ -194,6 +194,10 @@ public class GameLoop extends AppCompatActivity {
                 mainLayout.setBackgroundColor(Color.RED);
                 setViewColors(Color.BLACK);
                 break;
+            case "Blau":
+                mainLayout.setBackgroundColor(Color.BLUE);
+                setViewColors(Color.WHITE);
+                break;
             case "Grün":
                 mainLayout.setBackgroundColor(Color.GREEN);
                 setViewColors(Color.BLACK);
@@ -204,6 +208,10 @@ public class GameLoop extends AppCompatActivity {
                 break;
             case "Gelb":
                 mainLayout.setBackgroundColor(Color.YELLOW);
+                setViewColors(Color.BLACK);
+                break;
+            case "Orange":
+                mainLayout.setBackgroundColor(Color.parseColor("#FFA500"));
                 setViewColors(Color.BLACK);
                 break;
             default:
