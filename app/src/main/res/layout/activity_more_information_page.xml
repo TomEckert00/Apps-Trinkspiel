@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/flo2"
-    tools:context=".MoreInformationPage">
+    tools:context="de.saufapparat.trinkspiel.MoreInformationPage">
 
     <TextView
         android:id="@+id/textView"

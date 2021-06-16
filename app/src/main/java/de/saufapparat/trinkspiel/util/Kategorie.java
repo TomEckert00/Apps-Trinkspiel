@@ -1,6 +1,4 @@
-package com.example.trinkspiel.util;
-
-import android.graphics.Color;
+package de.saufapparat.trinkspiel.util;
 
 public class Kategorie {
 

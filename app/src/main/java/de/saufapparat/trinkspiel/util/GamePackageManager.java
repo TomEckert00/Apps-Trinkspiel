@@ -1,4 +1,4 @@
-package com.example.trinkspiel.util;
+package de.saufapparat.trinkspiel.util;
 
 import android.content.Context;
 import android.content.res.AssetManager;

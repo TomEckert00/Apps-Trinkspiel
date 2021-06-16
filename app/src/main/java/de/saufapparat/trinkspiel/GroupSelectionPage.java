@@ -1,10 +1,9 @@
-package com.example.trinkspiel;
+package de.saufapparat.trinkspiel;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.text.Layout;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.KeyEvent;
@@ -17,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import de.saufapparat.trinkspiel.R;
 
 import java.util.ArrayList;
 

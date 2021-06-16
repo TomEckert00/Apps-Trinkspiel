@@ -1,4 +1,4 @@
-package com.example.trinkspiel;
+package de.saufapparat.trinkspiel;
 
 import android.content.Context;
 

@@ -1,10 +1,12 @@
-package com.example.trinkspiel;
+package de.saufapparat.trinkspiel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import de.saufapparat.trinkspiel.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

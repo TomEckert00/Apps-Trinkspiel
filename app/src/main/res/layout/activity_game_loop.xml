@@ -5,7 +5,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="GameLoop">
+    tools:context="de.saufapparat.trinkspiel.GameLoop">
 
     <ImageView
         android:id="@+id/button_backToPackages"

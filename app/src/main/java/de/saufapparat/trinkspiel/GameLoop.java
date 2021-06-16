@@ -1,4 +1,4 @@
-package com.example.trinkspiel;
+package de.saufapparat.trinkspiel;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,9 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 
-import com.example.trinkspiel.util.Card;
-import com.example.trinkspiel.util.GamePackageManager;
-import com.example.trinkspiel.util.Kategorie;
+import de.saufapparat.trinkspiel.R;
+
+import de.saufapparat.trinkspiel.util.Card;
+import de.saufapparat.trinkspiel.util.GamePackageManager;
+import de.saufapparat.trinkspiel.util.Kategorie;
 
 import java.util.ArrayList;
 import java.util.Collections;

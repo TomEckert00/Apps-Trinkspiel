@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.trinkspiel">
+    package="de.saufapparat.trinkspiel">
 
     <application
         android:allowBackup="true"
@@ -9,15 +9,15 @@
         android:roundIcon="@drawable/appicon_flo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trinkspiel">
-        <activity android:name=".MainActivity" />
-        <activity android:name=".GameLoop" />
-        <activity android:name=".PackageSelectionPage" />
-        <activity android:name=".MoreInformationPage" />
+        <activity android:name="de.saufapparat.trinkspiel.MainActivity" />
+        <activity android:name="de.saufapparat.trinkspiel.GameLoop" />
+        <activity android:name="de.saufapparat.trinkspiel.PackageSelectionPage" />
+        <activity android:name="de.saufapparat.trinkspiel.MoreInformationPage" />
         <activity
-            android:name=".GroupSelectionPage"
+            android:name="de.saufapparat.trinkspiel.GroupSelectionPage"
             android:windowSoftInputMode="adjustPan"
         />
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name="de.saufapparat.trinkspiel.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

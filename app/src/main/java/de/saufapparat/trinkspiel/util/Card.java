@@ -1,9 +1,4 @@
-package com.example.trinkspiel.util;
-
-import android.graphics.Color;
-
-import java.util.HashMap;
-import java.util.Map;
+package de.saufapparat.trinkspiel.util;
 
 public class Card {
 

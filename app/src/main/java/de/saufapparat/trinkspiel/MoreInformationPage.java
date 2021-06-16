@@ -1,4 +1,4 @@
-package com.example.trinkspiel;
+package de.saufapparat.trinkspiel;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,7 +8,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.trinkspiel.util.Constants;
+import de.saufapparat.trinkspiel.R;
+
+import de.saufapparat.trinkspiel.util.Constants;
 
 public class MoreInformationPage extends AppCompatActivity {
 

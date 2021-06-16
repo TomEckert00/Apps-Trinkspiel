@@ -5,26 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background3"
-    tools:context="MainActivity">
+    tools:context="de.saufapparat.trinkspiel.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
-        tools:context="MainActivity">
+        tools:context="de.saufapparat.trinkspiel.MainActivity">
 
         <TextView
             android:id="@+id/textView_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="56dp"
             android:layout_marginEnd="10dp"
-            android:text="@string/mainActivity_logo"
+            android:layout_marginRight="10dp"
             android:background="@color/backgroundColor"
+            android:text="@string/mainActivity_logo"
             android:textColor="@color/design_default_color_on_primary"
             android:textSize="56sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,8 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_logo"
-            app:layout_constraintVertical_bias="0.15"
-        />
+            app:layout_constraintVertical_bias="0.15" />
 
         <ImageView
             android:id="@+id/InstaImageButton"
@@ -55,17 +54,17 @@
             android:src="@drawable/instagram"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/infoImageButton"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/infoImageButton"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginBottom="32dp"
+            android:background="@color/white"
             android:contentDescription="@string/alt_infoicon"
             android:onClick="openMoreInformationPage"
             android:src="@drawable/info"
-            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/languageImageView"
             app:layout_constraintStart_toEndOf="@+id/InstaImageButton" />
@@ -90,33 +89,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundColor"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/disclaimer_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
             android:text="@string/disclaimer_title"
             android:textColor="@color/design_default_color_on_primary"
             android:textSize="70sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/disclaimer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/disclaimer"
-            android:layout_width="350dp"
-            android:layout_height="190dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="212dp"
             android:gravity="center"
             android:text="@string/disclaimer"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/disclaimer_title" />
 
         <Button
             android:id="@+id/button"

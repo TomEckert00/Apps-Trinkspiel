@@ -1,4 +1,4 @@
-package com.example.trinkspiel;
+package de.saufapparat.trinkspiel;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import de.saufapparat.trinkspiel.R;
 
 public class PackageInformationDialog extends AppCompatDialogFragment {
 

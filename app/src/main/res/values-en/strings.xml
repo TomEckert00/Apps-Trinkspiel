@@ -1,55 +1,52 @@
 <resources>
     <string name="app_name">Saufapparat</string>
     <string name="language">Englisch</string>
-    <string name="disclaimer">Kenne deine Grenzen! Die Angaben sind nur als Vorschlag zu beachten. Vorsichtiger Umgang mit Alkohol!</string>
-    <string name="disclaimerAkzeptiert">Akzeptiert!</string>
-    <string name="disclaimer_title">Achtung</string>
+    <string name="disclaimer">Know your limits! The information is only to be considered as a suggestion. Be careful with alcohol!</string>
+    <string name="disclaimerAkzeptiert">Accepted!</string>
+    <string name="disclaimer_title">Attention</string>
 
     <string name="mainActivity_logo">Saufapparat</string>
-    <string name="mainActivity_playbutton">Spielen</string>
+    <string name="mainActivity_playbutton">Play</string>
 
-    <string name="moreInformationActivity_previousButton">Zurück</string>
+    <string name="moreInformationActivity_previousButton">Back</string>
 
-    <string name="groupActivity_header">Spielerauswahl</string>
-    <string name="player_hint">Spieler</string>
-    <string name="player1_hint">Spieler 1</string>
-    <string name="player2_hint">Spieler 2</string>
+    <string name="groupActivity_header">Players</string>
+    <string name="player_hint">Player</string>
+    <string name="player1_hint">Player 1</string>
+    <string name="player2_hint">Player 2</string>
     <string name="playerAddSign">+</string>
-    <string name="groupActivity_previousButton">Zurück</string>
-    <string name="groupActivity_nextButton">Weiter</string>
+    <string name="groupActivity_previousButton">Back</string>
+    <string name="groupActivity_nextButton">Next</string>
 
-    <string name="packageActivity_header">Paketauswahl</string>
-    <string name="packageActivity_players">Spieler: </string>
-    <string name="packageActivity_name_StandardPackage">Standardpaket</string>
-    <string name="packageActivity_name_OnlinePackage">Onlinepaket</string>
-    <string name="packageActivity_previousButton">Zurück</string>
-    <string name="packageActivity_startButton">Spielen</string>
+    <string name="packageActivity_header">Packages</string>
+    <string name="packageActivity_previousButton">Back</string>
+    <string name="packageActivity_startButton">Start</string>
 
     <string name="standardPaket_label">Standard</string>
-    <string name="standardPaket_sub">Angelehnt an den Klassiker Kingscup</string>
-    <string name="standardPaket_price">Frei</string>
-    <string name="standardPaket_infoText">Das Paket beinhaltet den Standard</string>
+    <string name="standardPaket_sub">For the perfect party</string>
+    <string name="standardPaket_price">Free</string>
+    <string name="standardPaket_infoText">Tasks, rules and voting break the ice or bring momentum into the round. With some tasks you become active, with others you merely quench your thirst.</string>
 
     <string name="onlinePaket_label">Online</string>
-    <string name="onlinePaket_sub">Für das perfekte online Sauferlebnis</string>
-    <string name="onlinePaket_price">Frei</string>
-    <string name="onlinePaket_infoText">Das Paket beinhaltet den Online</string>
+    <string name="onlinePaket_sub">For online meetings with friends</string>
+    <string name="onlinePaket_price">Free</string>
+    <string name="onlinePaket_infoText">Even if you can\'t meet in person sometimes, the tasks provide a lot of fun, cohesion and new challenges.</string>
 
-    <string name="activityPaket_label">Aktiv</string>
-    <string name="activityPaket_sub">Damit Niemand einschläft</string>
-    <string name="activityPaket_price">Frei</string>
-    <string name="activityPaket_infoText">Das Paket beinhaltet den Aktivität</string>
+    <string name="activityPaket_label">Active</string>
+    <string name="activityPaket_sub">With a lot of movement and perfect for outdoors</string>
+    <string name="activityPaket_price">Free</string>
+    <string name="activityPaket_infoText">Perfect for a cool evening outdoors or for the necessary momentum at a party. Lots of fun tasks to add a little movement to your game or make sure no one falls asleep.</string>
 
     <string name="packageActivity_ComingSoon">Coming soon...</string>
 
-    <string name="karten_gemischt">Karten gemischt!</string>
-    <string name="gameLoop_Schlucke">Schlucke</string>
+    <string name="karten_gemischt">Cards shuffled!</string>
+    <string name="gameLoop_Schlucke">Gulps</string>
 
     <string name="alt_instagram">Instagram Link</string>
-    <string name="alt_language">Sprache tauschen</string>
-    <string name="alt_Bierkrug">Bierkrug</string>
-    <string name="alt_Bildschirm">Bildschirm</string>
-    <string name="alt_Turnschuh">Turnschuh</string>
-    <string name="alt_infoicon">Infobutton</string>
-    <string name="alt_zuruckPfeil">Zurück</string>
+    <string name="alt_language">Change Language</string>
+    <string name="alt_Bierkrug">Beer mug</string>
+    <string name="alt_Bildschirm">Monitor</string>
+    <string name="alt_Turnschuh">Sneaker</string>
+    <string name="alt_infoicon">Information</string>
+    <string name="alt_zuruckPfeil">Back</string>
 </resources>

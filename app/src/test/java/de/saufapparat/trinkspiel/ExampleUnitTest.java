@@ -1,4 +1,4 @@
-package com.example.trinkspiel;
+package de.saufapparat.trinkspiel;
 
 import org.junit.Test;
 

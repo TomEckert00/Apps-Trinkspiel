@@ -1,4 +1,4 @@
-package com.example.trinkspiel;
+package de.saufapparat.trinkspiel;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import de.saufapparat.trinkspiel.R;
 
 import java.util.Locale;
 
