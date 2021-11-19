@@ -3,6 +3,7 @@ package de.saufapparat.trinkspiel;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -35,6 +36,12 @@ public class GroupSelectionPage extends AppCompatActivity {
         setContentView(R.layout.activity_group_selection_page);
 
         initializeViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        HelperUtil.fullScreencall(this);
     }
 
     private void initializeViews() {

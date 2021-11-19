@@ -18,6 +18,7 @@ public class MoreInformationPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_information_page);
+        HelperUtil.fullScreencall(this);
         TextView version =(TextView) findViewById(R.id.software_version);
         version.setText("Version: " + Constants.SOFTWARE_VERSION);
     }

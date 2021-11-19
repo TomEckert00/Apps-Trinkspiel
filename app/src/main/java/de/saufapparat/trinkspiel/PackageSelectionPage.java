@@ -36,6 +36,7 @@ public class PackageSelectionPage extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        HelperUtil.fullScreencall(this);
 
         checkButtonActivation();
     }
