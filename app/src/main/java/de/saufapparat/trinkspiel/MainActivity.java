@@ -13,11 +13,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import de.saufapparat.trinkspiel.R;
-
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private ConstraintLayout mainView;
     private ConstraintLayout disclaimerView;
@@ -29,7 +27,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initializeViews();
+        mainView.setVisibility(View.GONE);
         checkDisclaimer();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        HelperUtil.fullScreencall(this);
     }
 
     private void initializeViews() {

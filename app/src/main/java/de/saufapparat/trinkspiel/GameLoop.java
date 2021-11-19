@@ -79,6 +79,8 @@ public class GameLoop extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        HelperUtil.fullScreencall(this);
+
         shuffleCardsFillWithPlayersAnSetIndexToZero();
         changeCard();
     }
