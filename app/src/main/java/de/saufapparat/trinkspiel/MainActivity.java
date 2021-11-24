@@ -15,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.Locale;
 
+import de.saufapparat.trinkspiel.util.HelperUtil;
+
 public class MainActivity extends AppCompatActivity{
 
     private ConstraintLayout mainView;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        HelperUtil.fullScreencall(this);
+        HelperUtil.removeNavigationBarBottom(this);
     }
 
     private void initializeViews() {
