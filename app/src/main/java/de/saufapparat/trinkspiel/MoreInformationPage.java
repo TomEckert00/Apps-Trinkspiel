@@ -8,9 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import de.saufapparat.trinkspiel.R;
-
 import de.saufapparat.trinkspiel.util.Constants;
+import de.saufapparat.trinkspiel.util.HelperUtil;
 
 public class MoreInformationPage extends AppCompatActivity {
 
@@ -18,7 +17,7 @@ public class MoreInformationPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_information_page);
-        HelperUtil.fullScreencall(this);
+        HelperUtil.removeNavigationBarBottom(this);
         TextView version =(TextView) findViewById(R.id.software_version);
         version.setText("Version: " + Constants.SOFTWARE_VERSION);
     }

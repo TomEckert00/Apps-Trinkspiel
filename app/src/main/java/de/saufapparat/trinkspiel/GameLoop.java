@@ -1,43 +1,45 @@
 package de.saufapparat.trinkspiel;
 
+import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-
-import de.saufapparat.trinkspiel.R;
-
+import de.saufapparat.trinkspiel.service.GameLoopService;
 import de.saufapparat.trinkspiel.util.Card;
-import de.saufapparat.trinkspiel.util.GamePackageManager;
+import de.saufapparat.trinkspiel.util.HelperUtil;
 import de.saufapparat.trinkspiel.util.Kategorie;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class GameLoop extends AppCompatActivity {
 
-    private TextView aufgabe;
+    private TextView textview_aufgabe;
     private ConstraintLayout mainLayout;
-    private  ArrayList<Card> cards;
-    private ArrayList<String> players;
-    private int cardIndex;
     private boolean touchedRightHalf;
-    private TextView schluckCount;
-    private TextView schluckName;
-    private TextView kategorieLabel;
+    private TextView textview_schluckCount;
+    private TextView textview_schluckName;
+    private TextView textview_kategorieLabel;
+    private GameLoopService gameLoopService;
+    private Card aktuelleKarte;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_game_loop);
 
         initializeViews();
@@ -45,12 +47,55 @@ public class GameLoop extends AppCompatActivity {
         mainLayout.setOnTouchListener(new CardChangeListener());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        HelperUtil.removeNotchForFullScreen(this);
+        HelperUtil.removeNavigationBarBottom(this);
+    }
+
+    private boolean gameLoopServiceBound;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        startGameService();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(gameLoopServiceBound){
+            unbindService(myConnection);
+            gameLoopServiceBound = false;
+        }
+    }
+
+    public ServiceConnection myConnection = new ServiceConnection() {
+
+        public void onServiceConnected(ComponentName className, IBinder binder) {
+            gameLoopService = ((GameLoopService.MyBinder) binder).getService();
+            gameLoopServiceBound = true;
+            showCard();
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            gameLoopServiceBound = false;
+        }
+    };
+
+    private void startGameService() {
+        Intent serviceIntent = new Intent(this, GameLoopService.class);
+        startService(serviceIntent);
+        bindService(serviceIntent, myConnection, Context.BIND_AUTO_CREATE);
+    }
+
     private void initializeViews() {
-        aufgabe = findViewById(R.id.AufgabenTextView);
+        textview_aufgabe = findViewById(R.id.AufgabenTextView);
         mainLayout = findViewById(R.id.mainLayout);
-        schluckCount = findViewById(R.id.schluckCount);
-        schluckName = findViewById(R.id.schluckName);
-        kategorieLabel = findViewById(R.id.KategorieLabel);
+        textview_schluckCount = findViewById(R.id.schluckCount);
+        textview_schluckName = findViewById(R.id.schluckName);
+        textview_kategorieLabel = findViewById(R.id.KategorieLabel);
     }
 
     private class CardChangeListener implements View.OnTouchListener{
@@ -64,7 +109,7 @@ public class GameLoop extends AppCompatActivity {
             else {
                 touchedRightHalf = false;
             }
-            changeCard();
+            navigateThroughCards();
             return false;
         }
     }
@@ -75,117 +120,48 @@ public class GameLoop extends AppCompatActivity {
         return displayMetrics.widthPixels;
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        HelperUtil.fullScreencall(this);
-
-        shuffleCardsFillWithPlayersAnSetIndexToZero();
-        changeCard();
-    }
-
-    private void shuffleCardsFillWithPlayersAnSetIndexToZero() {
-        cards = fetchCardsFromProperties();
-        shuffleInRandomOrder(cards);
-        players = GroupSelectionPage.getPlayerList();
-        fillCardsWithPlayers();
-        cardIndex = 0;
-    }
-
-    private ArrayList<Card> fetchCardsFromProperties() {
-        return GamePackageManager.getCardsFromProperties(this, PackageSelectionPage.getSelectedPackage(),getResources().getConfiguration().locale.getLanguage());
-    }
-
-    private void shuffleInRandomOrder(ArrayList<Card> list){
-        Collections.shuffle(list);
-    }
-
-    private void fillCardsWithPlayers(){
-        ArrayList<Card> temporaryCardDeck = cards;
-        ArrayList<String> temporaryPlayers = players;
-        String removedPlayer = null;
-
-        for(int i = 0; i < cards.size(); i++){
-            String randomPlayer = temporaryPlayers.get(getRandomNumber(0,temporaryPlayers.size()));
-            temporaryPlayers.remove(randomPlayer);
-            if(removedPlayer != null){
-                temporaryPlayers.add(removedPlayer);
-            }
-            removedPlayer = randomPlayer;
-            String randomPlayer2 = temporaryPlayers.get(getRandomNumber(0,temporaryPlayers.size()));
-
-            String TaskWithPlayerReplaced = temporaryCardDeck.get(i).getAufgabe().replace("$Sp1", randomPlayer);
-            TaskWithPlayerReplaced = TaskWithPlayerReplaced.replace("$Sp2", randomPlayer2);
-            temporaryCardDeck.get(i).setAufgabe(TaskWithPlayerReplaced);
-
+    private void navigateThroughCards(){
+        if(touchedRightHalf){
+            showNextCard();
         }
-        temporaryPlayers.add(removedPlayer);
-        cards = temporaryCardDeck;
-    }
-
-    private int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
-    }
-
-    public void changeCard() {
-        NavigateThroughCards();
-        changeViewDependingOfCard();
-    }
-
-    private void NavigateThroughCards() {
-        if (touchedRightHalf) {
-            cardIndex++;
-            if (cardIndex == cards.size()) {
-                shuffleCardsFillWithPlayersAnSetIndexToZero();
-                Toast.makeText(this, getString(R.string.karten_gemischt), Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            cardIndex--;
-            if (cardIndex < 0) {
-                cardIndex = 0;
-            }
+        else {
+            showPreviousCard();
         }
     }
 
-    private void changeViewDependingOfCard() {
-        prepareAktuelleAufgabe();
-        prepareAktuelleSchlucke();
+    private void showNextCard() {
+        gameLoopService.nextCard();
+        showCard();
+    }
+
+    private void showPreviousCard() {
+        gameLoopService.previousCard();
+        showCard();
+    }
+
+    private void showCard(){
+        aktuelleKarte = gameLoopService.fetchCurrentCard();
+        textview_aufgabe.setText(aktuelleKarte.getAufgabe());
+        showSchlueckeIfPossible();
         changeViewDependingOnKategorie();
     }
 
-    private void prepareAktuelleAufgabe() {
-        aufgabe.setText(getAufgabeFromCardWithIndex());
-    }
 
-    private String getAufgabeFromCardWithIndex() {
-        return cards.get(cardIndex).getAufgabe();
-    }
-
-    private void prepareAktuelleSchlucke() {
-        int aktuelleSchlucke = getSchluckeFromCardWithIndex();
-        schluckCount.setText("" + aktuelleSchlucke);
-        schluckCount.setVisibility(View.VISIBLE);
-        schluckName.setVisibility(View.VISIBLE);
-        if (aktuelleSchlucke == 0){
-            schluckCount.setVisibility(View.INVISIBLE);
-            schluckName.setVisibility(View.INVISIBLE);
+    private void showSchlueckeIfPossible() {
+        textview_schluckCount.setText("" + aktuelleKarte.getSchlucke());
+        textview_schluckCount.setVisibility(View.VISIBLE);
+        textview_schluckName.setVisibility(View.VISIBLE);
+        if (aktuelleKarte.getSchlucke() == 0){
+            textview_schluckCount.setVisibility(View.INVISIBLE);
+            textview_schluckName.setVisibility(View.INVISIBLE);
         }
     }
 
-    private int getSchluckeFromCardWithIndex(){
-        return cards.get(cardIndex).getSchlucke();
-    }
-
     private void changeViewDependingOnKategorie() {
-        Kategorie aktuelleKategorie = getKategorieFromCardWithIndex();
-        kategorieLabel.setText(aktuelleKategorie.getKategorieName());
+        Kategorie aktuelleKategorie = aktuelleKarte.getKategorie();
+        textview_kategorieLabel.setText(aktuelleKategorie.getKategorieName());
         String color = aktuelleKategorie.getKategorieColorName();
         changeBackground(color);
-    }
-
-    private Kategorie getKategorieFromCardWithIndex() {
-        return cards.get(cardIndex).getKategorie();
     }
 
     private void changeBackground(String color) {
@@ -226,13 +202,14 @@ public class GameLoop extends AppCompatActivity {
     }
 
     private void setViewColors(int color){
-        aufgabe.setTextColor(color);
-        schluckCount.setTextColor(color);
-        schluckName.setTextColor(color);
-        kategorieLabel.setTextColor(color);
+        textview_aufgabe.setTextColor(color);
+        textview_schluckCount.setTextColor(color);
+        textview_schluckName.setTextColor(color);
+        textview_kategorieLabel.setTextColor(color);
     }
 
-    public void backToPackages(View view){
+    public void backToPackageSelectionPage(View view){
+        stopService(new Intent(this,GameLoopService.class));
         this.finish();
         return;
     }

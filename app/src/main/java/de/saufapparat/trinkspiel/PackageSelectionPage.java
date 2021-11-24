@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import de.saufapparat.trinkspiel.R;
+import de.saufapparat.trinkspiel.util.HelperUtil;
 
 public class PackageSelectionPage extends AppCompatActivity {
 
@@ -36,7 +36,7 @@ public class PackageSelectionPage extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        HelperUtil.fullScreencall(this);
+        HelperUtil.removeNavigationBarBottom(this);
 
         checkButtonActivation();
     }
