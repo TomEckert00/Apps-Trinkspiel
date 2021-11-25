@@ -21,48 +21,19 @@ public class GamePackageManager{
             properties.load(inputStream);
         }catch (Exception e){}
 
-        List<Kategorie> kategories = fetchKategories(properties);
-
-        return cardsFromProperties(properties, kategories);
+        return cardsFromProperties(properties);
     }
 
-    private static List<Kategorie> fetchKategories(Properties properties) {
-        List<Kategorie> kategories = new ArrayList();
-        addEmptyKategorie(kategories);
-        addAllExistingKategories(properties, kategories);
-        return kategories;
-    }
-
-    private static void addEmptyKategorie(List<Kategorie> kategories) {
-        Kategorie nothing = new Kategorie("","WHITE");
-        kategories.add(0, nothing);
-    }
-
-    private static void addAllExistingKategories(Properties properties, List<Kategorie> kategories) {
-        int kategorieCount = Integer.parseInt(properties.getProperty("kategorieSize"));
-        for(int i = 1 ; i <= kategorieCount; i++){
-            addKategorieOfCard(properties, kategories, i);
-        }
-    }
-
-    private static void addKategorieOfCard(Properties properties, List<Kategorie> kategories, int index) {
-        String kategorieName = properties.getProperty(sprache + ".kategorie."+ index + ".name");
-        kategorieName = (kategorieName == null || kategorieName.isEmpty()) ? "Kategorie" : kategorieName;
-        String kategorieColorName = properties.getProperty("kategorie." + index + ".color");
-        Kategorie kategorie = new Kategorie(kategorieName, kategorieColorName);
-        kategories.add(index, kategorie);
-    }
-
-    private static ArrayList<Card> cardsFromProperties(Properties properties, List<Kategorie> kategories) {
+    private static ArrayList<Card> cardsFromProperties(Properties properties) {
         ArrayList<Card> temporaryCards = new ArrayList<>();
 
         int cardSetSize = fetchCardSetSize(properties);
         if (cardSetSize > 0) {
-            for (int i = 1; i <= cardSetSize; i++) {
-                temporaryCards.add(buildNewCard(properties, kategories, i));
+            for (int index = 1; index <= cardSetSize; index++) {
+                temporaryCards.add(buildNewCard(properties, index));
             }
         }else{
-            temporaryCards.add(new Card("No Cards found",404, kategories.get(0)));
+            temporaryCards.add(new Card("No Cards found",404, new Kategorie("kategorie","blau")));
         }
         return temporaryCards;
     }
@@ -71,11 +42,11 @@ public class GamePackageManager{
         return Integer.parseInt(properties.getProperty("cardSetSize"));
     }
 
-    private static Card buildNewCard(Properties properties, List<Kategorie> kategories, int index){
+    private static Card buildNewCard(Properties properties, int index){
         String aufgabe = fetchAufgabe(properties, index);
         int schlucke = fetchSchlucke(properties, index);
-        Kategorie kategorieForCard = FindCorrespondingKategorie(properties, kategories, index);
-        return new Card(aufgabe, schlucke, kategorieForCard);
+        Kategorie kategorie = fetchKategorie(properties, index);
+        return new Card(aufgabe, schlucke, kategorie);
     }
 
     private static String fetchAufgabe(Properties properties, int index) {
@@ -88,14 +59,11 @@ public class GamePackageManager{
         return result == null ? 0 : Integer.parseInt(result);
     }
 
-    private static Kategorie FindCorrespondingKategorie(Properties properties, List<Kategorie> kategories, int index) {
-        String kategorie = fetchKategorie(properties, index);
-        int kategorieIndex = Integer.parseInt(kategorie);
-        return kategories.get(kategorieIndex);
-    }
+    private static Kategorie fetchKategorie(Properties properties, int index) {
+        String kategorieNumber = properties.getProperty("card." + index + ".kategorie");
+        String kategorieName = properties.getProperty(sprache + ".kategorie."+ kategorieNumber + ".name");
+        String kategorieColor = properties.getProperty("kategorie."+kategorieNumber + ".color");
+        return new Kategorie(kategorieName,kategorieColor);
 
-    private static String fetchKategorie(Properties properties, int index) {
-        String kategorie = properties.getProperty("card." + index + ".kategorie");
-        return (kategorie == null) ? "0" : kategorie;
     }
 }
