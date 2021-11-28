@@ -1,19 +1,13 @@
 package de.saufapparat.trinkspiel;
 
-import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
-import android.os.Messenger;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -208,9 +202,17 @@ public class GameLoop extends AppCompatActivity {
         textview_kategorieLabel.setTextColor(color);
     }
 
+    //should finish Configpage as well if boolean is set to true
     public void backToPackageSelectionPage(View view){
         stopService(new Intent(this,GameLoopService.class));
-        this.finish();
+        finish();
+        GameConfigurationActivity.setConfigsSet(true);
+        return;
+    }
+
+    public void backToConfigurations(View view){
+        stopService(new Intent(this,GameLoopService.class));
+        finish();
         return;
     }
 

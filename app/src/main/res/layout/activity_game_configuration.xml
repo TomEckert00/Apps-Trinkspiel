@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    tools:context="de.saufapparat.trinkspiel.GameConfigurationActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        tools:context="de.saufapparat.trinkspiel.GameConfigurationActivity"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-43dp">
+
+        <LinearLayout
+            android:layout_width="330dp"
+            android:layout_height="554dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_spezial">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView_trink"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="Trinkstärke"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_trink"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/flo3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView_art"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="Getränketyp"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_art"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/flo3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView_zufall"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="Ereignisse"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_random"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/flo3" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_spezial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/backgroundColor"
+            android:text="Einstellungen"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="56sp"
+            app:flow_wrapMode="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_startGameLoop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="startGameWithSelectedPackage"
+            android:text="@string/packageActivity_startButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/button_back2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="backToPackageSelectionPage"
+            android:text="@string/packageActivity_previousButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

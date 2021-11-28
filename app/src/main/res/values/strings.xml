@@ -37,6 +37,11 @@
     <string name="activityPaket_price">Frei</string>
     <string name="activityPaket_infoText">Perfekt für einen coolen Abend im Freien oder für den nötigen Schwung bei einer Party. Viele witzige Aufgaben um ein bisschen Bewegung in euer Spiel zu bringen oder dafür zu sorgen, dass niemand einschläft.</string>
 
+    <string name="hotPaket_label">Hot 18+</string>
+    <string name="hotPaket_sub">Nichts für schwache Nerven</string>
+    <string name="hotPaket_price">3,99€</string>
+    <string name="hotPaket_infoText">Für heiße Erlebnisse und viel Körperkontakt</string>
+
     <string name="packageActivity_ComingSoon">Bald mehr...</string>
 
     <string name="karten_gemischt">Karten gemischt!</string>

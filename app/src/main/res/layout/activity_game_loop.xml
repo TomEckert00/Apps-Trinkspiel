@@ -16,10 +16,23 @@
         android:layout_marginTop="16dp"
         android:contentDescription="@string/alt_zuruckPfeil"
         android:onClick="backToPackageSelectionPage"
-        android:src="@drawable/zuruck2"
+        android:src="@drawable/home2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <ImageView
+        android:id="@+id/button_backToConfig"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/alt_zuruckPfeil"
+        android:onClick="backToConfigurations"
+        android:src="@drawable/settings2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/KategorieLabel"

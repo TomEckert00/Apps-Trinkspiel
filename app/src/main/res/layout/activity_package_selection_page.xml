@@ -321,6 +321,99 @@
 
             </androidx.cardview.widget.CardView>
 
+            <!-- Hot Packet Karte-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/hotPackage_card"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_gravity="fill"
+                android:layout_margin="8dp"
+                android:onClick="selectHotPackage"
+                app:cardBackgroundColor="@color/flo1"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/hotPaket_icon"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:contentDescription="@string/alt_Turnschuh"
+                        android:src="@drawable/no_minors" />
+
+                    <TextView
+                        android:id="@+id/hotPaket_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toStartOf="@+id/hotPaket_info"
+                        android:layout_toLeftOf="@+id/hotPaket_info"
+                        android:layout_toEndOf="@+id/hotPaket_icon"
+                        android:layout_toRightOf="@+id/hotPaket_icon"
+                        android:text="@string/hotPaket_label"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/hotPaket_sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/hotPaket_label"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toStartOf="@+id/hotPaket_info"
+                        android:layout_toLeftOf="@+id/hotPaket_info"
+                        android:layout_toEndOf="@+id/hotPaket_icon"
+                        android:layout_toRightOf="@+id/hotPaket_icon"
+                        android:text="@string/hotPaket_sub"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="italic" />
+
+                    <ImageView
+                        android:id="@+id/hotPaket_info"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginRight="0dp"
+                        android:contentDescription="@string/alt_infoicon"
+                        android:onClick="openMoreInformationDialog"
+                        android:src="@drawable/info2"
+                        android:tag="hot" />
+
+                    <TextView
+                        android:id="@+id/hotPaket_price"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:gravity="center"
+                        android:text="@string/hotPaket_price"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
             <!-- Bald Karte -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/comingSoon_card"

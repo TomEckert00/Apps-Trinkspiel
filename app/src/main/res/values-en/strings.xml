@@ -37,6 +37,11 @@
     <string name="activityPaket_price">Free</string>
     <string name="activityPaket_infoText">Perfect for a cool evening outdoors or for the necessary momentum at a party. Lots of fun tasks to add a little movement to your game or make sure no one falls asleep.</string>
 
+    <string name="hotPaket_label"></string>
+    <string name="hotPaket_sub"></string>
+    <string name="hotPaket_price">3,99€</string>
+    <string name="hotPaket_infoText"></string>
+
     <string name="packageActivity_ComingSoon">Coming soon...</string>
 
     <string name="karten_gemischt">Cards shuffled!</string>

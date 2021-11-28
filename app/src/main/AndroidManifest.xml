@@ -13,6 +13,7 @@
         <activity android:name="de.saufapparat.trinkspiel.GameLoop" />
         <activity android:name="de.saufapparat.trinkspiel.PackageSelectionPage" />
         <activity android:name="de.saufapparat.trinkspiel.MoreInformationPage" />
+        <activity android:name="de.saufapparat.trinkspiel.GameConfigurationActivity" />
         <activity
             android:name="de.saufapparat.trinkspiel.GroupSelectionPage"
             android:windowSoftInputMode="adjustPan"

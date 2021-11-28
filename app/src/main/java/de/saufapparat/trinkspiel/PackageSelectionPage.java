@@ -36,6 +36,7 @@ public class PackageSelectionPage extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        GameConfigurationActivity.setConfigsSet(false);
         HelperUtil.removeNavigationBarBottom(this);
 
         checkButtonActivation();
@@ -48,8 +49,9 @@ public class PackageSelectionPage extends AppCompatActivity {
         }
     }
 
+    //onclick von startGameButton
     public void startGameWithSelectedPackage(View view){
-        Intent intent = new Intent(this, GameLoop.class);
+        Intent intent = new Intent(this, GameConfigurationActivity.class);
         startActivity(intent);
     }
 
@@ -72,6 +74,13 @@ public class PackageSelectionPage extends AppCompatActivity {
         startGameButton.setEnabled(true);
         resetAllColorsFromPackages();
         highLightSelectedPackage(2);
+    }
+
+    public void selectHotPackage(View view){
+        selectedPackageName = "HotPackage";
+        startGameButton.setEnabled(true);
+        resetAllColorsFromPackages();
+        highLightSelectedPackage(3);
     }
 
     private void resetAllColorsFromPackages() {
@@ -100,6 +109,10 @@ public class PackageSelectionPage extends AppCompatActivity {
             case "aktiv":
                 infoLabel = getString(R.string.activityPaket_label);
                 informationText=getString(R.string.activityPaket_infoText);
+                break;
+            case "hot":
+                infoLabel = getString(R.string.hotPaket_label);
+                informationText=getString(R.string.hotPaket_infoText);
                 break;
             default:
                 break;

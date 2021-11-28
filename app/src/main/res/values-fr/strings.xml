@@ -37,6 +37,11 @@
     <string name="activityPaket_price">Libre</string>
     <string name="activityPaket_infoText">Parfait pour une soirée cool ou pour ajouter du piquant à une fête. De nombreuses tâches amusantes pour ajouter un peu de mouvement à votre jeu ou faire en sorte que personne ne s\'endorme.</string>
 
+    <string name="hotPaket_label"></string>
+    <string name="hotPaket_sub"></string>
+    <string name="hotPaket_price">3,99€</string>
+    <string name="hotPaket_infoText"></string>
+
     <string name="packageActivity_ComingSoon">bientôt plus...</string>
 
     <string name="karten_gemischt">Cartes mélangées!</string>
