@@ -15,10 +15,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import de.saufapparat.trinkspiel.enmus.GetraenkeTyp;
 import de.saufapparat.trinkspiel.service.GameLoopService;
 import de.saufapparat.trinkspiel.util.Card;
 import de.saufapparat.trinkspiel.util.HelperUtil;
 import de.saufapparat.trinkspiel.util.Kategorie;
+import lombok.Setter;
 
 public class GameLoop extends AppCompatActivity {
 
@@ -30,6 +32,9 @@ public class GameLoop extends AppCompatActivity {
     private TextView textview_kategorieLabel;
     private GameLoopService gameLoopService;
     private Card aktuelleKarte;
+
+    @Setter
+    public static GetraenkeTyp getraenkeTyp = GetraenkeTyp.schlucke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,12 +147,23 @@ public class GameLoop extends AppCompatActivity {
 
 
     private void showSchlueckeIfPossible() {
+        decideGetraenkeTyp();
         textview_schluckCount.setText("" + aktuelleKarte.getSchlucke());
         textview_schluckCount.setVisibility(View.VISIBLE);
         textview_schluckName.setVisibility(View.VISIBLE);
         if (aktuelleKarte.getSchlucke() == 0){
             textview_schluckCount.setVisibility(View.INVISIBLE);
             textview_schluckName.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    //todo in resourcen strings auslagern
+
+    private void decideGetraenkeTyp() {
+        if (getraenkeTyp.equals(GetraenkeTyp.schlucke)){
+            textview_schluckName.setText("Schlucke");
+        }else if (getraenkeTyp.equals(GetraenkeTyp.shots)){
+            textview_schluckName.setText("Shots");
         }
     }
 

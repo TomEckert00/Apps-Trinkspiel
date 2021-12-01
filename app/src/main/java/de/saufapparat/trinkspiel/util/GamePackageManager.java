@@ -5,9 +5,10 @@ import android.content.res.AssetManager;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
+import de.saufapparat.trinkspiel.enmus.GetraenkeTyp;
+import de.saufapparat.trinkspiel.enmus.Trinkstaerke;
 import lombok.Setter;
 
 public class GamePackageManager{
@@ -15,7 +16,9 @@ public class GamePackageManager{
     private static String sprache;
 
     @Setter
-    public static double multiplier = 1;
+    public static Trinkstaerke trinkstaerke = Trinkstaerke.normal;
+    @Setter
+    public static GetraenkeTyp getraenkeTyp = GetraenkeTyp.schlucke;
 
     public static ArrayList<Card> getCardsFromProperties(Context context, String packagename, String language){
         Properties properties = new Properties();
@@ -60,8 +63,13 @@ public class GamePackageManager{
     }
 
     private static int fetchSchlucke(Properties properties, int index) {
-        String result = properties.getProperty("card." + index + ".schlucke");
-        return result == null ? 0 : (int) Math.round(Integer.parseInt(result) * multiplier);
+        String result;
+        if (getraenkeTyp.equals(GetraenkeTyp.schlucke)){
+            result = properties.getProperty("card." + index + ".schlucke");
+        }else{
+            result = properties.getProperty("card." + index + ".shots");
+        }
+        return result == null ? 0 : (int) Math.round(Integer.parseInt(result) * trinkstaerke.getMultiplier());
     }
 
     private static Kategorie fetchKategorie(Properties properties, int index) {

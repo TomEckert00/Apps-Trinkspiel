@@ -9,15 +9,31 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import de.saufapparat.trinkspiel.enmus.ActivitySpezialEnum;
+import de.saufapparat.trinkspiel.enmus.GamePackage;
+import de.saufapparat.trinkspiel.enmus.GetraenkeTyp;
+import de.saufapparat.trinkspiel.enmus.HotSpezialEnum;
+import de.saufapparat.trinkspiel.enmus.OnlineSpezialEnum;
+import de.saufapparat.trinkspiel.enmus.Trinkstaerke;
 import de.saufapparat.trinkspiel.util.GamePackageManager;
+import lombok.Getter;
 import lombok.Setter;
 
 public class GameConfigurationActivity extends AppCompatActivity {
 
-    Spinner dropdown_trink;
-    Spinner dropdown_art;
-    Spinner dropdown_random;
-    private String selectedMultiplier = "1";
+    Spinner dropdown_trinkstaerke;
+    Spinner dropdown_getraenkeTyp;
+    Spinner dropdown_spezial;
+
+    private Trinkstaerke selectedTrinkstaerke = Trinkstaerke.normal;
+    private GetraenkeTyp selectedGetraenkeTyp = GetraenkeTyp.schlucke;
+    @Getter
+    private static String selectedSpezialPlayer;
+    private static String selectedSpezial;
 
     @Setter
     private static boolean configsSet = false;
@@ -31,42 +47,49 @@ public class GameConfigurationActivity extends AppCompatActivity {
 
     public void startGameWithSelectedPackage(View view) {
         Intent intent = new Intent(this, GameLoop.class);
-        String selected = selectedMultiplier.replace("x", "");
-        GamePackageManager.setMultiplier(Double.parseDouble(selected));
+        GamePackageManager.setTrinkstaerke(selectedTrinkstaerke);
+        GamePackageManager.setGetraenkeTyp(selectedGetraenkeTyp);
+        GameLoop.setGetraenkeTyp(selectedGetraenkeTyp);
         startActivity(intent);
     }
 
     private void initializeViews() {
-        dropdown_trink = findViewById(R.id.spinner_trink);
-        dropdown_art = findViewById(R.id.spinner_art);
-        dropdown_random = findViewById(R.id.spinner_random);
+        dropdown_trinkstaerke = findViewById(R.id.spinner_trink);
+        dropdown_getraenkeTyp = findViewById(R.id.spinner_art);
+        dropdown_spezial = findViewById(R.id.spinner_spezial);
 
-        String[] items_trink = new String[]{"0.5x","1x","2x","3x","5x"};
-        ArrayAdapter<String> adapter_trink = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items_trink);
-        dropdown_trink.setAdapter(adapter_trink);
-        dropdown_trink.setSelection(1);
-        dropdown_trink.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedMultiplier = parent.getSelectedItem().toString();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                selectedMultiplier = "1";
-            }
+        configureSpinner(dropdown_trinkstaerke, Arrays.asList(Trinkstaerke.values()), 1, new TrinkstaerkeListener());
+        configureSpinner(dropdown_getraenkeTyp, Arrays.asList(GetraenkeTyp.values()), 0 , new GetraenkeTypListener());
+        configureSpinner(dropdown_spezial, decideSpezialItems(), 0 , new SpezialConfigListener());
+    }
 
-        });
+    private void configureSpinner(Spinner spinner, List items, int selection, AdapterView.OnItemSelectedListener listener){
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        spinner.setAdapter(adapter);
+        spinner.setSelection(selection);
+        spinner.setOnItemSelectedListener(listener);
+    }
 
-        String[] items_art = new String[]{"normal","shots"};
-        ArrayAdapter<String> adapter_art = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items_art);
-        dropdown_art.setAdapter(adapter_art);
-        dropdown_art.setSelection(0);
-
-        String[] items_random = new String[]{"aus","selten","häufig"};
-        ArrayAdapter<String> adapter_random = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items_random);
-        dropdown_random.setAdapter(adapter_random);
-        dropdown_random.setSelection(0);
+    private List decideSpezialItems() {
+        GamePackage selectedPackage = PackageSelectionPage.getSelectedPackage();
+        switch (selectedPackage){
+            case StandardPackage:
+                //todo: Auslagern in strings
+                ArrayList<String> list =  new ArrayList<>(Arrays.asList("niemand1234321"));
+                list.addAll(GroupSelectionPage.getPlayerList());
+                return list;
+            case OnlinePackage:
+                return Arrays.asList(OnlineSpezialEnum.values());
+            case ActivityPackage:
+                return Arrays.asList(ActivitySpezialEnum.values());
+            case HotPackage:
+                return Arrays.asList(HotSpezialEnum.values());
+            default:
+                List def = new ArrayList();
+                def.add("empty");
+                return def;
+        }
     }
 
     @Override
@@ -81,5 +104,52 @@ public class GameConfigurationActivity extends AppCompatActivity {
     public void backToPackageSelectionPage(View view){
         finish();
         return;
+    }
+
+    private class TrinkstaerkeListener implements AdapterView.OnItemSelectedListener{
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            selectedTrinkstaerke = Trinkstaerke.valueOf(parent.getSelectedItem().toString());
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            selectedTrinkstaerke = Trinkstaerke.normal;
+        }
+    }
+
+    private class GetraenkeTypListener implements AdapterView.OnItemSelectedListener{
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            selectedGetraenkeTyp = GetraenkeTyp.valueOf(parent.getSelectedItem().toString());
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            selectedGetraenkeTyp = GetraenkeTyp.schlucke;
+        }
+    }
+
+    private class SpezialConfigListener implements AdapterView.OnItemSelectedListener{
+
+        //todo: refactoring mit übergabe ergebnis
+        /*
+        String ergebnis = "";
+        public SpezialConfigListener(String ergebnis){
+            this.ergebnis = ergebnis
+        }
+         */
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            selectedSpezialPlayer = parent.getSelectedItem().toString();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            selectedSpezialPlayer = "niemand1234321";
+        }
     }
 }
