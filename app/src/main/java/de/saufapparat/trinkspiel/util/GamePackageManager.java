@@ -9,6 +9,8 @@ import java.util.Properties;
 
 import de.saufapparat.trinkspiel.enmus.GetraenkeTyp;
 import de.saufapparat.trinkspiel.enmus.Trinkstaerke;
+import de.saufapparat.trinkspiel.model.Card;
+import de.saufapparat.trinkspiel.model.Kategorie;
 import lombok.Setter;
 
 public class GamePackageManager{

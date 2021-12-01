@@ -1,4 +1,4 @@
-package de.saufapparat.trinkspiel;
+package de.saufapparat.trinkspiel.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+import de.saufapparat.trinkspiel.R;
 import de.saufapparat.trinkspiel.util.HelperUtil;
 
 public class GroupSelectionPage extends AppCompatActivity {

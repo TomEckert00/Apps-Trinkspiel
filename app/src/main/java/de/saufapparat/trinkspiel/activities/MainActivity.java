@@ -1,4 +1,4 @@
-package de.saufapparat.trinkspiel;
+package de.saufapparat.trinkspiel.activities;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -15,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.Locale;
 
+import de.saufapparat.trinkspiel.util.MoreInformationPage;
+import de.saufapparat.trinkspiel.R;
 import de.saufapparat.trinkspiel.util.HelperUtil;
 
 public class MainActivity extends AppCompatActivity{

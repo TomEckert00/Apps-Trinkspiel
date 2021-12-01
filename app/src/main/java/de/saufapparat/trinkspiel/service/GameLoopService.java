@@ -3,25 +3,20 @@ package de.saufapparat.trinkspiel.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Messenger;
-import android.util.Log;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import de.saufapparat.trinkspiel.GameConfigurationActivity;
-import de.saufapparat.trinkspiel.GroupSelectionPage;
-import de.saufapparat.trinkspiel.PackageSelectionPage;
+import de.saufapparat.trinkspiel.activities.GameConfigurationActivity;
+import de.saufapparat.trinkspiel.activities.GroupSelectionPage;
+import de.saufapparat.trinkspiel.activities.PackageSelectionPage;
 import de.saufapparat.trinkspiel.R;
-import de.saufapparat.trinkspiel.util.Card;
+import de.saufapparat.trinkspiel.enmus.ActivitySpezialEnum;
+import de.saufapparat.trinkspiel.model.Card;
 import de.saufapparat.trinkspiel.util.GamePackageManager;
 import de.saufapparat.trinkspiel.util.HelperUtil;
-import de.saufapparat.trinkspiel.util.Kategorie;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,7 +29,6 @@ public class GameLoopService extends Service {
     private ArrayList<Card> additionalCards;
     private ArrayList<String> players;
     private final IBinder mBinder = new MyBinder();
-    private static String spezialPlayer = null;
 
     private void toastThatCardDeckFinished(){
         Toast.makeText(this, getString(R.string.karten_gemischt), Toast.LENGTH_SHORT).show();
@@ -48,7 +42,6 @@ public class GameLoopService extends Service {
     }
 
     private void reloadPlayersAndCards(){
-        spezialPlayer = GameConfigurationActivity.getSelectedSpezialPlayer();
         fetchAllPlayers();
         fetchAllCards();
     }
@@ -109,7 +102,12 @@ public class GameLoopService extends Service {
         String removedPlayer = null;
 
         int repeats = cards.size();
-        if (spezialPlayer!=null && spezialPlayer.equals("niemand1234321")){
+        if (GameConfigurationActivity.getSelectedSpezialPlayer() != null
+                &&  GameConfigurationActivity.getSelectedSpezialPlayer().equals("aus")){
+            this.cards = new ArrayList<>(cards.subList(0,repeats-7));
+        }
+        if (GameConfigurationActivity.getSelectedSpezialActivity() != null
+                && GameConfigurationActivity.getSelectedSpezialActivity().equals(ActivitySpezialEnum.aus)){
             this.cards = new ArrayList<>(cards.subList(0,repeats-7));
         }
         for(int i = 0; i < repeats; i++){
@@ -123,8 +121,11 @@ public class GameLoopService extends Service {
 
             String taskWithPlayerReplaced = temporaryCardDeck.get(i).getAufgabe()
                     .replace("$Sp1", randomPlayer)
-                    .replace("$Sp2", randomPlayer2)
-                    .replace("$Spez", spezialPlayer);
+                    .replace("$Sp2", randomPlayer2);
+
+            if(GameConfigurationActivity.getSelectedSpezialPlayer()!=null){
+                taskWithPlayerReplaced = taskWithPlayerReplaced.replace("$Spez",  GameConfigurationActivity.getSelectedSpezialPlayer());
+            }
             temporaryCardDeck.get(i).setAufgabe(taskWithPlayerReplaced);
 
         }

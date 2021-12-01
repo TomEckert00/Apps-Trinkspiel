@@ -1,10 +1,11 @@
-package de.saufapparat.trinkspiel;
+package de.saufapparat.trinkspiel.activities;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
@@ -15,11 +16,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import de.saufapparat.trinkspiel.R;
+import de.saufapparat.trinkspiel.activities.GameConfigurationActivity;
+import de.saufapparat.trinkspiel.enmus.GamePackage;
 import de.saufapparat.trinkspiel.enmus.GetraenkeTyp;
 import de.saufapparat.trinkspiel.service.GameLoopService;
-import de.saufapparat.trinkspiel.util.Card;
+import de.saufapparat.trinkspiel.model.Card;
 import de.saufapparat.trinkspiel.util.HelperUtil;
-import de.saufapparat.trinkspiel.util.Kategorie;
+import de.saufapparat.trinkspiel.model.Kategorie;
 import lombok.Setter;
 
 public class GameLoop extends AppCompatActivity {
@@ -32,6 +36,8 @@ public class GameLoop extends AppCompatActivity {
     private TextView textview_kategorieLabel;
     private GameLoopService gameLoopService;
     private Card aktuelleKarte;
+
+    private MediaPlayer mediaPlayer_hupe;
 
     @Setter
     public static GetraenkeTyp getraenkeTyp = GetraenkeTyp.schlucke;
@@ -141,6 +147,13 @@ public class GameLoop extends AppCompatActivity {
     private void showCard(){
         aktuelleKarte = gameLoopService.fetchCurrentCard();
         textview_aufgabe.setText(aktuelleKarte.getAufgabe());
+        if (PackageSelectionPage.getSelectedPackage().equals(GamePackage.ActivityPackage)
+                && aktuelleKarte.getKategorie().getKategorieName().equals("Spezial")){
+            if(mediaPlayer_hupe==null){
+                mediaPlayer_hupe = MediaPlayer.create(this, R.raw.hupe_sound);
+            }
+            mediaPlayer_hupe.start();
+        }
         showSchlueckeIfPossible();
         changeViewDependingOnKategorie();
     }

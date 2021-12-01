@@ -1,4 +1,4 @@
-package de.saufapparat.trinkspiel;
+package de.saufapparat.trinkspiel.util;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import de.saufapparat.trinkspiel.R;
 import de.saufapparat.trinkspiel.util.Constants;
 import de.saufapparat.trinkspiel.util.HelperUtil;
 

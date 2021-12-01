@@ -1,4 +1,4 @@
-package de.saufapparat.trinkspiel;
+package de.saufapparat.trinkspiel.activities;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import de.saufapparat.trinkspiel.util.PackageInformationDialog;
+import de.saufapparat.trinkspiel.R;
 import de.saufapparat.trinkspiel.enmus.GamePackage;
 import de.saufapparat.trinkspiel.util.HelperUtil;
 

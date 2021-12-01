@@ -1,4 +1,4 @@
-package de.saufapparat.trinkspiel.util;
+package de.saufapparat.trinkspiel.model;
 
 public class Kategorie {
 

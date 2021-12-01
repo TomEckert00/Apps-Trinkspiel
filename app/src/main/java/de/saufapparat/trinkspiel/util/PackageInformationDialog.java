@@ -1,4 +1,4 @@
-package de.saufapparat.trinkspiel;
+package de.saufapparat.trinkspiel.util;
 
 import android.app.Dialog;
 import android.content.DialogInterface;

@@ -1,4 +1,4 @@
-package de.saufapparat.trinkspiel;
+package de.saufapparat.trinkspiel.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import de.saufapparat.trinkspiel.R;
 import de.saufapparat.trinkspiel.enmus.ActivitySpezialEnum;
 import de.saufapparat.trinkspiel.enmus.GamePackage;
 import de.saufapparat.trinkspiel.enmus.GetraenkeTyp;
@@ -29,11 +31,14 @@ public class GameConfigurationActivity extends AppCompatActivity {
     Spinner dropdown_getraenkeTyp;
     Spinner dropdown_spezial;
 
+    TextView spezial_textview;
+
     private Trinkstaerke selectedTrinkstaerke = Trinkstaerke.normal;
     private GetraenkeTyp selectedGetraenkeTyp = GetraenkeTyp.schlucke;
     @Getter
     private static String selectedSpezialPlayer;
-    private static String selectedSpezial;
+    @Getter
+    private static ActivitySpezialEnum selectedSpezialActivity;
 
     @Setter
     private static boolean configsSet = false;
@@ -43,6 +48,8 @@ public class GameConfigurationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_configuration);
         initializeViews();
+        selectedSpezialPlayer=null;
+        selectedSpezialActivity=null;
     }
 
     public void startGameWithSelectedPackage(View view) {
@@ -54,6 +61,7 @@ public class GameConfigurationActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
+        spezial_textview = findViewById(R.id.textView_spezial);
         dropdown_trinkstaerke = findViewById(R.id.spinner_trink);
         dropdown_getraenkeTyp = findViewById(R.id.spinner_art);
         dropdown_spezial = findViewById(R.id.spinner_spezial);
@@ -76,14 +84,18 @@ public class GameConfigurationActivity extends AppCompatActivity {
         switch (selectedPackage){
             case StandardPackage:
                 //todo: Auslagern in strings
-                ArrayList<String> list =  new ArrayList<>(Arrays.asList("niemand1234321"));
+                ArrayList<String> list =  new ArrayList<>(Arrays.asList("aus"));
                 list.addAll(GroupSelectionPage.getPlayerList());
+                spezial_textview.setText("Abfüllung");
                 return list;
             case OnlinePackage:
+                spezial_textview.setText("Noch keine Idee");
                 return Arrays.asList(OnlineSpezialEnum.values());
             case ActivityPackage:
+                spezial_textview.setText("Reaktion");
                 return Arrays.asList(ActivitySpezialEnum.values());
             case HotPackage:
+                spezial_textview.setText("Spezial");
                 return Arrays.asList(HotSpezialEnum.values());
             default:
                 List def = new ArrayList();
@@ -144,12 +156,27 @@ public class GameConfigurationActivity extends AppCompatActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            selectedSpezialPlayer = parent.getSelectedItem().toString();
+
+            switch (PackageSelectionPage.getSelectedPackage()){
+                case StandardPackage:
+                    selectedSpezialPlayer = parent.getSelectedItem().toString();
+                    break;
+                case ActivityPackage:
+                    selectedSpezialActivity = ActivitySpezialEnum.valueOf(parent.getSelectedItem().toString());
+                    break;
+            }
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-            selectedSpezialPlayer = "niemand1234321";
+            switch (PackageSelectionPage.getSelectedPackage()) {
+                case StandardPackage:
+                    selectedSpezialPlayer = "aus";
+                    break;
+                case ActivityPackage:
+                    selectedSpezialActivity = ActivitySpezialEnum.aus;
+                    break;
+            }
         }
     }
 }

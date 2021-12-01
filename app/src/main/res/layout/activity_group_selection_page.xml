@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/flo5"
-    tools:context="de.saufapparat.trinkspiel.GroupSelectionPage">
+    tools:context="de.saufapparat.trinkspiel.activities.GroupSelectionPage">
 
     <TextView
         android:id="@+id/textView_Header"

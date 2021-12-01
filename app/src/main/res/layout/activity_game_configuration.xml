@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context="de.saufapparat.trinkspiel.GameConfigurationActivity">
+    tools:context="de.saufapparat.trinkspiel.activities.GameConfigurationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
-        tools:context="de.saufapparat.trinkspiel.GameConfigurationActivity"
+        tools:context="de.saufapparat.trinkspiel.activities.GameConfigurationActivity"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="-43dp">
 
