@@ -147,6 +147,12 @@ public class GameLoop extends AppCompatActivity {
     private void showCard(){
         aktuelleKarte = gameLoopService.fetchCurrentCard();
         textview_aufgabe.setText(aktuelleKarte.getAufgabe());
+        playSoundWhenActivityPackageSpezialActivated();
+        showSchlueckeIfPossible();
+        changeViewDependingOnKategorie();
+    }
+
+    private void playSoundWhenActivityPackageSpezialActivated() {
         if (PackageSelectionPage.getSelectedPackage().equals(GamePackage.ActivityPackage)
                 && aktuelleKarte.getKategorie().getKategorieName().equals("Spezial")){
             if(mediaPlayer_hupe==null){
@@ -154,8 +160,6 @@ public class GameLoop extends AppCompatActivity {
             }
             mediaPlayer_hupe.start();
         }
-        showSchlueckeIfPossible();
-        changeViewDependingOnKategorie();
     }
 
 
@@ -174,9 +178,9 @@ public class GameLoop extends AppCompatActivity {
 
     private void decideGetraenkeTyp() {
         if (getraenkeTyp.equals(GetraenkeTyp.schlucke)){
-            textview_schluckName.setText("Schlucke");
+            textview_schluckName.setText(getString(R.string.gameLoop_Schlucke));
         }else if (getraenkeTyp.equals(GetraenkeTyp.shots)){
-            textview_schluckName.setText("Shots");
+            textview_schluckName.setText(getString(R.string.gameLoop_Shots));
         }
     }
 

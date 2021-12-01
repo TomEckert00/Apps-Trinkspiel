@@ -46,6 +46,7 @@
 
     <string name="karten_gemischt">Karten gemischt!</string>
     <string name="gameLoop_Schlucke">Schlucke</string>
+    <string name="gameLoop_Shots">Shots</string>
 
     <string name="alt_instagram">Instagram Link</string>
     <string name="alt_language">Sprache tauschen</string>
@@ -54,4 +55,10 @@
     <string name="alt_Turnschuh">Turnschuh</string>
     <string name="alt_infoicon">Infobutton</string>
     <string name="alt_zuruckPfeil">Zurück</string>
+
+    <string name="spezial_standardpack_aus">aus</string>
+    <string name="spezial_textview_standard">Abfüllen</string>
+    <string name="spezial_textview_online">Abfüllen</string>
+    <string name="spezial_textview_activity">Abfüllen</string>
+    <string name="spezial_textview_hot">Abfüllen</string>
 </resources>

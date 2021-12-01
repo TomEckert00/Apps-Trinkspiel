@@ -81,27 +81,23 @@ public class GameConfigurationActivity extends AppCompatActivity {
 
     private List decideSpezialItems() {
         GamePackage selectedPackage = PackageSelectionPage.getSelectedPackage();
-        switch (selectedPackage){
+        switch (selectedPackage) {
             case StandardPackage:
-                //todo: Auslagern in strings
-                ArrayList<String> list =  new ArrayList<>(Arrays.asList("aus"));
+                ArrayList<String> list = new ArrayList<>(Arrays.asList(getString(R.string.spezial_standardpack_aus)));
                 list.addAll(GroupSelectionPage.getPlayerList());
-                spezial_textview.setText("Abfüllung");
+                spezial_textview.setText(getString(R.string.spezial_textview_standard));
                 return list;
             case OnlinePackage:
-                spezial_textview.setText("Noch keine Idee");
+                spezial_textview.setText(getString(R.string.spezial_textview_online));
                 return Arrays.asList(OnlineSpezialEnum.values());
             case ActivityPackage:
-                spezial_textview.setText("Reaktion");
+                spezial_textview.setText(getString(R.string.spezial_textview_activity));
                 return Arrays.asList(ActivitySpezialEnum.values());
             case HotPackage:
-                spezial_textview.setText("Spezial");
+                spezial_textview.setText(getString(R.string.spezial_textview_hot));
                 return Arrays.asList(HotSpezialEnum.values());
-            default:
-                List def = new ArrayList();
-                def.add("empty");
-                return def;
         }
+        return new ArrayList();
     }
 
     @Override
@@ -119,12 +115,10 @@ public class GameConfigurationActivity extends AppCompatActivity {
     }
 
     private class TrinkstaerkeListener implements AdapterView.OnItemSelectedListener{
-
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             selectedTrinkstaerke = Trinkstaerke.valueOf(parent.getSelectedItem().toString());
         }
-
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
             selectedTrinkstaerke = Trinkstaerke.normal;
@@ -132,12 +126,10 @@ public class GameConfigurationActivity extends AppCompatActivity {
     }
 
     private class GetraenkeTypListener implements AdapterView.OnItemSelectedListener{
-
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             selectedGetraenkeTyp = GetraenkeTyp.valueOf(parent.getSelectedItem().toString());
         }
-
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
             selectedGetraenkeTyp = GetraenkeTyp.schlucke;
@@ -145,15 +137,6 @@ public class GameConfigurationActivity extends AppCompatActivity {
     }
 
     private class SpezialConfigListener implements AdapterView.OnItemSelectedListener{
-
-        //todo: refactoring mit übergabe ergebnis
-        /*
-        String ergebnis = "";
-        public SpezialConfigListener(String ergebnis){
-            this.ergebnis = ergebnis
-        }
-         */
-
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -166,7 +149,6 @@ public class GameConfigurationActivity extends AppCompatActivity {
                     break;
             }
         }
-
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
             switch (PackageSelectionPage.getSelectedPackage()) {
