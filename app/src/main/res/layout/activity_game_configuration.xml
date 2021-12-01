@@ -27,7 +27,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_spezial">
+            app:layout_constraintTop_toBottomOf="@+id/textView_config">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView_zufall"
+                    android:id="@+id/textView_spezial"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:text="Ereignisse"
@@ -89,7 +89,7 @@
                     android:textSize="25sp" />
 
                 <Spinner
-                    android:id="@+id/spinner_random"
+                    android:id="@+id/spinner_spezial"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/flo3" />
@@ -99,7 +99,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView_spezial"
+            android:id="@+id/textView_config"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -111,7 +111,6 @@
             android:text="Einstellungen"
             android:textColor="@color/design_default_color_on_primary"
             android:textSize="56sp"
-            app:flow_wrapMode="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

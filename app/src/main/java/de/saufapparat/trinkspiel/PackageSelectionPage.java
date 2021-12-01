@@ -11,11 +11,12 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import de.saufapparat.trinkspiel.enmus.GamePackage;
 import de.saufapparat.trinkspiel.util.HelperUtil;
 
 public class PackageSelectionPage extends AppCompatActivity {
 
-    private static String selectedPackageName;
+    private static GamePackage selectedPackageName;
     private Button startGameButton;
     private LinearLayout cardViews;
 
@@ -30,7 +31,7 @@ public class PackageSelectionPage extends AppCompatActivity {
     private void initializeViews() {
         startGameButton = findViewById(R.id.button_startGameLoop);
         cardViews = findViewById(R.id.package_cards);
-        selectedPackageName = "";
+        selectedPackageName = null;
     }
 
     @Override
@@ -56,32 +57,33 @@ public class PackageSelectionPage extends AppCompatActivity {
     }
 
     public void selectStandardPackage(View view){
-        selectedPackageName = "StandardPackage";
+        selectedPackageName = GamePackage.StandardPackage;
         startGameButton.setEnabled(true);
         resetAllColorsFromPackages();
         highLightSelectedPackage(0);
     }
 
     public void selectOnlinePackage(View view){
-        selectedPackageName = "OnlinePackage";
+        selectedPackageName = GamePackage.OnlinePackage;
         startGameButton.setEnabled(true);
         resetAllColorsFromPackages();
         highLightSelectedPackage(1);
     }
 
     public void selectActivityPackage(View view){
-        selectedPackageName = "ActivityPackage";
+        selectedPackageName = GamePackage.ActivityPackage;
         startGameButton.setEnabled(true);
         resetAllColorsFromPackages();
         highLightSelectedPackage(2);
     }
 
     public void selectHotPackage(View view){
-        selectedPackageName = "HotPackage";
+        selectedPackageName = GamePackage.HotPackage;
         startGameButton.setEnabled(true);
         resetAllColorsFromPackages();
         highLightSelectedPackage(3);
     }
+
 
     private void resetAllColorsFromPackages() {
         for(int i = 0; i < cardViews.getChildCount(); i++){
@@ -142,7 +144,7 @@ public class PackageSelectionPage extends AppCompatActivity {
         return;
     }
 
-    public static String getSelectedPackage(){
+    public static GamePackage getSelectedPackage(){
         return selectedPackageName;
     }
 }

@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import de.saufapparat.trinkspiel.GameConfigurationActivity;
 import de.saufapparat.trinkspiel.GroupSelectionPage;
 import de.saufapparat.trinkspiel.PackageSelectionPage;
 import de.saufapparat.trinkspiel.R;
@@ -33,6 +34,7 @@ public class GameLoopService extends Service {
     private ArrayList<Card> additionalCards;
     private ArrayList<String> players;
     private final IBinder mBinder = new MyBinder();
+    private static String spezialPlayer = null;
 
     private void toastThatCardDeckFinished(){
         Toast.makeText(this, getString(R.string.karten_gemischt), Toast.LENGTH_SHORT).show();
@@ -46,6 +48,7 @@ public class GameLoopService extends Service {
     }
 
     private void reloadPlayersAndCards(){
+        spezialPlayer = GameConfigurationActivity.getSelectedSpezialPlayer();
         fetchAllPlayers();
         fetchAllCards();
     }
@@ -64,8 +67,8 @@ public class GameLoopService extends Service {
 
     private void addAdditionalCards() {
         additionalCards = fetchCardsFromProperties();
-        shuffleInRandomOrder(additionalCards);
         fillCardsWithPlayers(additionalCards);
+        shuffleInRandomOrder(additionalCards);
         toastThatCardDeckFinished();
         cards.addAll(additionalCards);
     }
@@ -84,13 +87,16 @@ public class GameLoopService extends Service {
 
     private void fetchAllCards(){
         cards = fetchCardsFromProperties();
-        shuffleInRandomOrder(cards);
         fillCardsWithPlayers(cards);
+        shuffleInRandomOrder(cards);
         cardIndex = 0;
     }
 
     private ArrayList<Card> fetchCardsFromProperties() {
-        return GamePackageManager.getCardsFromProperties(this, PackageSelectionPage.getSelectedPackage(),getResources().getConfiguration().locale.getLanguage());
+        return GamePackageManager.getCardsFromProperties(
+                this,
+                PackageSelectionPage.getSelectedPackage().toString(),
+                getResources().getConfiguration().locale.getLanguage());
     }
 
     private void shuffleInRandomOrder(ArrayList<Card> list){
@@ -102,7 +108,11 @@ public class GameLoopService extends Service {
         ArrayList<String> temporaryPlayers = players;
         String removedPlayer = null;
 
-        for(int i = 0; i < cards.size(); i++){
+        int repeats = cards.size();
+        if (spezialPlayer!=null && spezialPlayer.equals("niemand1234321")){
+            this.cards = new ArrayList<>(cards.subList(0,repeats-7));
+        }
+        for(int i = 0; i < repeats; i++){
             String randomPlayer = temporaryPlayers.get(HelperUtil.getRandomNumber(0,temporaryPlayers.size()));
             temporaryPlayers.remove(randomPlayer);
             if(removedPlayer != null){
@@ -111,9 +121,11 @@ public class GameLoopService extends Service {
             removedPlayer = randomPlayer;
             String randomPlayer2 = temporaryPlayers.get(HelperUtil.getRandomNumber(0,temporaryPlayers.size()));
 
-            String TaskWithPlayerReplaced = temporaryCardDeck.get(i).getAufgabe().replace("$Sp1", randomPlayer);
-            TaskWithPlayerReplaced = TaskWithPlayerReplaced.replace("$Sp2", randomPlayer2);
-            temporaryCardDeck.get(i).setAufgabe(TaskWithPlayerReplaced);
+            String taskWithPlayerReplaced = temporaryCardDeck.get(i).getAufgabe()
+                    .replace("$Sp1", randomPlayer)
+                    .replace("$Sp2", randomPlayer2)
+                    .replace("$Spez", spezialPlayer);
+            temporaryCardDeck.get(i).setAufgabe(taskWithPlayerReplaced);
 
         }
         temporaryPlayers.add(removedPlayer);
