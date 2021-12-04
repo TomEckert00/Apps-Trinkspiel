@@ -40,4 +40,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     def billing_version = "4.0.0"
     implementation "com.android.billingclient:billing:$billing_version"
+    def volley_version = "1.2.0"
+    implementation "com.android.volley:volley:$volley_version"
 }

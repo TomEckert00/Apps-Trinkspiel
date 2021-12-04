@@ -403,7 +403,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:gravity="center"
-                        android:text="@string/hotPaket_price"
+                        android:text="frei"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold" />
