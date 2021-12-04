@@ -9,16 +9,24 @@
         android:roundIcon="@drawable/appicon_flo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trinkspiel">
-        <activity android:name="de.saufapparat.trinkspiel.activities.MainActivity" />
+        <activity
+            android:name="de.saufapparat.trinkspiel.activities.MainActivity"
+            android:screenOrientation="portrait"
+        />
         <activity android:name="de.saufapparat.trinkspiel.activities.GameLoop" />
-        <activity android:name="de.saufapparat.trinkspiel.activities.PackageSelectionPage" />
-        <activity android:name="de.saufapparat.trinkspiel.util.MoreInformationPage" />
-        <activity android:name="de.saufapparat.trinkspiel.activities.GameConfigurationActivity" />
+        <activity android:name="de.saufapparat.trinkspiel.activities.PackageSelectionPage"
+            android:screenOrientation="portrait"/>
+        <activity android:name="de.saufapparat.trinkspiel.util.MoreInformationPage"
+            android:screenOrientation="portrait"/>
+        <activity android:name="de.saufapparat.trinkspiel.activities.GameConfigurationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="de.saufapparat.trinkspiel.activities.GroupSelectionPage"
             android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
         />
-        <activity android:name="de.saufapparat.trinkspiel.activities.SplashScreenActivity">
+        <activity android:name="de.saufapparat.trinkspiel.activities.SplashScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,5 +1,6 @@
 package de.saufapparat.trinkspiel.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -162,10 +163,13 @@ public class GroupSelectionPage extends AppCompatActivity {
             }
             return false;
         }
-    };
+    }
 
     public void closeKeyBoard(View view){
-        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        InputMethodManager inputMethodManager = (InputMethodManager)  getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if(getCurrentFocus()!=null){
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
+
 }

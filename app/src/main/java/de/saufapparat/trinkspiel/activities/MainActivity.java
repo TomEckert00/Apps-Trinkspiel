@@ -4,20 +4,18 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.Locale;
 
-import de.saufapparat.trinkspiel.util.MoreInformationPage;
 import de.saufapparat.trinkspiel.R;
 import de.saufapparat.trinkspiel.util.HelperUtil;
+import de.saufapparat.trinkspiel.util.MoreInformationPage;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -75,8 +73,7 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = new Intent(this, MoreInformationPage.class);
         startActivity(intent);
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    
     public void changeLanguageToNextInOrder(View view){
         String language = getResources().getConfiguration().locale.getLanguage();
         if (language == "de"){

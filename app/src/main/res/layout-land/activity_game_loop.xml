@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="de.saufapparat.trinkspiel.activities.GameLoop">
+
+    <ImageView
+        android:id="@+id/button_backToPackages"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/alt_zuruckPfeil"
+        android:onClick="backToPackageSelectionPage"
+        android:src="@drawable/home2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/button_backToConfig"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/alt_zuruckPfeil"
+        android:onClick="backToConfigurations"
+        android:src="@drawable/settings2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/KategorieLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Kategorie"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/button_backToConfig"
+        app:layout_constraintStart_toEndOf="@+id/button_backToPackages"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/AufgabenTextView"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="36sp"
+        android:autoSizeMinTextSize="15sp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="Das ist eine Aufgabe. Die solltest du jetzt machen du Schlingel oder trink!Das ist eine Aufgabe. Die solltest du jetzt machen du Schlingel oder trink!Das ist eine Aufgabe. Die solltest du jetzt machen du Schlingel oder trink!Das ist eine Aufgabe. Die solltest du jetzt machen du Schlingel oder trink!"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/schluckName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/KategorieLabel" />
+
+    <TextView
+        android:id="@+id/schluckName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gameLoop_Schlucke"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/schluckCount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/schluckCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="0"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
