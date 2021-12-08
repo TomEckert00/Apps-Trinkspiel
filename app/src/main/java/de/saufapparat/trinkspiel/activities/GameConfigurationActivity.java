@@ -22,8 +22,10 @@ import de.saufapparat.trinkspiel.enmus.HotSpezialEnum;
 import de.saufapparat.trinkspiel.enmus.OnlineSpezialEnum;
 import de.saufapparat.trinkspiel.enmus.Trinkstaerke;
 import de.saufapparat.trinkspiel.util.GamePackageManager;
+import de.saufapparat.trinkspiel.util.HelperUtil;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Helper;
 
 public class GameConfigurationActivity extends AppCompatActivity {
 
@@ -83,7 +85,9 @@ public class GameConfigurationActivity extends AppCompatActivity {
         GamePackage selectedPackage = PackageSelectionPage.getSelectedPackage();
         switch (selectedPackage) {
             case StandardPackage:
-                ArrayList<String> list = new ArrayList<>(Arrays.asList(getString(R.string.spezial_standardpack_aus)));
+                ArrayList<String> list = new ArrayList<>(Arrays.asList(
+                        getString(R.string.spezial_standardpack_aus),
+                        getString(R.string.spezial_standardpack_zufall)));
                 list.addAll(GroupSelectionPage.getPlayerList());
                 spezial_textview.setText(getString(R.string.spezial_textview_standard));
                 return list;
@@ -107,6 +111,7 @@ public class GameConfigurationActivity extends AppCompatActivity {
             finish();
             return;
         }
+        fetchRandomPlayerForSpezialConfiguration();
     }
 
     public void backToPackageSelectionPage(View view){
@@ -143,6 +148,7 @@ public class GameConfigurationActivity extends AppCompatActivity {
             switch (PackageSelectionPage.getSelectedPackage()){
                 case StandardPackage:
                     selectedSpezialPlayer = parent.getSelectedItem().toString();
+                    fetchRandomPlayerForSpezialConfiguration();
                     break;
                 case ActivityPackage:
                     selectedSpezialActivity = ActivitySpezialEnum.valueOf(parent.getSelectedItem().toString());
@@ -158,6 +164,16 @@ public class GameConfigurationActivity extends AppCompatActivity {
                 case ActivityPackage:
                     selectedSpezialActivity = ActivitySpezialEnum.aus;
                     break;
+            }
+        }
+    }
+
+    private void fetchRandomPlayerForSpezialConfiguration() {
+        if(selectedSpezialPlayer!=null){
+            Spinner spinner = (Spinner) findViewById(R.id.spinner_spezial);
+            if (spinner.getSelectedItemPosition() == 1){
+                int randomNumber = HelperUtil.getRandomNumber(0, GroupSelectionPage.getPlayerList().size());
+                selectedSpezialPlayer = GroupSelectionPage.getPlayerList().get(randomNumber);
             }
         }
     }
