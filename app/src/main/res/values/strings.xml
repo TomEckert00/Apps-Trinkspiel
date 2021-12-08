@@ -59,8 +59,9 @@
     <string name="alt_zuruckPfeil">Zurück</string>
 
     <string name="spezial_standardpack_aus">aus</string>
+    <string name="spezial_standardpack_zufall">zufällig</string>
     <string name="spezial_textview_standard">Abfüllen</string>
-    <string name="spezial_textview_online">Abfüllen</string>
-    <string name="spezial_textview_activity">Abfüllen</string>
-    <string name="spezial_textview_hot">Abfüllen</string>
+    <string name="spezial_textview_online">Spezial</string>
+    <string name="spezial_textview_activity">Zufall</string>
+    <string name="spezial_textview_hot">Spezial</string>
 </resources>
