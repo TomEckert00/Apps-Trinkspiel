@@ -42,6 +42,8 @@
     <string name="hotPaket_price">3,99€</string>
     <string name="hotPaket_infoText">Für heiße Erlebnisse und viel Körperkontakt</string>
 
+    <string name="package_bought">gekauft</string>
+
     <string name="packageActivity_ComingSoon">Bald mehr...</string>
 
     <string name="karten_gemischt">Karten gemischt!</string>
