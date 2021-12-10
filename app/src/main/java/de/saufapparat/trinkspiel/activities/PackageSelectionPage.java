@@ -288,12 +288,14 @@ public class PackageSelectionPage extends AppCompatActivity {
         CardView card = (CardView) findViewById(view.getId());
         GamePackage selection = GamePackage.valueOf(card.getTag().toString());
         if (!availableCardViews.contains(card)) {
-            billingClient.launchBillingFlow(
-                    this,
-                    BillingFlowParams
-                            .newBuilder()
-                            .setSkuDetails(itemInfo)
-                            .build());
+            if(itemInfo!=null){
+                billingClient.launchBillingFlow(
+                        this,
+                        BillingFlowParams
+                                .newBuilder()
+                                .setSkuDetails(itemInfo)
+                                .build());
+            }
         } else {
             selectedPackageName = selection;
             startGameButton.setEnabled(true);

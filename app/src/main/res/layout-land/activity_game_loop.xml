@@ -16,7 +16,7 @@
         android:layout_marginTop="16dp"
         android:contentDescription="@string/alt_zuruckPfeil"
         android:onClick="backToPackageSelectionPage"
-        android:src="@drawable/home2"
+        android:src="@drawable/home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
