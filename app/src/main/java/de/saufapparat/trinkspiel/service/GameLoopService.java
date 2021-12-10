@@ -11,6 +11,7 @@ import java.util.Collections;
 
 import de.saufapparat.trinkspiel.activities.GameConfigurationActivity;
 import de.saufapparat.trinkspiel.activities.GroupSelectionPage;
+import de.saufapparat.trinkspiel.activities.MainActivity;
 import de.saufapparat.trinkspiel.activities.PackageSelectionPage;
 import de.saufapparat.trinkspiel.R;
 import de.saufapparat.trinkspiel.enmus.ActivitySpezialEnum;
@@ -29,6 +30,7 @@ public class GameLoopService extends Service {
     private ArrayList<Card> additionalCards;
     private ArrayList<String> players;
     private final IBinder mBinder = new MyBinder();
+    private String language;
 
     private void toastThatCardDeckFinished(){
         Toast.makeText(this, getString(R.string.karten_gemischt), Toast.LENGTH_SHORT).show();
@@ -37,18 +39,19 @@ public class GameLoopService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        reloadPlayersAndCards();
         cardIndex=0;
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        language = intent.getStringExtra("language");
+        reloadPlayersAndCards();
+        return super.onStartCommand(intent, flags, startId);
     }
 
     private void reloadPlayersAndCards(){
         fetchAllPlayers();
         fetchAllCards();
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
     }
 
     public void nextCard(){
@@ -89,7 +92,7 @@ public class GameLoopService extends Service {
         return GamePackageManager.getCardsFromProperties(
                 this,
                 PackageSelectionPage.getSelectedPackage().toString(),
-                getResources().getConfiguration().locale.getLanguage());
+                language);
     }
 
     private void shuffleInRandomOrder(ArrayList<Card> list){

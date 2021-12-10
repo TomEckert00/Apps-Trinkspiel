@@ -91,6 +91,8 @@ public class GameLoop extends AppCompatActivity {
 
     private void startGameService() {
         Intent serviceIntent = new Intent(this, GameLoopService.class);
+        String language = getResources().getConfiguration().locale.getLanguage();
+        serviceIntent.putExtra("language", language);
         startService(serviceIntent);
         bindService(serviceIntent, myConnection, Context.BIND_AUTO_CREATE);
     }
