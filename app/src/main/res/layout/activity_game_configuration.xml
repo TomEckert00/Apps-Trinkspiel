@@ -17,13 +17,13 @@
         tools:layout_editor_absoluteY="-43dp">
 
         <LinearLayout
-            android:layout_width="330dp"
-            android:layout_height="554dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
 
                 <TextView
                     android:id="@+id/textView_trink"
-                    android:layout_width="180dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="Trinkstärke"
                     android:textColor="@color/white"
@@ -46,7 +46,7 @@
 
                 <Spinner
                     android:id="@+id/spinner_trink"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:background="@color/flo3" />
             </LinearLayout>
@@ -60,7 +60,7 @@
 
                 <TextView
                     android:id="@+id/textView_art"
-                    android:layout_width="180dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="Getränketyp"
                     android:textColor="@color/white"
@@ -68,7 +68,7 @@
 
                 <Spinner
                     android:id="@+id/spinner_art"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:background="@color/flo3" />
             </LinearLayout>
@@ -82,7 +82,7 @@
 
                 <TextView
                     android:id="@+id/textView_spezial"
-                    android:layout_width="180dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="Ereignisse"
                     android:textColor="@color/white"
@@ -90,7 +90,7 @@
 
                 <Spinner
                     android:id="@+id/spinner_spezial"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:background="@color/flo3" />
 
@@ -107,7 +107,10 @@
             android:layout_marginTop="56dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
+            android:autoSizeMaxTextSize="56sp"
+            android:autoSizeMinTextSize="12sp"
             android:background="@color/backgroundColor"
+            android:maxLines="1"
             android:text="Einstellungen"
             android:textColor="@color/design_default_color_on_primary"
             android:textSize="56sp"

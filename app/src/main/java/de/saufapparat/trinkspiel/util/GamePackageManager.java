@@ -54,9 +54,9 @@ public class GamePackageManager{
 
     private static Card buildNewCard(Properties properties, int index){
         String aufgabe = fetchAufgabe(properties, index);
-        int schlucke = fetchSchlucke(properties, index);
+        int trinkeinheit = fetchTrinkeinheit(properties, index);
         Kategorie kategorie = fetchKategorie(properties, index);
-        return new Card(aufgabe, schlucke, kategorie);
+        return new Card(aufgabe, trinkeinheit, kategorie);
     }
 
     private static String fetchAufgabe(Properties properties, int index) {
@@ -64,7 +64,7 @@ public class GamePackageManager{
         return (result == null || result.isEmpty()) ? "Nothing to do" : result;
     }
 
-    private static int fetchSchlucke(Properties properties, int index) {
+    private static int fetchTrinkeinheit(Properties properties, int index) {
         String result;
         if (getraenkeTyp.equals(GetraenkeTyp.schlucke)){
             result = properties.getProperty("card." + index + ".schlucke");

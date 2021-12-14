@@ -182,6 +182,7 @@ public class PackageSelectionPage extends AppCompatActivity {
                     availableCardViews.add(hotCard);
                     hotCard.setCardBackgroundColor(getResources().getColor(R.color.flo1));
                     ((TextView) findViewById(R.id.hotPaket_price)).setText(getString(R.string.package_bought));
+                    hotPackageBought = true;
                     break;
                 default:
                     break;
@@ -192,7 +193,7 @@ public class PackageSelectionPage extends AppCompatActivity {
     private void fetchProductDetails(){
         List<String> productIds = new ArrayList<>();
         CardView card = (CardView) findViewById(R.id.hotPackage_card);
-        if(!availableCardViews.contains(card)){
+        if(!hotPackageBought){
             productIds.add("card_package_hot");
         }
         SkuDetailsParams getProductDetailsQuery = SkuDetailsParams
@@ -206,7 +207,7 @@ public class PackageSelectionPage extends AppCompatActivity {
                     @Override
                     public void onSkuDetailsResponse(@NonNull BillingResult billingResult, @Nullable List<SkuDetails> list) {
                         if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && list != null) {
-                            if (!availableCardViews.contains(R.id.hotPackage_card)){
+                            if (!hotPackageBought){
                                 TextView itemPrice = findViewById(R.id.hotPaket_price);
                                 itemInfo = list.get(0);
                                 itemPrice.setText(itemInfo.getPrice());

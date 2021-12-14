@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import de.saufapparat.trinkspiel.R;
-import de.saufapparat.trinkspiel.activities.GameConfigurationActivity;
 import de.saufapparat.trinkspiel.enmus.GamePackage;
 import de.saufapparat.trinkspiel.enmus.GetraenkeTyp;
 import de.saufapparat.trinkspiel.service.GameLoopService;
@@ -167,10 +166,10 @@ public class GameLoop extends AppCompatActivity {
 
     private void showSchlueckeIfPossible() {
         decideGetraenkeTyp();
-        textview_schluckCount.setText("" + aktuelleKarte.getSchlucke());
+        textview_schluckCount.setText("" + aktuelleKarte.getTrinkeinheit());
         textview_schluckCount.setVisibility(View.VISIBLE);
         textview_schluckName.setVisibility(View.VISIBLE);
-        if (aktuelleKarte.getSchlucke() == 0){
+        if (aktuelleKarte.getTrinkeinheit() == 0){
             textview_schluckCount.setVisibility(View.INVISIBLE);
             textview_schluckName.setVisibility(View.INVISIBLE);
         }
