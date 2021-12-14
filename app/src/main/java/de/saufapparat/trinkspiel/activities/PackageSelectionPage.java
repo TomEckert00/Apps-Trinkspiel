@@ -37,6 +37,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -181,7 +182,8 @@ public class PackageSelectionPage extends AppCompatActivity {
                     CardView hotCard = (CardView) cardViews.getChildAt(3);
                     availableCardViews.add(hotCard);
                     hotCard.setCardBackgroundColor(getResources().getColor(R.color.flo1));
-                    ((TextView) findViewById(R.id.hotPaket_price)).setText(getString(R.string.package_bought));
+                    ((TextView) findViewById(R.id.hotPaket_price)).setText("");
+                    findViewById(R.id.hotPaket_price).setBackground(getResources().getDrawable(R.drawable.checklist));
                     hotPackageBought = true;
                     break;
                 default:
