@@ -127,7 +127,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:gravity="center"
-                        android:text="@string/standardPaket_price"
+                        android:background="@drawable/checklist"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -220,7 +220,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:gravity="center"
-                        android:text="@string/onlinePaket_price"
+                        android:background="@drawable/checklist"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -314,7 +314,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:gravity="center"
-                        android:text="@string/activityPaket_price"
+                        android:background="@drawable/checklist"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold" />
