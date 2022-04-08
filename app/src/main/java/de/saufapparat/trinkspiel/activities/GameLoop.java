@@ -1,5 +1,6 @@
 package de.saufapparat.trinkspiel.activities;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -92,8 +93,21 @@ public class GameLoop extends AppCompatActivity {
         Intent serviceIntent = new Intent(this, GameLoopService.class);
         String language = getResources().getConfiguration().locale.getLanguage();
         serviceIntent.putExtra("language", language);
-        startService(serviceIntent);
+        if(!isForeGroundServiceRunning()){
+            startForegroundService(serviceIntent);
+        }
+
         bindService(serviceIntent, myConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    public boolean isForeGroundServiceRunning(){
+        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for(ActivityManager.RunningServiceInfo service : am.getRunningServices(Integer.MAX_VALUE)){
+            if(GameLoopService.class.getName().equals(service.service.getClassName())){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void initializeViews() {

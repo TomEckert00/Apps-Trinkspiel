@@ -1,10 +1,16 @@
 package de.saufapparat.trinkspiel.service;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Build;
 import android.os.IBinder;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,8 +48,26 @@ public class GameLoopService extends Service {
         cardIndex=0;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        final String CHANNELID = "Foreground Service ID";
+        NotificationChannel channel = new NotificationChannel(
+                CHANNELID,
+                CHANNELID,
+                NotificationManager.IMPORTANCE_LOW
+        );
+
+        getSystemService(NotificationManager.class).createNotificationChannel(channel);
+        Notification.Builder notification = new Notification.Builder(this, CHANNELID)
+                .setContentText("Service is running")
+                .setContentTitle("Service enabled")
+                .setSmallIcon(R.drawable.ic_launcher_background);
+
+        startForeground(1001, notification.build());
+
+
         language = intent.getStringExtra("language");
         reloadPlayersAndCards();
         return super.onStartCommand(intent, flags, startId);
