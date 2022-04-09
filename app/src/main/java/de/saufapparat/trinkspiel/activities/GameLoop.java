@@ -16,6 +16,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import java.util.ArrayList;
+
 import de.saufapparat.trinkspiel.R;
 import de.saufapparat.trinkspiel.enmus.GamePackage;
 import de.saufapparat.trinkspiel.enmus.GetraenkeTyp;
@@ -23,6 +25,7 @@ import de.saufapparat.trinkspiel.service.GameLoopService;
 import de.saufapparat.trinkspiel.model.Card;
 import de.saufapparat.trinkspiel.util.HelperUtil;
 import de.saufapparat.trinkspiel.model.Kategorie;
+import de.saufapparat.trinkspiel.util.TinyDB;
 import lombok.Setter;
 
 public class GameLoop extends AppCompatActivity {
@@ -35,6 +38,7 @@ public class GameLoop extends AppCompatActivity {
     private TextView textview_kategorieLabel;
     private GameLoopService gameLoopService;
     private Card aktuelleKarte;
+    public boolean isQuickPlay = false;
 
     private MediaPlayer mediaPlayer_hupe;
 
@@ -80,6 +84,16 @@ public class GameLoop extends AppCompatActivity {
         public void onServiceConnected(ComponentName className, IBinder binder) {
             gameLoopService = ((GameLoopService.MyBinder) binder).getService();
             gameLoopServiceBound = true;
+            if("true".equals(getIntent().getStringExtra("quickplay"))) {
+                TinyDB tinyDB = new TinyDB(getApplicationContext());
+                gameLoopService.setCardIndex(tinyDB.getInt("cardindex"));
+                ArrayList<Object> lis = tinyDB.getListObject("cards", Card.class);
+                ArrayList<Card> newcards = new ArrayList<>();
+                for (Object o : lis) {
+                    newcards.add((Card) o);
+                }
+                gameLoopService.setCards(newcards);
+            }
             showCard();
         }
 

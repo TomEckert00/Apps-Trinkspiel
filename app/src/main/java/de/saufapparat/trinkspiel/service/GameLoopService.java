@@ -171,7 +171,6 @@ public class GameLoopService extends Service {
 
     @Override
     public IBinder onBind(Intent arg0) {
-        Toast.makeText(this, "OnBind", Toast.LENGTH_SHORT).show();
         return mBinder;
     }
 
