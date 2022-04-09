@@ -23,6 +23,7 @@ import de.saufapparat.trinkspiel.enmus.OnlineSpezialEnum;
 import de.saufapparat.trinkspiel.enmus.Trinkstaerke;
 import de.saufapparat.trinkspiel.util.GamePackageManager;
 import de.saufapparat.trinkspiel.util.HelperUtil;
+import de.saufapparat.trinkspiel.util.TinyDB;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Helper;
@@ -55,6 +56,10 @@ public class GameConfigurationActivity extends AppCompatActivity {
     }
 
     public void startGameWithSelectedPackage(View view) {
+        TinyDB tinyDB = new TinyDB(getApplicationContext());
+        tinyDB.putObject("trinkstaerke", selectedTrinkstaerke);
+        tinyDB.putObject("getraenketyp", selectedGetraenkeTyp);
+
         Intent intent = new Intent(this, GameLoop.class);
         GamePackageManager.setTrinkstaerke(selectedTrinkstaerke);
         GamePackageManager.setGetraenkeTyp(selectedGetraenkeTyp);

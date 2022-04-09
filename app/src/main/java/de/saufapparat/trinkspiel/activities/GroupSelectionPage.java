@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import de.saufapparat.trinkspiel.R;
 import de.saufapparat.trinkspiel.util.HelperUtil;
+import de.saufapparat.trinkspiel.util.TinyDB;
 
 public class GroupSelectionPage extends AppCompatActivity {
 
@@ -89,8 +90,14 @@ public class GroupSelectionPage extends AppCompatActivity {
     }
 
     private void openNextIntent() {
+        savePlayersToPreferences();
         Intent intent = new Intent(this, PackageSelectionPage.class);
         startActivity(intent);
+    }
+
+    private void savePlayersToPreferences() {
+        TinyDB tinyDB = new TinyDB(getApplicationContext());
+        tinyDB.putListString("spielerListe", playerList);
     }
 
     public void addNewPlayerInput(View v){

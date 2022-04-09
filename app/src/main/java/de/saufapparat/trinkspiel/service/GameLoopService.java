@@ -4,10 +4,12 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import de.saufapparat.trinkspiel.activities.GameConfigurationActivity;
 import de.saufapparat.trinkspiel.activities.GroupSelectionPage;
@@ -18,6 +20,7 @@ import de.saufapparat.trinkspiel.enmus.ActivitySpezialEnum;
 import de.saufapparat.trinkspiel.model.Card;
 import de.saufapparat.trinkspiel.util.GamePackageManager;
 import de.saufapparat.trinkspiel.util.HelperUtil;
+import de.saufapparat.trinkspiel.util.TinyDB;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +34,7 @@ public class GameLoopService extends Service {
     private ArrayList<String> players;
     private final IBinder mBinder = new MyBinder();
     private String language;
+    TinyDB tinyDB;
 
     private void toastThatCardDeckFinished(){
         Toast.makeText(this, getString(R.string.karten_gemischt), Toast.LENGTH_SHORT).show();
@@ -40,6 +44,7 @@ public class GameLoopService extends Service {
     public void onCreate() {
         super.onCreate();
         cardIndex=0;
+        tinyDB = new TinyDB(getApplicationContext());
     }
 
     @Override
@@ -55,10 +60,15 @@ public class GameLoopService extends Service {
     }
 
     public void nextCard(){
-        cardIndex++;
+        updateCardIndex(1);
         if(cardIndex>=cards.size()){
             addAdditionalCards();
         }
+    }
+
+    private void updateCardIndex(int i) {
+        cardIndex += i;
+        tinyDB.putInt("cardIndex", cardIndex);
     }
 
     private void addAdditionalCards() {
@@ -70,7 +80,7 @@ public class GameLoopService extends Service {
     }
 
     public void previousCard(){
-        cardIndex--;
+        updateCardIndex(-1);
         if (cardIndex<0){
             cardIndex=0;
             Toast.makeText(this, "Keine vorherige Karte!", Toast.LENGTH_SHORT).show();
@@ -82,10 +92,26 @@ public class GameLoopService extends Service {
     }
 
     private void fetchAllCards(){
-        cards = fetchCardsFromProperties();
-        fillCardsWithPlayers(cards);
-        shuffleInRandomOrder(cards);
-        cardIndex = 0;
+        if(cards.size() == 0){
+            cards = fetchCardsFromProperties();
+            fillCardsWithPlayers(cards);
+            shuffleInRandomOrder(cards);
+            ArrayList<Object> cardsToSave = new ArrayList<>();
+            for(Card card : cards){
+                cardsToSave.add((Object) card);
+            }
+
+            tinyDB.putListObject("cards", cardsToSave);
+            cardIndex = 0;
+        }
+        else{
+            ArrayList<Object> lis = tinyDB.getListObject("cards", Card.class);
+            ArrayList<Card> newcards = new ArrayList<>();
+            for(Object o : lis){
+                newcards.add((Card) o);
+            }
+            cards = newcards;
+        }
     }
 
     private ArrayList<Card> fetchCardsFromProperties() {
@@ -137,11 +163,15 @@ public class GameLoopService extends Service {
     }
 
     public Card fetchCurrentCard(){
+        if(cards == null || cards.size() == 0){
+            reloadPlayersAndCards();
+        }
         return cards.get(cardIndex);
     }
 
     @Override
     public IBinder onBind(Intent arg0) {
+        Toast.makeText(this, "OnBind", Toast.LENGTH_SHORT).show();
         return mBinder;
     }
 

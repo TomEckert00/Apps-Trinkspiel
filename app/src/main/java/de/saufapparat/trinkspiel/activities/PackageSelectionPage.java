@@ -46,6 +46,7 @@ import de.saufapparat.trinkspiel.R;
 import de.saufapparat.trinkspiel.enmus.GamePackage;
 import de.saufapparat.trinkspiel.util.HelperUtil;
 import de.saufapparat.trinkspiel.util.PackageInformationDialog;
+import de.saufapparat.trinkspiel.util.TinyDB;
 
 public class PackageSelectionPage extends AppCompatActivity {
 
@@ -283,6 +284,8 @@ public class PackageSelectionPage extends AppCompatActivity {
 
     //onclick von startGameButton
     public void startGameButton(View view){
+        TinyDB tinyDB = new TinyDB(getApplicationContext());
+        tinyDB.putObject("selectedPackage", selectedPackageName);
         Intent intent = new Intent(this, GameConfigurationActivity.class);
         startActivity(intent);
     }
