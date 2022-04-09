@@ -6,22 +6,31 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import de.saufapparat.trinkspiel.R;
+import de.saufapparat.trinkspiel.enmus.GamePackage;
+import de.saufapparat.trinkspiel.enmus.GetraenkeTyp;
+import de.saufapparat.trinkspiel.enmus.Trinkstaerke;
+import de.saufapparat.trinkspiel.model.Card;
 import de.saufapparat.trinkspiel.util.HelperUtil;
 import de.saufapparat.trinkspiel.util.MoreInformationPage;
+import de.saufapparat.trinkspiel.util.TinyDB;
 
 public class MainActivity extends AppCompatActivity{
 
     private ConstraintLayout mainView;
     private ConstraintLayout disclaimerView;
     private ImageView languageButton;
+    private Button quickPlayButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +52,9 @@ public class MainActivity extends AppCompatActivity{
         languageButton = findViewById(R.id.languageImageView);
         disclaimerView = findViewById(R.id.disclaimerView);
         mainView = findViewById(R.id.mainView);
+        quickPlayButton = findViewById(R.id.quickplay);
         setImageButtonViewToLanguage(getResources().getConfiguration().locale.getLanguage());
+        showQuickPlayIfPossible();
     }
 
     private void checkDisclaimer(){
@@ -61,6 +72,32 @@ public class MainActivity extends AppCompatActivity{
     public void openGroupSelectionPage(View view){
         Intent intent = new Intent(this, GroupSelectionPage.class);
         startActivity(intent);
+    }
+
+    public void quickPlay(View view){
+        Intent intent = new Intent(this, GroupSelectionPage.class);
+        intent.putExtra("quickplay", "true");
+        startActivity(intent);
+    }
+
+    private void showQuickPlayIfPossible() {
+        TinyDB tinyDB = new TinyDB(getApplicationContext());
+        ArrayList<String> spieler = tinyDB.getListString("spielerListe");
+        GamePackage selectedPackage = tinyDB.getObject("selectedPackage", GamePackage.class);
+        Trinkstaerke trinkstaerke = tinyDB.getObject("trinkstaerke", Trinkstaerke.class);
+        GetraenkeTyp getraenkeTyp = tinyDB.getObject("getraenketyp", GetraenkeTyp.class);
+        int cardindex = tinyDB.getInt("cardindex");
+        ArrayList<Object> lis = tinyDB.getListObject("cards", Card.class);
+        ArrayList<Card> newcards = new ArrayList<>();
+        for(Object o : lis){
+            newcards.add((Card) o);
+        }
+        ArrayList<Card> cards = newcards;
+        if(spieler!=null && selectedPackage!=null && trinkstaerke!= null&&getraenkeTyp!=null&&cards.size()!=0){
+            quickPlayButton.setEnabled(true);
+        }else {
+            quickPlayButton.setEnabled(false);
+        }
     }
 
     public void openInstagram(View view){

@@ -38,6 +38,13 @@ public class GroupSelectionPage extends AppCompatActivity {
         setContentView(R.layout.activity_group_selection_page);
 
         initializeViews();
+
+        if("true".equals(getIntent().getStringExtra("quickplay"))){
+            Intent intent = new Intent(this, PackageSelectionPage.class);
+            playerList  = new TinyDB(getApplicationContext()).getListString("spielerListe");
+            intent.putExtra("quickplay", "true");
+            startActivity(intent);
+        }
     }
 
     @Override

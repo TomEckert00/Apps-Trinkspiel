@@ -66,6 +66,13 @@ public class PackageSelectionPage extends AppCompatActivity {
         setContentView(R.layout.activity_package_selection_page);
         initializeViews();
 
+        if("true".equals(getIntent().getStringExtra("quickplay"))){
+            selectedPackageName = new TinyDB(getApplicationContext()).getObject("selectedPackage", GamePackage.class);
+            Intent intent = new Intent(this, GameConfigurationActivity.class);
+            intent.putExtra("quickplay","true");
+            startActivity(intent);
+        }
+
         billingClient = BillingClient.newBuilder(this)
                 .enablePendingPurchases()
                 .setListener(new PurchasesUpdatedListener() {

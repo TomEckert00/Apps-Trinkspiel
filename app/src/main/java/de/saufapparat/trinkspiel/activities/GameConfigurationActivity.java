@@ -53,6 +53,18 @@ public class GameConfigurationActivity extends AppCompatActivity {
         initializeViews();
         selectedSpezialPlayer=null;
         selectedSpezialActivity=null;
+        if("true".equals(getIntent().getStringExtra("quickplay"))){
+            TinyDB tinyDB = new TinyDB(getApplicationContext());
+            Trinkstaerke trinkstaerke = tinyDB.getObject("trinkstaerke", Trinkstaerke.class);
+            GetraenkeTyp getraenkeTyp = tinyDB.getObject("getraenketyp", GetraenkeTyp.class);
+
+            Intent intent = new Intent(this, GameLoop.class);
+            intent.putExtra("quickplay", "true");
+            GamePackageManager.setTrinkstaerke(trinkstaerke);
+            GamePackageManager.setGetraenkeTyp(getraenkeTyp);
+            GameLoop.setGetraenkeTyp(getraenkeTyp);
+            startActivity(intent);
+        }
     }
 
     public void startGameWithSelectedPackage(View view) {
