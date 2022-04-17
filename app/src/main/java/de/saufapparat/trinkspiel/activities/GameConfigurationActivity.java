@@ -19,14 +19,12 @@ import de.saufapparat.trinkspiel.enmus.ActivitySpezialEnum;
 import de.saufapparat.trinkspiel.enmus.GamePackage;
 import de.saufapparat.trinkspiel.enmus.GetraenkeTyp;
 import de.saufapparat.trinkspiel.enmus.HotSpezialEnum;
-import de.saufapparat.trinkspiel.enmus.OnlineSpezialEnum;
 import de.saufapparat.trinkspiel.enmus.Trinkstaerke;
 import de.saufapparat.trinkspiel.util.GamePackageManager;
 import de.saufapparat.trinkspiel.util.HelperUtil;
 import de.saufapparat.trinkspiel.util.TinyDB;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Helper;
 
 public class GameConfigurationActivity extends AppCompatActivity {
 
@@ -42,6 +40,8 @@ public class GameConfigurationActivity extends AppCompatActivity {
     private static String selectedSpezialPlayer;
     @Getter
     private static ActivitySpezialEnum selectedSpezialActivity;
+    @Getter
+    private static HotSpezialEnum selectedSpezialHot;
 
     @Setter
     private static boolean configsSet = false;
@@ -102,15 +102,11 @@ public class GameConfigurationActivity extends AppCompatActivity {
         GamePackage selectedPackage = PackageSelectionPage.getSelectedPackage();
         switch (selectedPackage) {
             case StandardPackage:
-                ArrayList<String> list = new ArrayList<>(Arrays.asList(
-                        getString(R.string.spezial_standardpack_aus),
-                        getString(R.string.spezial_standardpack_zufall)));
-                list.addAll(GroupSelectionPage.getPlayerList());
                 spezial_textview.setText(getString(R.string.spezial_textview_standard));
-                return list;
+                return getListWithPlayersAndStandardOptions();
             case OnlinePackage:
                 spezial_textview.setText(getString(R.string.spezial_textview_online));
-                return Arrays.asList(OnlineSpezialEnum.values());
+                return getListWithPlayersAndStandardOptions();
             case ActivityPackage:
                 spezial_textview.setText(getString(R.string.spezial_textview_activity));
                 return Arrays.asList(ActivitySpezialEnum.values());
@@ -120,6 +116,15 @@ public class GameConfigurationActivity extends AppCompatActivity {
         }
         return new ArrayList();
     }
+
+    private ArrayList<String> getListWithPlayersAndStandardOptions() {
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(
+                getString(R.string.spezial_standardpack_aus),
+                getString(R.string.spezial_standardpack_zufall)));
+        list.addAll(GroupSelectionPage.getPlayerList());
+        return list;
+    }
+
 
     @Override
     protected void onResume() {
@@ -164,11 +169,15 @@ public class GameConfigurationActivity extends AppCompatActivity {
 
             switch (PackageSelectionPage.getSelectedPackage()){
                 case StandardPackage:
+                case OnlinePackage:
                     selectedSpezialPlayer = parent.getSelectedItem().toString();
                     fetchRandomPlayerForSpezialConfiguration();
                     break;
                 case ActivityPackage:
                     selectedSpezialActivity = ActivitySpezialEnum.valueOf(parent.getSelectedItem().toString());
+                    break;
+                case HotPackage:
+                    selectedSpezialHot = HotSpezialEnum.valueOf(parent.getSelectedItem().toString());
                     break;
             }
         }
@@ -176,10 +185,14 @@ public class GameConfigurationActivity extends AppCompatActivity {
         public void onNothingSelected(AdapterView<?> parent) {
             switch (PackageSelectionPage.getSelectedPackage()) {
                 case StandardPackage:
+                case OnlinePackage:
                     selectedSpezialPlayer = "aus";
                     break;
                 case ActivityPackage:
                     selectedSpezialActivity = ActivitySpezialEnum.aus;
+                    break;
+                case HotPackage:
+                    selectedSpezialHot = HotSpezialEnum.sicher;
                     break;
             }
         }

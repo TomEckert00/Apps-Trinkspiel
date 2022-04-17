@@ -61,7 +61,7 @@
     <string name="spezial_standardpack_aus">aus</string>
     <string name="spezial_standardpack_zufall">zufällig</string>
     <string name="spezial_textview_standard">Abfüllen</string>
-    <string name="spezial_textview_online">Spezial</string>
-    <string name="spezial_textview_activity">Zufall</string>
-    <string name="spezial_textview_hot">Spezial</string>
+    <string name="spezial_textview_online">Schauspieler</string>
+    <string name="spezial_textview_activity">Zufälle</string>
+    <string name="spezial_textview_hot">Super Hot</string>
 </resources>

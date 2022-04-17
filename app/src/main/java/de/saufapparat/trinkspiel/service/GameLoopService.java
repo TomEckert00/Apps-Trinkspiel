@@ -132,13 +132,22 @@ public class GameLoopService extends Service {
 
         int repeats = cards.size();
         if (GameConfigurationActivity.getSelectedSpezialPlayer() != null
-                &&  GameConfigurationActivity.getSelectedSpezialPlayer().equals("aus")){
+                &&  GameConfigurationActivity.getSelectedSpezialPlayer().equals(R.string.spezial_standardpack_aus)){
             this.cards = new ArrayList<>(cards.subList(0,repeats-7));
         }
+
         if (GameConfigurationActivity.getSelectedSpezialActivity() != null
                 && GameConfigurationActivity.getSelectedSpezialActivity().equals(ActivitySpezialEnum.aus)){
             this.cards = new ArrayList<>(cards.subList(0,repeats-7));
         }
+
+        if (GameConfigurationActivity.getSelectedSpezialHot() != null
+                && GameConfigurationActivity.getSelectedSpezialHot().equals(R.string.spezial_standardpack_aus)){
+            this.cards = new ArrayList<>(cards.subList(0,repeats-7));
+        }
+
+        Toast.makeText(getApplicationContext(),this.cards.size() + " so lang",Toast.LENGTH_LONG).show();
+
         for(int i = 0; i < repeats; i++){
             String randomPlayer = temporaryPlayers.get(HelperUtil.getRandomNumber(0,temporaryPlayers.size()));
             temporaryPlayers.remove(randomPlayer);
@@ -159,7 +168,7 @@ public class GameLoopService extends Service {
 
         }
         temporaryPlayers.add(removedPlayer);
-        cards = temporaryCardDeck;
+        this.cards = temporaryCardDeck;
     }
 
     public Card fetchCurrentCard(){
