@@ -216,6 +216,10 @@ public class GameLoop extends AppCompatActivity {
                 mainLayout.setBackgroundColor(Color.RED);
                 setViewColors(Color.BLACK);
                 break;
+            case "Hellrot":
+                mainLayout.setBackgroundColor(getResources().getColor(R.color.hellrot));
+                setViewColors(Color.BLACK);
+                break;
             case "Blau":
                 mainLayout.setBackgroundColor(Color.BLUE);
                 setViewColors(Color.WHITE);
