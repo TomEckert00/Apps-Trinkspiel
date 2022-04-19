@@ -7,6 +7,9 @@
 
     <string name="mainActivity_logo">Saufapparat</string>
     <string name="mainActivity_playbutton">Play</string>
+    <string name="quickplay">Quick play</string>
+
+    <string name="Informationen">Information</string>
 
     <string name="moreInformationActivity_previousButton">Back</string>
 
@@ -22,6 +25,10 @@
     <string name="packageActivity_previousButton">Back</string>
     <string name="packageActivity_startButton">Start</string>
 
+    <string name="SpielEinstellungen">Options</string>
+    <string name="Trinkstärke">Thirstlevel</string>
+    <string name="Getränketyp">Drink type</string>
+
     <string name="standardPaket_label">Standard</string>
     <string name="standardPaket_sub">For the perfect party</string>
     <string name="standardPaket_price">Free</string>
@@ -32,20 +39,23 @@
     <string name="onlinePaket_price">Free</string>
     <string name="onlinePaket_infoText">Even if you can\'t meet in person sometimes, the tasks provide a lot of fun, cohesion and new challenges.</string>
 
+    <string name="package_bought">bought</string>
+
     <string name="activityPaket_label">Active</string>
     <string name="activityPaket_sub">With a lot of movement and perfect for outdoors</string>
     <string name="activityPaket_price">Free</string>
     <string name="activityPaket_infoText">Perfect for a cool evening outdoors or for the necessary momentum at a party. Lots of fun tasks to add a little movement to your game or make sure no one falls asleep.</string>
 
-    <string name="hotPaket_label"></string>
-    <string name="hotPaket_sub"></string>
+    <string name="hotPaket_label">Hot 18+</string>
+    <string name="hotPaket_sub">Not for the faint hearted</string>
     <string name="hotPaket_price">3,99€</string>
-    <string name="hotPaket_infoText"></string>
+    <string name="hotPaket_infoText">For hot experiences and lots of body contact</string>
 
     <string name="packageActivity_ComingSoon">Coming soon...</string>
 
     <string name="karten_gemischt">Cards shuffled!</string>
     <string name="gameLoop_Schlucke">Gulps</string>
+    <string name="gameLoop_Shots">Shots</string>
 
     <string name="alt_instagram">Instagram Link</string>
     <string name="alt_language">Change Language</string>
@@ -54,4 +64,11 @@
     <string name="alt_Turnschuh">Sneaker</string>
     <string name="alt_infoicon">Information</string>
     <string name="alt_zuruckPfeil">Back</string>
+
+    <string name="spezial_standardpack_aus">off</string>
+    <string name="spezial_standardpack_zufall">random</string>
+    <string name="spezial_textview_standard">target</string>
+    <string name="spezial_textview_online">Actor</string>
+    <string name="spezial_textview_activity">Coincidences</string>
+    <string name="spezial_textview_hot">Super Hot</string>
 </resources>

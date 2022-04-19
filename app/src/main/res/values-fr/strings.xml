@@ -7,6 +7,9 @@
 
     <string name="mainActivity_logo">Saufapparat</string>
     <string name="mainActivity_playbutton">Jouer</string>
+    <string name="quickplay">jeu rapide</string>
+
+    <string name="Informationen">Informations</string>
 
     <string name="moreInformationActivity_previousButton">Retour</string>
 
@@ -22,6 +25,10 @@
     <string name="packageActivity_previousButton">Retour</string>
     <string name="packageActivity_startButton">Jouer</string>
 
+    <string name="SpielEinstellungen">Options</string>
+    <string name="Trinkstärke">Niveau de dureté</string>
+    <string name="Getränketyp">Type de boisson</string>
+
     <string name="standardPaket_label">Standard</string>
     <string name="standardPaket_sub">Pour une fête parfaite</string>
     <string name="standardPaket_price">Libre</string>
@@ -32,20 +39,23 @@
     <string name="onlinePaket_price">Libre</string>
     <string name="onlinePaket_infoText">Même si vous ne pouvez parfois pas vous rencontrer en personne, les tâches offrent beaucoup de plaisir, de cohésion et de nouveaux défis.</string>
 
+    <string name="package_bought">acheté</string>
+
     <string name="activityPaket_label">Actif</string>
     <string name="activityPaket_sub">Avec beaucoup de mouvement et parfait pour l\'extérieur</string>
     <string name="activityPaket_price">Libre</string>
     <string name="activityPaket_infoText">Parfait pour une soirée cool ou pour ajouter du piquant à une fête. De nombreuses tâches amusantes pour ajouter un peu de mouvement à votre jeu ou faire en sorte que personne ne s\'endorme.</string>
 
-    <string name="hotPaket_label"></string>
-    <string name="hotPaket_sub"></string>
+    <string name="hotPaket_label">chaud 18+</string>
+    <string name="hotPaket_sub">Pas pour les nerfs fragiles</string>
     <string name="hotPaket_price">3,99€</string>
-    <string name="hotPaket_infoText"></string>
+    <string name="hotPaket_infoText">Pour des expériences torrides et beaucoup de contacts physiques</string>
 
     <string name="packageActivity_ComingSoon">bientôt plus...</string>
 
     <string name="karten_gemischt">Cartes mélangées!</string>
     <string name="gameLoop_Schlucke">Avalez</string>
+    <string name="gameLoop_Shots">Shots</string>
 
     <string name="alt_instagram">Lien Instagram</string>
     <string name="alt_language">Changement de langue</string>
@@ -54,4 +64,11 @@
     <string name="alt_Turnschuh">Sneaker</string>
     <string name="alt_infoicon">Bouton d\'information</string>
     <string name="alt_zuruckPfeil">Retour</string>
+
+    <string name="spezial_standardpack_aus">désactivé</string>
+    <string name="spezial_standardpack_zufall">aléatoire</string>
+    <string name="spezial_textview_standard">objectif</string>
+    <string name="spezial_textview_online">acteur</string>
+    <string name="spezial_textview_activity">acteur</string>
+    <string name="spezial_textview_hot">Super chaud</string>
 </resources>

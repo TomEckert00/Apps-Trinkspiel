@@ -40,7 +40,7 @@
                     android:id="@+id/textView_trink"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:text="Trinkstärke"
+                    android:text="@string/Trinkstärke"
                     android:textColor="@color/white"
                     android:textSize="25sp" />
 
@@ -62,7 +62,7 @@
                     android:id="@+id/textView_art"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:text="Getränketyp"
+                    android:text="@string/Getränketyp"
                     android:textColor="@color/white"
                     android:textSize="25sp" />
 
@@ -84,7 +84,7 @@
                     android:id="@+id/textView_spezial"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:text="Ereignisse"
+                    android:text="@android:string/yes"
                     android:textColor="@color/white"
                     android:textSize="25sp" />
 
@@ -111,7 +111,7 @@
             android:autoSizeMinTextSize="12sp"
             android:background="@color/backgroundColor"
             android:maxLines="1"
-            android:text="Einstellungen"
+            android:text="@string/SpielEinstellungen"
             android:textColor="@color/design_default_color_on_primary"
             android:textSize="56sp"
             app:layout_constraintEnd_toEndOf="parent"

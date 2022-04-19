@@ -50,7 +50,7 @@
             android:layout_marginTop="60dp"
             android:enabled="false"
             android:onClick="quickPlay"
-            android:text="Schnellspiel"
+            android:text="@string/quickplay"
             android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@+id/infoImageButton"
             app:layout_constraintEnd_toEndOf="parent"

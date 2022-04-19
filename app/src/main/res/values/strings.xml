@@ -7,7 +7,9 @@
 
     <string name="mainActivity_logo">Saufapparat</string>
     <string name="mainActivity_playbutton">Spielen</string>
+    <string name="quickplay">Schnellspiel</string>
 
+    <string name="Informationen">Informationen</string>
     <string name="moreInformationActivity_previousButton">Zurück</string>
 
     <string name="groupActivity_header">Spielerwahl</string>
@@ -21,6 +23,10 @@
     <string name="packageActivity_header">Paketwahl</string>
     <string name="packageActivity_previousButton">Zurück</string>
     <string name="packageActivity_startButton">Spielen</string>
+
+    <string name="SpielEinstellungen">Einstellungen</string>
+    <string name="Trinkstärke">Trinkstärke</string>
+    <string name="Getränketyp">Getränketyp</string>
 
     <string name="standardPaket_label">Standard</string>
     <string name="standardPaket_sub">Für die perfekte Party</string>
