@@ -54,6 +54,11 @@
     <string name="packageActivity_ComingSoon">Coming soon...</string>
 
     <string name="karten_gemischt">Cards shuffled!</string>
+    <string name="mul_entspannt">relaxed</string>
+    <string name="mul_normal">normal</string>
+    <string name="mul_stark">strong</string>
+    <string name="mul_extrem">extreme</string>
+    <string name="mul_hardcore">hardcore</string>
     <string name="gameLoop_Schlucke">Gulps</string>
     <string name="gameLoop_Shots">Shots</string>
 

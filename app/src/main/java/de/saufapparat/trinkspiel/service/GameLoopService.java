@@ -2,6 +2,8 @@ package de.saufapparat.trinkspiel.service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Binder;
 import android.os.IBinder;
 import android.widget.ArrayAdapter;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import de.saufapparat.trinkspiel.activities.GameConfigurationActivity;
 import de.saufapparat.trinkspiel.activities.GroupSelectionPage;
@@ -51,6 +54,7 @@ public class GameLoopService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         language = intent.getStringExtra("language");
         reloadPlayersAndCards();
+        UpdateConfiguration(language);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -73,7 +77,7 @@ public class GameLoopService extends Service {
 
     private void addAdditionalCards() {
         additionalCards = fetchCardsFromProperties();
-        fillCardsWithPlayers(additionalCards);
+        additionalCards = fillCardsWithPlayers(additionalCards);
         shuffleInRandomOrder(additionalCards);
         toastThatCardDeckFinished();
         cards.addAll(additionalCards);
@@ -100,8 +104,8 @@ public class GameLoopService extends Service {
             for(Card card : cards){
                 cardsToSave.add((Object) card);
             }
-
             tinyDB.putListObject("cards", cardsToSave);
+            tinyDB.putString("savedLanguage", language);
             cardIndex = 0;
         }
         else{
@@ -125,30 +129,30 @@ public class GameLoopService extends Service {
         Collections.shuffle(list);
     }
 
-    private void fillCardsWithPlayers(ArrayList<Card> cards){
+    private ArrayList<Card> fillCardsWithPlayers(ArrayList<Card> cards){
         ArrayList<Card> temporaryCardDeck = cards;
         ArrayList<String> temporaryPlayers = players;
         String removedPlayer = null;
 
         int repeats = cards.size();
         if (GameConfigurationActivity.getSelectedSpezialPlayer() != null
-                &&  GameConfigurationActivity.getSelectedSpezialPlayer().equals(R.string.spezial_standardpack_aus)){
-            this.cards = new ArrayList<>(cards.subList(0,repeats-7));
+                && isSpecialPlayerSettingOff()){
+            temporaryCardDeck = new ArrayList<>(cards.subList(0,repeats-7));
         }
 
         if (GameConfigurationActivity.getSelectedSpezialActivity() != null
-                && GameConfigurationActivity.getSelectedSpezialActivity().equals(ActivitySpezialEnum.aus)){
-            this.cards = new ArrayList<>(cards.subList(0,repeats-7));
+                && GameConfigurationActivity.getSelectedSpezialActivity().equals(getString(R.string.spezial_standardpack_aus))){
+            temporaryCardDeck = new ArrayList<>(cards.subList(0,repeats-7));
         }
 
         if (GameConfigurationActivity.getSelectedSpezialHot() != null
-                && GameConfigurationActivity.getSelectedSpezialHot().equals(R.string.spezial_standardpack_aus)){
-            this.cards = new ArrayList<>(cards.subList(0,repeats-7));
+                && GameConfigurationActivity.getSelectedSpezialHot().equals(getString(R.string.spezial_standardpack_aus))){
+            temporaryCardDeck = new ArrayList<>(cards.subList(0,repeats-7));
         }
 
         Toast.makeText(getApplicationContext(),this.cards.size() + " so lang",Toast.LENGTH_LONG).show();
 
-        for(int i = 0; i < repeats; i++){
+        for(int i = 0; i < temporaryCardDeck.size(); i++){
             String randomPlayer = temporaryPlayers.get(HelperUtil.getRandomNumber(0,temporaryPlayers.size()));
             temporaryPlayers.remove(randomPlayer);
             if(removedPlayer != null){
@@ -161,14 +165,18 @@ public class GameLoopService extends Service {
                     .replace("$Sp1", randomPlayer)
                     .replace("$Sp2", randomPlayer2);
 
-            if(GameConfigurationActivity.getSelectedSpezialPlayer()!=null){
+            if(!GameConfigurationActivity.getSelectedSpezialPlayer().equals(getString(R.string.spezial_standardpack_aus))){
                 taskWithPlayerReplaced = taskWithPlayerReplaced.replace("$Spez",  GameConfigurationActivity.getSelectedSpezialPlayer());
             }
             temporaryCardDeck.get(i).setAufgabe(taskWithPlayerReplaced);
 
         }
         temporaryPlayers.add(removedPlayer);
-        this.cards = temporaryCardDeck;
+        return temporaryCardDeck;
+    }
+
+    private boolean isSpecialPlayerSettingOff() {
+        return GameConfigurationActivity.getSelectedSpezialPlayer().equals(getApplicationContext().getResources().getString(R.string.spezial_standardpack_aus));
     }
 
     public Card fetchCurrentCard(){
@@ -187,5 +195,14 @@ public class GameLoopService extends Service {
         public GameLoopService getService() {
             return GameLoopService.this;
         }
+    }
+
+    private void UpdateConfiguration(String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        Resources resources = getResources();
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 }

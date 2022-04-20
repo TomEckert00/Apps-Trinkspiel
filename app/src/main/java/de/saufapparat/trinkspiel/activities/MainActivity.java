@@ -88,12 +88,16 @@ public class MainActivity extends AppCompatActivity{
         GetraenkeTyp getraenkeTyp = tinyDB.getObject("getraenketyp", GetraenkeTyp.class);
         int cardindex = tinyDB.getInt("cardindex");
         ArrayList<Object> lis = tinyDB.getListObject("cards", Card.class);
+
+        String savedLanguage = tinyDB.getString("savedLanguage");
+        String actualLanguage = getResources().getConfiguration().locale.getLanguage();
+
         ArrayList<Card> newcards = new ArrayList<>();
         for(Object o : lis){
             newcards.add((Card) o);
         }
         ArrayList<Card> cards = newcards;
-        if(spieler!=null && selectedPackage!=null && trinkstaerke!= null&&getraenkeTyp!=null&&cards.size()!=0){
+        if(spieler!=null && selectedPackage!=null && trinkstaerke!= null&&getraenkeTyp!=null&&cards.size()!=0&&actualLanguage.equals(savedLanguage)){
             quickPlayButton.setEnabled(true);
         }else {
             quickPlayButton.setEnabled(false);

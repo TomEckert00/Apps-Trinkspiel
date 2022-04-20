@@ -39,7 +39,7 @@ public class GameConfigurationActivity extends AppCompatActivity {
     @Getter
     private static String selectedSpezialPlayer;
     @Getter
-    private static ActivitySpezialEnum selectedSpezialActivity;
+    private static String selectedSpezialActivity;
     @Getter
     private static HotSpezialEnum selectedSpezialHot;
 
@@ -85,8 +85,7 @@ public class GameConfigurationActivity extends AppCompatActivity {
         dropdown_getraenkeTyp = findViewById(R.id.spinner_art);
         dropdown_spezial = findViewById(R.id.spinner_spezial);
 
-
-        configureSpinner(dropdown_trinkstaerke, Arrays.asList(Trinkstaerke.values()), 1, new TrinkstaerkeListener());
+        configureSpinner(dropdown_trinkstaerke, Trinkstaerke.getValuesWithLanguage(getApplicationContext()), 1, new TrinkstaerkeListener());
         configureSpinner(dropdown_getraenkeTyp, Arrays.asList(GetraenkeTyp.values()), 0 , new GetraenkeTypListener());
         configureSpinner(dropdown_spezial, decideSpezialItems(), 0 , new SpezialConfigListener());
     }
@@ -174,7 +173,7 @@ public class GameConfigurationActivity extends AppCompatActivity {
                     fetchRandomPlayerForSpezialConfiguration();
                     break;
                 case ActivityPackage:
-                    selectedSpezialActivity = ActivitySpezialEnum.valueOf(parent.getSelectedItem().toString());
+                    selectedSpezialActivity = parent.getSelectedItem().toString();
                     break;
                 case HotPackage:
                     selectedSpezialHot = HotSpezialEnum.valueOf(parent.getSelectedItem().toString());
@@ -186,10 +185,10 @@ public class GameConfigurationActivity extends AppCompatActivity {
             switch (PackageSelectionPage.getSelectedPackage()) {
                 case StandardPackage:
                 case OnlinePackage:
-                    selectedSpezialPlayer = "aus";
+                    selectedSpezialPlayer = getString(R.string.spezial_standardpack_aus);
                     break;
                 case ActivityPackage:
-                    selectedSpezialActivity = ActivitySpezialEnum.aus;
+                    selectedSpezialActivity = getString(R.string.spezial_standardpack_aus);
                     break;
                 case HotPackage:
                     selectedSpezialHot = HotSpezialEnum.sicher;
