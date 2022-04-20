@@ -31,6 +31,7 @@ public class GroupSelectionPage extends AppCompatActivity {
     private TextView.OnEditorActionListener editorActionListener;
     private EditText player1EditText;
     private ImageView closeKeyBoardImage;
+    private TinyDB tinyDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +39,22 @@ public class GroupSelectionPage extends AppCompatActivity {
         setContentView(R.layout.activity_group_selection_page);
 
         initializeViews();
+        checkIfQuickplay();
+    }
 
+    private void initializeViews() {
+        playerListLayout = findViewById(R.id.playerListLinearLayout);
+        player1EditText = findViewById(R.id.player1EditText);
+        closeKeyBoardImage = findViewById(R.id.closeKeyBoardImage);
+        editorActionListener = new CustomActionListener();
+        player1EditText.setOnEditorActionListener(editorActionListener);
+        tinyDB = new TinyDB(getApplicationContext());
+    }
+
+    private void checkIfQuickplay() {
         if("true".equals(getIntent().getStringExtra("quickplay"))){
             Intent intent = new Intent(this, PackageSelectionPage.class);
-            playerList  = new TinyDB(getApplicationContext()).getListString("spielerListe");
+            playerList  = tinyDB.getListString("spielerListe");
             intent.putExtra("quickplay", "true");
             startActivity(intent);
         }
@@ -53,17 +66,9 @@ public class GroupSelectionPage extends AppCompatActivity {
         HelperUtil.removeNavigationBarBottom(this);
     }
 
-    private void initializeViews() {
-        playerListLayout = findViewById(R.id.playerListLinearLayout);
-        player1EditText = findViewById(R.id.player1EditText);
-        closeKeyBoardImage = findViewById(R.id.closeKeyBoardImage);
-        editorActionListener = new CustomActionListener();
-        player1EditText.setOnEditorActionListener(editorActionListener);
-    }
-
     public void openPackageSelectionPage(View v){
         preparePlayerList();
-        openNextIntent();
+        openNextActivity();
     }
 
     private void preparePlayerList() {
@@ -96,14 +101,12 @@ public class GroupSelectionPage extends AppCompatActivity {
         }
     }
 
-    private void openNextIntent() {
+    private void openNextActivity() {
         savePlayersToPreferences();
-        Intent intent = new Intent(this, PackageSelectionPage.class);
-        startActivity(intent);
+        startActivity(new Intent(this, PackageSelectionPage.class));
     }
 
     private void savePlayersToPreferences() {
-        TinyDB tinyDB = new TinyDB(getApplicationContext());
         tinyDB.putListString("spielerListe", playerList);
     }
 

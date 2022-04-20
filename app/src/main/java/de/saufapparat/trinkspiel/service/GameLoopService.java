@@ -37,35 +37,80 @@ public class GameLoopService extends Service {
     private ArrayList<String> players;
     private final IBinder mBinder = new MyBinder();
     private String language;
-    TinyDB tinyDB;
+    private TinyDB tinyDB;
+    private boolean isQuickplay = false;
+    private Intent intent;
 
-    private void toastThatCardDeckFinished(){
+    private void toastThatCardDeckFinished() {
         Toast.makeText(this, getString(R.string.karten_gemischt), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        cardIndex=0;
-        tinyDB = new TinyDB(getApplicationContext());
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        language = intent.getStringExtra("language");
+        this.intent = intent;
+        initialize();
         reloadPlayersAndCards();
         UpdateConfiguration(language);
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private void reloadPlayersAndCards(){
+    private void initialize() {
+        tinyDB = new TinyDB(getApplicationContext());
+        cardIndex = 0;
+        language = intent.getStringExtra("language");
+        String quickplayExtra = intent.getStringExtra("quickplay");
+        if (quickplayExtra != null && "true".equals(quickplayExtra)) {
+            isQuickplay = true;
+        }
+    }
+
+    private void reloadPlayersAndCards() {
         fetchAllPlayers();
         fetchAllCards();
     }
 
-    public void nextCard(){
+    private void fetchAllPlayers() {
+        players = GroupSelectionPage.getPlayerList();
+    }
+
+    private void fetchAllCards() {
+        if (cards.size() == 0 && isQuickplay) {
+            ArrayList<Object> lis = tinyDB.getListObject("cards", Card.class);
+            ArrayList<Card> newcards = new ArrayList<>();
+            for (Object o : lis) {
+                newcards.add((Card) o);
+            }
+            cards = newcards;
+        }
+        else{
+            cards = prepareCards();
+            ArrayList<Object> cardsToSave = new ArrayList<>();
+            for (Card card : cards) {
+                cardsToSave.add((Object) card);
+            }
+            tinyDB.putListObject("cards", cardsToSave);
+            tinyDB.putString("savedLanguage", language);
+            Toast.makeText(this, "Cards saved", Toast.LENGTH_SHORT).show();
+            cardIndex = 0;
+            ArrayList<Object> lis = tinyDB.getListObject("cards", Card.class);
+        }
+    }
+
+    private ArrayList<Card> prepareCards(){
+        ArrayList<Card> cardsToPrepare = fetchCardsFromProperties();
+        cardsToPrepare = fillCardsWithPlayers(cardsToPrepare);
+        shuffleInRandomOrder(cardsToPrepare);
+        return cardsToPrepare;
+    }
+
+    public void nextCard() {
         updateCardIndex(1);
-        if(cardIndex>=cards.size()){
+        if (cardIndex >= cards.size()) {
             addAdditionalCards();
         }
     }
@@ -76,111 +121,81 @@ public class GameLoopService extends Service {
     }
 
     private void addAdditionalCards() {
-        additionalCards = fetchCardsFromProperties();
-        additionalCards = fillCardsWithPlayers(additionalCards);
-        shuffleInRandomOrder(additionalCards);
+        additionalCards = prepareCards();
         toastThatCardDeckFinished();
         cards.addAll(additionalCards);
     }
 
-    public void previousCard(){
+    public void previousCard() {
         updateCardIndex(-1);
-        if (cardIndex<0){
-            cardIndex=0;
-            Toast.makeText(this, "Keine vorherige Karte!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void fetchAllPlayers(){
-        players = GroupSelectionPage.getPlayerList();
-    }
-
-    private void fetchAllCards(){
-        if(cards.size() == 0){
-            cards = fetchCardsFromProperties();
-            fillCardsWithPlayers(cards);
-            shuffleInRandomOrder(cards);
-            ArrayList<Object> cardsToSave = new ArrayList<>();
-            for(Card card : cards){
-                cardsToSave.add((Object) card);
-            }
-            tinyDB.putListObject("cards", cardsToSave);
-            tinyDB.putString("savedLanguage", language);
+        if (cardIndex < 0) {
             cardIndex = 0;
-        }
-        else{
-            ArrayList<Object> lis = tinyDB.getListObject("cards", Card.class);
-            ArrayList<Card> newcards = new ArrayList<>();
-            for(Object o : lis){
-                newcards.add((Card) o);
-            }
-            cards = newcards;
+            Toast.makeText(this, "Keine vorherige Karte!", Toast.LENGTH_SHORT).show();
         }
     }
 
     private ArrayList<Card> fetchCardsFromProperties() {
         return GamePackageManager.getCardsFromProperties(
                 this,
-                PackageSelectionPage.getSelectedPackage().toString(),
+                PackageSelectionPage.getSelectedPackageName().toString(),
                 language);
     }
 
-    private void shuffleInRandomOrder(ArrayList<Card> list){
+    private void shuffleInRandomOrder(ArrayList<Card> list) {
         Collections.shuffle(list);
     }
 
-    private ArrayList<Card> fillCardsWithPlayers(ArrayList<Card> cards){
-        ArrayList<Card> temporaryCardDeck = cards;
+    private ArrayList<Card> fillCardsWithPlayers(ArrayList<Card> cards) {
         ArrayList<String> temporaryPlayers = players;
         String removedPlayer = null;
 
         int repeats = cards.size();
         if (GameConfigurationActivity.getSelectedSpezialPlayer() != null
-                && isSpecialPlayerSettingOff()){
-            temporaryCardDeck = new ArrayList<>(cards.subList(0,repeats-7));
+                && isSpecialPlayerSettingOff()) {
+            cards = new ArrayList<>(cards.subList(0, repeats - 7));
         }
 
         if (GameConfigurationActivity.getSelectedSpezialActivity() != null
-                && GameConfigurationActivity.getSelectedSpezialActivity().equals(getString(R.string.spezial_standardpack_aus))){
-            temporaryCardDeck = new ArrayList<>(cards.subList(0,repeats-7));
+                && GameConfigurationActivity.getSelectedSpezialActivity().equals(getString(R.string.spezial_standardpack_aus))) {
+            cards = new ArrayList<>(cards.subList(0, repeats - 7));
         }
 
         if (GameConfigurationActivity.getSelectedSpezialHot() != null
-                && GameConfigurationActivity.getSelectedSpezialHot().equals(getString(R.string.spezial_standardpack_aus))){
-            temporaryCardDeck = new ArrayList<>(cards.subList(0,repeats-7));
+                && GameConfigurationActivity.getSelectedSpezialHot().equals(getString(R.string.spezial_standardpack_aus))) {
+            cards = new ArrayList<>(cards.subList(0, repeats - 7));
         }
 
-        Toast.makeText(getApplicationContext(),this.cards.size() + " so lang",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), cards.size() + " so lang", Toast.LENGTH_LONG).show();
 
-        for(int i = 0; i < temporaryCardDeck.size(); i++){
-            String randomPlayer = temporaryPlayers.get(HelperUtil.getRandomNumber(0,temporaryPlayers.size()));
+        for (int i = 0; i < cards.size(); i++) {
+            String randomPlayer = temporaryPlayers.get(HelperUtil.getRandomNumber(0, temporaryPlayers.size()));
             temporaryPlayers.remove(randomPlayer);
-            if(removedPlayer != null){
+            if (removedPlayer != null) {
                 temporaryPlayers.add(removedPlayer);
             }
             removedPlayer = randomPlayer;
-            String randomPlayer2 = temporaryPlayers.get(HelperUtil.getRandomNumber(0,temporaryPlayers.size()));
+            String randomPlayer2 = temporaryPlayers.get(HelperUtil.getRandomNumber(0, temporaryPlayers.size()));
 
-            String taskWithPlayerReplaced = temporaryCardDeck.get(i).getAufgabe()
+            String taskWithPlayerReplaced = cards.get(i).getAufgabe()
                     .replace("$Sp1", randomPlayer)
                     .replace("$Sp2", randomPlayer2);
 
-            if(!GameConfigurationActivity.getSelectedSpezialPlayer().equals(getString(R.string.spezial_standardpack_aus))){
-                taskWithPlayerReplaced = taskWithPlayerReplaced.replace("$Spez",  GameConfigurationActivity.getSelectedSpezialPlayer());
+            if (!GameConfigurationActivity.getSelectedSpezialPlayer().equals(getString(R.string.spezial_standardpack_aus))) {
+                taskWithPlayerReplaced = taskWithPlayerReplaced.replace("$Spez", GameConfigurationActivity.getSelectedSpezialPlayer());
             }
-            temporaryCardDeck.get(i).setAufgabe(taskWithPlayerReplaced);
+            cards.get(i).setAufgabe(taskWithPlayerReplaced);
 
         }
         temporaryPlayers.add(removedPlayer);
-        return temporaryCardDeck;
+        return cards;
     }
 
     private boolean isSpecialPlayerSettingOff() {
         return GameConfigurationActivity.getSelectedSpezialPlayer().equals(getApplicationContext().getResources().getString(R.string.spezial_standardpack_aus));
     }
 
-    public Card fetchCurrentCard(){
-        if(cards == null || cards.size() == 0){
+    public Card fetchCurrentCard() {
+        if (cards == null || cards.size() == 0) {
             reloadPlayersAndCards();
         }
         return cards.get(cardIndex);

@@ -38,7 +38,7 @@ public class GameLoop extends AppCompatActivity {
     private TextView textview_kategorieLabel;
     private GameLoopService gameLoopService;
     private Card aktuelleKarte;
-    public boolean isQuickPlay = false;
+    private boolean isQuickPlay = false;
 
     private MediaPlayer mediaPlayer_hupe;
 
@@ -53,6 +53,14 @@ public class GameLoop extends AppCompatActivity {
         initializeViews();
 
         mainLayout.setOnTouchListener(new CardChangeListener());
+    }
+
+    private void initializeViews() {
+        textview_aufgabe = findViewById(R.id.AufgabenTextView);
+        mainLayout = findViewById(R.id.mainLayout);
+        textview_schluckCount = findViewById(R.id.schluckCount);
+        textview_schluckName = findViewById(R.id.schluckName);
+        textview_kategorieLabel = findViewById(R.id.KategorieLabel);
     }
 
     @Override
@@ -106,16 +114,14 @@ public class GameLoop extends AppCompatActivity {
         Intent serviceIntent = new Intent(this, GameLoopService.class);
         String language = getResources().getConfiguration().locale.getLanguage();
         serviceIntent.putExtra("language", language);
+        if("true".equals(getIntent().getStringExtra("quickplay"))){
+            isQuickPlay = true;
+        }
+        if(isQuickPlay){
+            serviceIntent.putExtra("quickplay", "true");
+        }
         startService(serviceIntent);
         bindService(serviceIntent, myConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    private void initializeViews() {
-        textview_aufgabe = findViewById(R.id.AufgabenTextView);
-        mainLayout = findViewById(R.id.mainLayout);
-        textview_schluckCount = findViewById(R.id.schluckCount);
-        textview_schluckName = findViewById(R.id.schluckName);
-        textview_kategorieLabel = findViewById(R.id.KategorieLabel);
     }
 
     private class CardChangeListener implements View.OnTouchListener{
@@ -168,7 +174,7 @@ public class GameLoop extends AppCompatActivity {
     }
 
     private void playSoundWhenActivityPackageSpezialActivated() {
-        if (PackageSelectionPage.getSelectedPackage().equals(GamePackage.ActivityPackage)
+        if (PackageSelectionPage.getSelectedPackageName().equals(GamePackage.ActivityPackage)
                 && aktuelleKarte.getKategorie().getKategorieName().equals("Spezial")){
             if(mediaPlayer_hupe==null){
                 mediaPlayer_hupe = MediaPlayer.create(this, R.raw.hupe_sound);
@@ -188,8 +194,6 @@ public class GameLoop extends AppCompatActivity {
             textview_schluckName.setVisibility(View.INVISIBLE);
         }
     }
-
-    //todo in resourcen strings auslagern
 
     private void decideGetraenkeTyp() {
         if (getraenkeTyp.equals(GetraenkeTyp.schlucke)){
