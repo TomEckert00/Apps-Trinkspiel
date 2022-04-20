@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import de.saufapparat.trinkspiel.R;
@@ -25,12 +24,14 @@ import de.saufapparat.trinkspiel.util.HelperUtil;
 import de.saufapparat.trinkspiel.util.MoreInformationPage;
 import de.saufapparat.trinkspiel.util.TinyDB;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private ConstraintLayout mainView;
     private ConstraintLayout disclaimerView;
     private ImageView languageButton;
     private Button quickPlayButton;
+    private String language;
+    private TinyDB tinyDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,63 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         initializeViews();
+        checkIfDisclaimerWasShown();
+        setImageButtonViewToLanguage(language);
+        showQuickPlayIfPossible();
+    }
+
+    private void initializeViews() {
+        languageButton = findViewById(R.id.languageImageView);
+        disclaimerView = findViewById(R.id.disclaimerView);
+        mainView = findViewById(R.id.mainView);
+        quickPlayButton = findViewById(R.id.quickplay);
+        language = fetchLanguageFromResources();
+        tinyDB = new TinyDB(getApplicationContext());
+    }
+
+    private void checkIfDisclaimerWasShown() {
         mainView.setVisibility(View.GONE);
-        checkDisclaimer();
+        boolean disClaimerShown = getIntent().getBooleanExtra("disclaimerShown", false);
+        if (disClaimerShown) {
+            killDisclaimer(null);
+        }
+    }
+
+    public void killDisclaimer(View view) {
+        disclaimerView.setVisibility(View.GONE);
+        mainView.setVisibility(View.VISIBLE);
+    }
+
+    private void showQuickPlayIfPossible() {
+        ArrayList<String> savedPlayers = tinyDB.getListString("spielerListe");
+        GamePackage savedPackage = tinyDB.getObject("selectedPackage", GamePackage.class);
+        Trinkstaerke savedTrinkstaerke = tinyDB.getObject("trinkstaerke", Trinkstaerke.class);
+        GetraenkeTyp savedGetraenketyp = tinyDB.getObject("getraenketyp", GetraenkeTyp.class);
+        ArrayList<Object> savedCards = tinyDB.getListObject("cards", Card.class);
+        String savedLanguage = tinyDB.getString("savedLanguage");
+        String actualLanguage = fetchLanguageFromResources();
+
+        ArrayList<Card> castedCards = castCards(savedCards);
+
+        if (savedPlayers != null &&
+                savedPackage != null &&
+                savedTrinkstaerke != null &&
+                savedGetraenketyp != null &&
+                castedCards.size() != 0 &&
+                actualLanguage.equals(savedLanguage)
+        ) {
+            quickPlayButton.setEnabled(true);
+        } else {
+            quickPlayButton.setEnabled(false);
+        }
+    }
+
+    private ArrayList<Card> castCards(ArrayList<Object> lis) {
+        ArrayList<Card> castedCards = new ArrayList<>();
+        for (Object o : lis) {
+            castedCards.add((Card) o);
+        }
+        return castedCards;
     }
 
     @Override
@@ -48,93 +104,54 @@ public class MainActivity extends AppCompatActivity{
         HelperUtil.removeNavigationBarBottom(this);
     }
 
-    private void initializeViews() {
-        languageButton = findViewById(R.id.languageImageView);
-        disclaimerView = findViewById(R.id.disclaimerView);
-        mainView = findViewById(R.id.mainView);
-        quickPlayButton = findViewById(R.id.quickplay);
-        setImageButtonViewToLanguage(getResources().getConfiguration().locale.getLanguage());
-        showQuickPlayIfPossible();
-    }
-
-    private void checkDisclaimer(){
-        boolean disClaimerShown = getIntent().getBooleanExtra("disclaimerShown", false);
-        if (disClaimerShown){
-            killDisclaimer(null);
-        }
-    }
-
-    public void killDisclaimer(View view){
-        disclaimerView.setVisibility(View.GONE);
-        mainView.setVisibility(View.VISIBLE);
-    }
-
-    public void openGroupSelectionPage(View view){
+    public void openGroupSelectionPage(View view) {
         Intent intent = new Intent(this, GroupSelectionPage.class);
         startActivity(intent);
     }
 
-    public void quickPlay(View view){
+    public void quickPlay(View view) {
         Intent intent = new Intent(this, GroupSelectionPage.class);
         intent.putExtra("quickplay", "true");
         startActivity(intent);
     }
 
-    private void showQuickPlayIfPossible() {
-        TinyDB tinyDB = new TinyDB(getApplicationContext());
-        ArrayList<String> spieler = tinyDB.getListString("spielerListe");
-        GamePackage selectedPackage = tinyDB.getObject("selectedPackage", GamePackage.class);
-        Trinkstaerke trinkstaerke = tinyDB.getObject("trinkstaerke", Trinkstaerke.class);
-        GetraenkeTyp getraenkeTyp = tinyDB.getObject("getraenketyp", GetraenkeTyp.class);
-        int cardindex = tinyDB.getInt("cardindex");
-        ArrayList<Object> lis = tinyDB.getListObject("cards", Card.class);
-        ArrayList<Card> newcards = new ArrayList<>();
-        for(Object o : lis){
-            newcards.add((Card) o);
-        }
-        ArrayList<Card> cards = newcards;
-        if(spieler!=null && selectedPackage!=null && trinkstaerke!= null&&getraenkeTyp!=null&&cards.size()!=0){
-            quickPlayButton.setEnabled(true);
-        }else {
-            quickPlayButton.setEnabled(false);
-        }
-    }
-
-    public void openInstagram(View view){
+    public void openInstagram(View view) {
         Uri uri = Uri.parse("https://www.instagram.com/saufapparat/");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
 
-    public void openMoreInformationPage(View view){
+    public void openMoreInformationPage(View view) {
         Intent intent = new Intent(this, MoreInformationPage.class);
         startActivity(intent);
     }
-    
-    public void changeLanguageToNextInOrder(View view){
-        String language = getResources().getConfiguration().locale.getLanguage();
-        if (language == "de"){
+
+    public void changeLanguageToNextInOrder(View view) {
+        String language = fetchLanguageFromResources();
+        if (language == "de") {
             language = "en";
-        }
-        else if (language == "en"){
+        } else if (language == "en") {
             language = "fr";
-        }
-        else if (language == "fr"){
+        } else if (language == "fr") {
             language = "de";
         }
         setImageButtonViewToLanguage(language);
         reloadPageForNewLanguage(language);
     }
 
-    private void setImageButtonViewToLanguage(String language){
-        switch (language){
+    private String fetchLanguageFromResources() {
+        return getResources().getConfiguration().locale.getLanguage();
+    }
+
+    private void setImageButtonViewToLanguage(String language) {
+        switch (language) {
             case "de":
                 languageButton.setImageResource(R.drawable.deutschland);
                 break;
             case "fr":
                 languageButton.setImageResource(R.drawable.frankreich);
                 break;
-            default:
+            case "en":
                 languageButton.setImageResource(R.drawable.greatbritain);
                 break;
         }

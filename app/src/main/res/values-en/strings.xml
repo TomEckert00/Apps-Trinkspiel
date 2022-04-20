@@ -54,6 +54,11 @@
     <string name="packageActivity_ComingSoon">Coming soon...</string>
 
     <string name="karten_gemischt">Cards shuffled!</string>
+    <string name="mul_entspannt">relaxed</string>
+    <string name="mul_normal">normal</string>
+    <string name="mul_stark">strong</string>
+    <string name="mul_extrem">extreme</string>
+    <string name="mul_hardcore">hardcore</string>
     <string name="gameLoop_Schlucke">Gulps</string>
     <string name="gameLoop_Shots">Shots</string>
 
@@ -67,7 +72,7 @@
 
     <string name="spezial_standardpack_aus">off</string>
     <string name="spezial_standardpack_zufall">random</string>
-    <string name="spezial_textview_standard">target</string>
+    <string name="spezial_textview_standard">Target</string>
     <string name="spezial_textview_online">Actor</string>
     <string name="spezial_textview_activity">Coincidences</string>
     <string name="spezial_textview_hot">Super Hot</string>

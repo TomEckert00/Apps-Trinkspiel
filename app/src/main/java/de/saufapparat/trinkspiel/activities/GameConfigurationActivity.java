@@ -28,18 +28,19 @@ import lombok.Setter;
 
 public class GameConfigurationActivity extends AppCompatActivity {
 
-    Spinner dropdown_trinkstaerke;
-    Spinner dropdown_getraenkeTyp;
-    Spinner dropdown_spezial;
-
-    TextView spezial_textview;
+    private Spinner dropdown_trinkstaerke;
+    private Spinner dropdown_getraenkeTyp;
+    private Spinner dropdown_spezial;
+    private TextView spezial_textview;
+    private TinyDB tinyDB;
+    private boolean startedQuick = false;
 
     private Trinkstaerke selectedTrinkstaerke = Trinkstaerke.normal;
     private GetraenkeTyp selectedGetraenkeTyp = GetraenkeTyp.schlucke;
     @Getter
     private static String selectedSpezialPlayer;
     @Getter
-    private static ActivitySpezialEnum selectedSpezialActivity;
+    private static String selectedSpezialActivity;
     @Getter
     private static HotSpezialEnum selectedSpezialHot;
 
@@ -50,33 +51,10 @@ public class GameConfigurationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_configuration);
+
         initializeViews();
-        selectedSpezialPlayer=null;
-        selectedSpezialActivity=null;
-        if("true".equals(getIntent().getStringExtra("quickplay"))){
-            TinyDB tinyDB = new TinyDB(getApplicationContext());
-            Trinkstaerke trinkstaerke = tinyDB.getObject("trinkstaerke", Trinkstaerke.class);
-            GetraenkeTyp getraenkeTyp = tinyDB.getObject("getraenketyp", GetraenkeTyp.class);
 
-            Intent intent = new Intent(this, GameLoop.class);
-            intent.putExtra("quickplay", "true");
-            GamePackageManager.setTrinkstaerke(trinkstaerke);
-            GamePackageManager.setGetraenkeTyp(getraenkeTyp);
-            GameLoop.setGetraenkeTyp(getraenkeTyp);
-            startActivity(intent);
-        }
-    }
-
-    public void startGameWithSelectedPackage(View view) {
-        TinyDB tinyDB = new TinyDB(getApplicationContext());
-        tinyDB.putObject("trinkstaerke", selectedTrinkstaerke);
-        tinyDB.putObject("getraenketyp", selectedGetraenkeTyp);
-
-        Intent intent = new Intent(this, GameLoop.class);
-        GamePackageManager.setTrinkstaerke(selectedTrinkstaerke);
-        GamePackageManager.setGetraenkeTyp(selectedGetraenkeTyp);
-        GameLoop.setGetraenkeTyp(selectedGetraenkeTyp);
-        startActivity(intent);
+        checkIfQuickplay();
     }
 
     private void initializeViews() {
@@ -84,10 +62,13 @@ public class GameConfigurationActivity extends AppCompatActivity {
         dropdown_trinkstaerke = findViewById(R.id.spinner_trink);
         dropdown_getraenkeTyp = findViewById(R.id.spinner_art);
         dropdown_spezial = findViewById(R.id.spinner_spezial);
+        tinyDB = new TinyDB(getApplicationContext());
 
-
-        configureSpinner(dropdown_trinkstaerke, Arrays.asList(Trinkstaerke.values()), 1, new TrinkstaerkeListener());
-        configureSpinner(dropdown_getraenkeTyp, Arrays.asList(GetraenkeTyp.values()), 0 , new GetraenkeTypListener());
+        selectedSpezialPlayer=null;
+        selectedSpezialActivity=null;
+        String language = getResources().getConfiguration().locale.getLanguage();
+        configureSpinner(dropdown_trinkstaerke, Trinkstaerke.getValuesWithLanguage(language, getApplicationContext()), 1, new TrinkstaerkeListener());
+        configureSpinner(dropdown_getraenkeTyp, GetraenkeTyp.getValuesWithLanguage(language, getApplicationContext()), 0 , new GetraenkeTypListener());
         configureSpinner(dropdown_spezial, decideSpezialItems(), 0 , new SpezialConfigListener());
     }
 
@@ -99,7 +80,7 @@ public class GameConfigurationActivity extends AppCompatActivity {
     }
 
     private List decideSpezialItems() {
-        GamePackage selectedPackage = PackageSelectionPage.getSelectedPackage();
+        GamePackage selectedPackage = PackageSelectionPage.getSelectedPackageName();
         switch (selectedPackage) {
             case StandardPackage:
                 spezial_textview.setText(getString(R.string.spezial_textview_standard));
@@ -125,6 +106,27 @@ public class GameConfigurationActivity extends AppCompatActivity {
         return list;
     }
 
+    private void checkIfQuickplay() {
+        if("true".equals(getIntent().getStringExtra("quickplay"))){
+            selectedTrinkstaerke = tinyDB.getObject("trinkstaerke", Trinkstaerke.class);
+            selectedGetraenkeTyp = tinyDB.getObject("getraenketyp", GetraenkeTyp.class);
+            Intent intent = new Intent(this, GameLoop.class);
+            intent.putExtra("quickplay", "true");
+            GameLoop.setGetraenkeTyp(selectedGetraenkeTyp);
+            startActivity(intent);
+        }
+    }
+
+    public void startGameWithSelectedPackage(View view) {
+        tinyDB.putObject("trinkstaerke", selectedTrinkstaerke);
+        tinyDB.putObject("getraenketyp", selectedGetraenkeTyp);
+
+        Intent intent = new Intent(this, GameLoop.class);
+        GamePackageManager.setTrinkstaerke(selectedTrinkstaerke);
+        GamePackageManager.setGetraenkeTyp(selectedGetraenkeTyp);
+        GameLoop.setGetraenkeTyp(selectedGetraenkeTyp);
+        startActivity(intent);
+    }
 
     @Override
     protected void onResume() {
@@ -136,15 +138,41 @@ public class GameConfigurationActivity extends AppCompatActivity {
         fetchRandomPlayerForSpezialConfiguration();
     }
 
+    private void fetchRandomPlayerForSpezialConfiguration() {
+        if(selectedSpezialPlayer!=null){
+            Spinner spinner = (Spinner) findViewById(R.id.spinner_spezial);
+            if (spinner.getSelectedItemPosition() == 1){
+                int randomNumber = HelperUtil.getRandomNumber(0, GroupSelectionPage.getPlayerList().size());
+                selectedSpezialPlayer = GroupSelectionPage.getPlayerList().get(randomNumber);
+            }
+        }
+    }
+
     public void backToPackageSelectionPage(View view){
         finish();
         return;
     }
 
     private class TrinkstaerkeListener implements AdapterView.OnItemSelectedListener{
+
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            selectedTrinkstaerke = Trinkstaerke.valueOf(parent.getSelectedItem().toString());
+            if (parent.getSelectedItem().toString().equals(getString(R.string.mul_entspannt))) {
+                selectedTrinkstaerke = Trinkstaerke.entspannt;
+            }
+            if (parent.getSelectedItem().toString().equals(getString(R.string.mul_normal))) {
+                selectedTrinkstaerke = Trinkstaerke.normal;
+            }
+            if (parent.getSelectedItem().toString().equals(getString(R.string.mul_stark))) {
+                selectedTrinkstaerke = Trinkstaerke.stark;
+            }
+            if (parent.getSelectedItem().toString().equals(getString(R.string.mul_extrem))) {
+                selectedTrinkstaerke = Trinkstaerke.extrem;
+            }
+            if (parent.getSelectedItem().toString().equals(getString(R.string.mul_hardcore))) {
+                selectedTrinkstaerke = Trinkstaerke.hardcore;
+            }
+
         }
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
@@ -155,7 +183,13 @@ public class GameConfigurationActivity extends AppCompatActivity {
     private class GetraenkeTypListener implements AdapterView.OnItemSelectedListener{
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            selectedGetraenkeTyp = GetraenkeTyp.valueOf(parent.getSelectedItem().toString());
+            if(parent.getSelectedItem().toString().equals(getString(R.string.gameLoop_Schlucke))){
+                selectedGetraenkeTyp =  GetraenkeTyp.schlucke;
+            }
+            if(parent.getSelectedItem().toString().equals(getString(R.string.gameLoop_Shots))){
+                selectedGetraenkeTyp =  GetraenkeTyp.shots;
+            }
+
         }
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
@@ -167,14 +201,14 @@ public class GameConfigurationActivity extends AppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-            switch (PackageSelectionPage.getSelectedPackage()){
+            switch (PackageSelectionPage.getSelectedPackageName()){
                 case StandardPackage:
                 case OnlinePackage:
                     selectedSpezialPlayer = parent.getSelectedItem().toString();
                     fetchRandomPlayerForSpezialConfiguration();
                     break;
                 case ActivityPackage:
-                    selectedSpezialActivity = ActivitySpezialEnum.valueOf(parent.getSelectedItem().toString());
+                    selectedSpezialActivity = parent.getSelectedItem().toString();
                     break;
                 case HotPackage:
                     selectedSpezialHot = HotSpezialEnum.valueOf(parent.getSelectedItem().toString());
@@ -183,27 +217,17 @@ public class GameConfigurationActivity extends AppCompatActivity {
         }
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-            switch (PackageSelectionPage.getSelectedPackage()) {
+            switch (PackageSelectionPage.getSelectedPackageName()) {
                 case StandardPackage:
                 case OnlinePackage:
-                    selectedSpezialPlayer = "aus";
+                    selectedSpezialPlayer = getString(R.string.spezial_standardpack_aus);
                     break;
                 case ActivityPackage:
-                    selectedSpezialActivity = ActivitySpezialEnum.aus;
+                    selectedSpezialActivity = getString(R.string.spezial_standardpack_aus);
                     break;
                 case HotPackage:
                     selectedSpezialHot = HotSpezialEnum.sicher;
                     break;
-            }
-        }
-    }
-
-    private void fetchRandomPlayerForSpezialConfiguration() {
-        if(selectedSpezialPlayer!=null){
-            Spinner spinner = (Spinner) findViewById(R.id.spinner_spezial);
-            if (spinner.getSelectedItemPosition() == 1){
-                int randomNumber = HelperUtil.getRandomNumber(0, GroupSelectionPage.getPlayerList().size());
-                selectedSpezialPlayer = GroupSelectionPage.getPlayerList().get(randomNumber);
             }
         }
     }
