@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         initializeViews();
         checkIfDisclaimerWasShown();
         setImageButtonViewToLanguage(language);
-        showQuickPlayIfPossible();
     }
 
     private void initializeViews() {
@@ -102,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         HelperUtil.removeNavigationBarBottom(this);
+        showQuickPlayIfPossible();
     }
 
     public void openGroupSelectionPage(View view) {
