@@ -112,6 +112,7 @@ public class PackageSelectionPage extends AppCompatActivity {
         checkButtonActivation();
     }
 
+    //reset button falls für tests benötigt
     public void resetPurchases(View view){
         billingClient.queryPurchasesAsync( BillingClient.SkuType.INAPP,
                 new PurchasesResponseListener() {
