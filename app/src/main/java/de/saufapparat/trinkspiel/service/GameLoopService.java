@@ -103,8 +103,8 @@ public class GameLoopService extends Service {
 
     private ArrayList<Card> prepareCards(){
         ArrayList<Card> cardsToPrepare = fetchCardsFromProperties();
-        cardsToPrepare = fillCardsWithPlayers(cardsToPrepare);
         shuffleInRandomOrder(cardsToPrepare);
+        cardsToPrepare = fillCardsWithPlayers(cardsToPrepare);
         return cardsToPrepare;
     }
 
@@ -117,7 +117,11 @@ public class GameLoopService extends Service {
 
     private void updateCardIndex(int i) {
         cardIndex += i;
-        tinyDB.putInt("cardIndex", cardIndex);
+        if(cardIndex < 0){
+            tinyDB.putInt("cardIndex", 0);
+        }else{
+            tinyDB.putInt("cardIndex", cardIndex);
+        }
     }
 
     private void addAdditionalCards() {
@@ -146,6 +150,7 @@ public class GameLoopService extends Service {
     }
 
     private ArrayList<Card> fillCardsWithPlayers(ArrayList<Card> cards) {
+        //spieler können mehrfach hintereinander kommen
         ArrayList<String> temporaryPlayers = players;
         String removedPlayer = null;
 
