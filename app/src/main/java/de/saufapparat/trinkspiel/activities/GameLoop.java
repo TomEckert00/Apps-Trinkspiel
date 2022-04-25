@@ -94,7 +94,7 @@ public class GameLoop extends AppCompatActivity {
             gameLoopServiceBound = true;
             if("true".equals(getIntent().getStringExtra("quickplay"))) {
                 TinyDB tinyDB = new TinyDB(getApplicationContext());
-                gameLoopService.setCardIndex(tinyDB.getInt("cardindex"));
+                gameLoopService.setCardIndex(tinyDB.getInt("cardIndex"));
                 ArrayList<Object> lis = tinyDB.getListObject("cards", Card.class);
                 ArrayList<Card> newcards = new ArrayList<>();
                 for (Object o : lis) {

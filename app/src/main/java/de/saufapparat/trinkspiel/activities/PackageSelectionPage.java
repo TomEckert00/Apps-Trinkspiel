@@ -67,38 +67,9 @@ public class PackageSelectionPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package_selection_page);
-
         initializeViews();
         checkIfQuickplay();
 
-        initializeBillingClient();
-        connectToGooglePlayBilling();
-    }
-
-    private void initializeViews() {
-        startGameButton = findViewById(R.id.button_startGameLoop);
-        cardViews = findViewById(R.id.package_cards);
-        selectedPackageName = null;
-        addFreePacksToAvailable();
-        tinyDB = new TinyDB(getApplicationContext());
-    }
-
-    private void addFreePacksToAvailable() {
-        availableCardViews.add((CardView) cardViews.getChildAt(0));
-        availableCardViews.add((CardView) cardViews.getChildAt(1));
-        availableCardViews.add((CardView) cardViews.getChildAt(2));
-    }
-
-    private void checkIfQuickplay() {
-        if("true".equals(getIntent().getStringExtra("quickplay"))){
-            selectedPackageName = new TinyDB(getApplicationContext()).getObject("selectedPackage", GamePackage.class);
-            Intent intent = new Intent(this, GameConfigurationActivity.class);
-            intent.putExtra("quickplay","true");
-            startActivity(intent);
-        }
-    }
-
-    private void initializeBillingClient() {
         billingClient = BillingClient.newBuilder(this)
                 .enablePendingPurchases()
                 .setListener(new PurchasesUpdatedListener() {
@@ -118,28 +89,18 @@ public class PackageSelectionPage extends AppCompatActivity {
                         }
                     }
                 }).build();
+
+        connectToGooglePlayBilling();
+
     }
 
-    private void connectToGooglePlayBilling(){
-        billingClient.startConnection(
-                new BillingClientStateListener() {
-                    @Override
-                    public void onBillingServiceDisconnected() {
-                        connectToGooglePlayBilling();
-                    }
-
-                    @Override
-                    public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
-                        if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
-                            fetchProductDetails();
-                            try {
-                                Thread.sleep(200);
-                            }catch (Exception e){}
-                            fetchExistingPurchases();
-                        }
-                    }
-                }
-        );
+    private void checkIfQuickplay() {
+        if("true".equals(getIntent().getStringExtra("quickplay"))){
+            selectedPackageName = new TinyDB(getApplicationContext()).getObject("selectedPackage", GamePackage.class);
+            Intent intent = new Intent(this, GameConfigurationActivity.class);
+            intent.putExtra("quickplay","true");
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -191,7 +152,27 @@ public class PackageSelectionPage extends AppCompatActivity {
        );
     }
 
+    private void connectToGooglePlayBilling(){
+        billingClient.startConnection(
+                new BillingClientStateListener() {
+                    @Override
+                    public void onBillingServiceDisconnected() {
+                        connectToGooglePlayBilling();
+                    }
 
+                    @Override
+                    public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
+                        if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
+                            fetchProductDetails();
+                            try {
+                                Thread.sleep(200);
+                            }catch (Exception e){}
+                            fetchExistingPurchases();
+                        }
+                    }
+                }
+        );
+    }
 
     private void fetchExistingPurchases() {
         billingClient.queryPurchasesAsync(BillingClient.SkuType.INAPP,
@@ -298,7 +279,15 @@ public class PackageSelectionPage extends AppCompatActivity {
 
     }
 
-
+    private void initializeViews() {
+        startGameButton = findViewById(R.id.button_startGameLoop);
+        cardViews = findViewById(R.id.package_cards);
+        selectedPackageName = null;
+        availableCardViews.add((CardView) cardViews.getChildAt(0));
+        availableCardViews.add((CardView) cardViews.getChildAt(1));
+        availableCardViews.add((CardView) cardViews.getChildAt(2));
+        tinyDB = new TinyDB(getApplicationContext());
+    }
 
     private void checkButtonActivation() {
         startGameButton.setEnabled(false);

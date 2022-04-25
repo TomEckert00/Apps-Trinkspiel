@@ -20,6 +20,7 @@ import de.saufapparat.trinkspiel.activities.MainActivity;
 import de.saufapparat.trinkspiel.activities.PackageSelectionPage;
 import de.saufapparat.trinkspiel.R;
 import de.saufapparat.trinkspiel.enmus.ActivitySpezialEnum;
+import de.saufapparat.trinkspiel.enmus.HotSpezialEnum;
 import de.saufapparat.trinkspiel.model.Card;
 import de.saufapparat.trinkspiel.util.GamePackageManager;
 import de.saufapparat.trinkspiel.util.HelperUtil;
@@ -40,32 +41,32 @@ public class GameLoopService extends Service {
     private TinyDB tinyDB;
     private boolean isQuickplay = false;
     private Intent intent;
+    private boolean serviceStarted;
 
     private void toastThatCardDeckFinished() {
         Toast.makeText(this, getString(R.string.karten_gemischt), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
-    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         this.intent = intent;
         initialize();
-        reloadPlayersAndCards();
+        if(!serviceStarted){
+            reloadPlayersAndCards();
+            //Toast.makeText(this, "Service started", Toast.LENGTH_SHORT).show();
+            serviceStarted = true;
+        }
         UpdateConfiguration(language);
         return super.onStartCommand(intent, flags, startId);
     }
 
     private void initialize() {
         tinyDB = new TinyDB(getApplicationContext());
-        cardIndex = 0;
         language = intent.getStringExtra("language");
         String quickplayExtra = intent.getStringExtra("quickplay");
         if (quickplayExtra != null && "true".equals(quickplayExtra)) {
             isQuickplay = true;
+
         }
     }
 
@@ -95,9 +96,8 @@ public class GameLoopService extends Service {
             }
             tinyDB.putListObject("cards", cardsToSave);
             tinyDB.putString("savedLanguage", language);
-            Toast.makeText(this, "Cards saved", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Cards saved", Toast.LENGTH_SHORT).show();
             cardIndex = 0;
-            ArrayList<Object> lis = tinyDB.getListObject("cards", Card.class);
         }
     }
 
@@ -161,11 +161,11 @@ public class GameLoopService extends Service {
         }
 
         if (GameConfigurationActivity.getSelectedSpezialHot() != null
-                && GameConfigurationActivity.getSelectedSpezialHot().equals(getString(R.string.spezial_standardpack_aus))) {
+                && GameConfigurationActivity.getSelectedSpezialHot().equals(HotSpezialEnum.sicher)) {
             cards = new ArrayList<>(cards.subList(0, repeats - 7));
         }
 
-        Toast.makeText(getApplicationContext(), cards.size() + " so lang", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), cards.size() + " so lang", Toast.LENGTH_LONG).show();
 
         for (int i = 0; i < cards.size(); i++) {
             String randomPlayer = temporaryPlayers.get(HelperUtil.getRandomNumber(0, temporaryPlayers.size()));
@@ -180,7 +180,8 @@ public class GameLoopService extends Service {
                     .replace("$Sp1", randomPlayer)
                     .replace("$Sp2", randomPlayer2);
 
-            if (!GameConfigurationActivity.getSelectedSpezialPlayer().equals(getString(R.string.spezial_standardpack_aus))) {
+            String selectedSpezialPlayer = GameConfigurationActivity.getSelectedSpezialPlayer();
+            if (selectedSpezialPlayer!=null && ! selectedSpezialPlayer.equals(getString(R.string.spezial_standardpack_aus))) {
                 taskWithPlayerReplaced = taskWithPlayerReplaced.replace("$Spez", GameConfigurationActivity.getSelectedSpezialPlayer());
             }
             cards.get(i).setAufgabe(taskWithPlayerReplaced);
