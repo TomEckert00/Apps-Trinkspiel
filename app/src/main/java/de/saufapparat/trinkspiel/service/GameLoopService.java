@@ -103,7 +103,6 @@ public class GameLoopService extends Service {
 
     private ArrayList<Card> prepareCards(){
         ArrayList<Card> cardsToPrepare = fetchCardsFromProperties();
-        shuffleInRandomOrder(cardsToPrepare);
         cardsToPrepare = fillCardsWithPlayers(cardsToPrepare);
         return cardsToPrepare;
     }
@@ -169,6 +168,8 @@ public class GameLoopService extends Service {
                 && GameConfigurationActivity.getSelectedSpezialHot().equals(HotSpezialEnum.sicher)) {
             cards = new ArrayList<>(cards.subList(0, repeats - 7));
         }
+
+        shuffleInRandomOrder(cards);
 
         //Toast.makeText(getApplicationContext(), cards.size() + " so lang", Toast.LENGTH_LONG).show();
 
